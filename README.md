@@ -10,3 +10,36 @@ Los empleados cuentan con tres perfiles claramente diferenciados:
 - Los empleados de tienda gestionan la recepción y elaboración de los pedidos, registrando en la aplicación sus acciones para permitir el seguimiento de los pedidos por parte de los clientes.
 - Los repartidores servirán los pedidos, registrando a través de sus móviles el proceso y así permitir a los clientes continuar con el seguimiento de su pedido hasta la entrega.
 - El gerente se encarga de las acciones comerciales elaborando la carta y será el encargado de las autorizaciones a los usuarios asignando los diferentes perfiles.
+### Product Backlog
+Analizadas las historias de usuario, el Product Owner ha incorporado las siguientes temáticas y tareas priorizadas al backlog:
+- Area de clientes
+    - Consultar carta de pizzas.
+    - Ver los detalles de cada pizza.
+    - Pedir una pizza.
+    - Hacer el seguimiento de su pedido pendiente.
+    - Cancelar el pedido si no ha empezado a elaborarse.
+    - Marcar si le ha gustado o no la pizza.
+    - Valorar o escribir sobre la pizza.
+- Tienda
+    - Consulta los pedidos solicitados.
+    - Pasar un pedido de solicitado a elaborándose o cancelado.
+    - Pasar un pedido de elaborándose a preparado (pendiente de enviar).
+- Repartidores:
+    - Consulta los pedidos preparados.
+    - Marcar el pedido que recoge dejándolo como enviado.
+    - Marcar el pedido que entrega dejándolo como recibido.
+- Gerente:
+    - Mantenimiento de los ingredientes de las pizzas.
+    - Mantenimiento de las pizzas y su composición.
+    - Asignación de los roles de empleados a los usuarios.
+- Usuarios:
+    - Auto registro de clientes (como usuarios autenticados).
+    - Auto registro de empleados (como usuarios autenticados).
+    - Consulta y mantenimiento de los datos propios de usuario.
+    - Cambio de contraseña.
+- Infraestructura
+    - Creación del repositorio GIT
+    - Creación de las bases de datos
+    - Creación de proyecto del microservicio de tienda.
+    - Creación de proyecto del microservicio del servidor de autenticación.
+    - Creación de proyecto del frontend.
