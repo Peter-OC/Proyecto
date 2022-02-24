@@ -44,5 +44,5 @@ Analizadas las historias de usuario, el Product Owner ha incorporado las siguien
     - Creación de proyecto del frontend.
 ## Especificaciones:
 ### Modelo de datos:
-![This is an image](C:\Curso-Bootcapm\BunkerTeam\modelo_de_datos.png)
+![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/modelo_de_datos.png)
 
