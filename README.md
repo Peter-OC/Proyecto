@@ -80,11 +80,11 @@ El precio de la pizza se calcula sumando el coste de los ingredientes, increment
         - Autenticados: GET y PUT propio
         - Gerente: GET, POS, PUT, DELETE
 ### Restricciones:
-:one: Los usuarios deben poder registrarse en la aplicación por medio de un formulario y hacer log-in.
-:two: Debe dar soporte a la autentificación OAuth con JWT.
-:three: Debe permitir CORS.
-:four: Debe seguir un enfoque API First.
-:five: Debe contar con:
+:one: - Los usuarios deben poder registrarse en la aplicación por medio de un formulario y hacer log-in.
+:two: - Debe dar soporte a la autentificación OAuth con JWT.
+:three: - Debe permitir CORS.
+:four: - Debe seguir un enfoque API First.
+:five: - Debe contar con:
 - Validaciones
 - Batería de pruebas
 - Documentación con OpenApi (opcional)
@@ -96,10 +96,10 @@ Aplicación Angular: Pizza Web
 - Personal (Autenticados): Consultar pedidos, cambiar estado pedido.
 - Gerente (Autenticados): Mantener pizzas e ingredientes, mantener usuarios.
 ### Restricciones:
-:one: Debe ser accesible.
-:two: Debe seguir un enfoque Mobile First.
-:three: Debe tener un estilo propio: Diseño adaptable, BEM, ...
-:four: Debe contar con:
+:one: - Debe ser accesible.
+:two: - Debe seguir un enfoque Mobile First.
+:three: - Debe tener un estilo propio: Diseño adaptable, BEM, ...
+:four: - Debe contar con:
 - Validaciones
 - Enrutamientos
 - Batería de pruebas
