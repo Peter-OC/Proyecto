@@ -46,3 +46,15 @@ Analizadas las historias de usuario, el Product Owner ha incorporado las siguien
 ### Modelo de datos:
 ![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/modelo_de_datos.png)
 
+- Ingrediente: nombre, tipo (base, salsa y otros) y precio.
+- Pizza: nombre, descripción, foto, base (ingrediente), salsa(ingrediente), precio, me gusta, no me gusta.
+- Ingredientes por Pizza: pizza, ingrediente, cantidad.
+- Comentario: texto, puntuación, fecha, usuario y pizza.
+- Usuario: email (identificador), nombre, apellidos, dirección y contraseña.
+- Función: usuario, rol (usuario, tienda, repartidor, gerente).
+- Pedido: número de pedido, usuario, fecha y hora del pedido, dirección de entrega, preparado por, fecha y hora de entrega, entregada por, importe, estado.
+- Pizzas por Pedido: pedido, pizza, cantidad, precio
+### Estado del pedido:
+![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/estado_del_pedido.png)
+### Restricciones:
+El precio de la pizza se calcula sumando el coste de los ingredientes, incrementados en un 50% en concepto de gastos de elaboración y envío.
