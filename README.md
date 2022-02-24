@@ -58,3 +58,48 @@ Analizadas las historias de usuario, el Product Owner ha incorporado las siguien
 ![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/estado_del_pedido.png)
 ### Restricciones:
 El precio de la pizza se calcula sumando el coste de los ingredientes, incrementados en un 50% en concepto de gastos de elaboración y envío.
+
+## Arquitectura:
+### Back End
+- Microservicio: Tienda
+    - Servicio: Pizzas (y Comentarios)
+        - No autenticados: Solo GET
+        - Autenticados: POST (Solo Comentarios)
+        - Gerente: GET, POS, PUT, DELETE
+    - Servicio: Ingredientes
+        - No autenticados: Solo GET
+        - Gerente: GET, POS, PUT, DELETE
+    - Servicio: Pedidos
+        - Autenticados: GET, POS, PUT (solo si solicitada), DELETE (solo si solicitada)
+        - Empleado: PATCH: Cambios de estado:
+- Microservicio: Autentication
+    - Servicio: Login
+        - No autenticados: GET, POST
+    - Servicio: Usuarios
+        - No autenticados: Solo POST
+        - Autenticados: GET y PUT propio
+        - Gerente: GET, POS, PUT, DELETE
+### Restricciones:
+:one: Los usuarios deben poder registrarse en la aplicación por medio de un formulario y hacer log-in.
+:two: Debe dar soporte a la autentificación OAuth con JWT.
+:three: Debe permitir CORS.
+:four: Debe seguir un enfoque API First.
+:five: Debe contar con:
+- Validaciones
+- Batería de pruebas
+- Documentación con OpenApi (opcional)
+- Despliegue con Docker (opcional)
+### Front End
+Aplicación Angular: Pizza Web
+- Anónimos: Consultar la carta
+- Autenticados: Consultar la carta, dejar comentarios, hacer pedidos, modificar o cancelar pedidos, consultar situación del pedido, ver historial de pedidos.
+- Personal (Autenticados): Consultar pedidos, cambiar estado pedido.
+- Gerente (Autenticados): Mantener pizzas e ingredientes, mantener usuarios.
+### Restricciones:
+:one: Debe ser accesible.
+:two: Debe seguir un enfoque Mobile First.
+:three: Debe tener un estilo propio: Diseño adaptable, BEM, ...
+:four: Debe contar con:
+- Validaciones
+- Enrutamientos
+- Batería de pruebas
