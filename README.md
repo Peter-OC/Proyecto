@@ -1,3 +1,6 @@
+<style>H1{color:#f66b09;}</style>
+<style>H2{color:#f4aa0b;}</style>
+
 # Proyecto Real: Aplicación Sector Hostelería "PIZZERÍA" :pizza:
 El objetivo que perseguimos con el desarrollo de esta aplicación es que los alumnos puedan aplicar lo aprendido en el curso desde el primer momento a un Proyecto real que irá creciendo según avance la formación y sus conocimientos vayan siendo más amplios. Además de la parte técnica, en el Proyecto se trabajarán otra serie de habilidades importantes en su perfil como el trabajo en equipo, gestión del tiempo y comunicación.
 El proyecto consistirá en el desarrollo de una aplicación web para el sector hostelero (pizzería). La aplicación tendrá un backend con microservicios desarrollados con JAVA, MAVEN y SPRING; haciendo uso de bases de datos relacionales (MySQL) y No-SQL (MongoDB). Estos servicios serán consumidos desde el frontend web desarrollado en Angular. El proyecto deberá cumplir con las reglas de buenas prácticas del Clean Code y una cobertura de código adecuada.
