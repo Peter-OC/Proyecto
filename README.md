@@ -1,4 +1,4 @@
-# Proyecto Real: Aplicación Sector Hostelería "PIZZERÍA" :pizza:
+![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/img_Document/pizzaHead.jpg)
 El objetivo que perseguimos con el desarrollo de esta aplicación es que los alumnos puedan aplicar lo aprendido en el curso desde el primer momento a un Proyecto real que irá creciendo según avance la formación y sus conocimientos vayan siendo más amplios. Además de la parte técnica, en el Proyecto se trabajarán otra serie de habilidades importantes en su perfil como el trabajo en equipo, gestión del tiempo y comunicación.
 El proyecto consistirá en el desarrollo de una aplicación web para el sector hostelero (pizzería). La aplicación tendrá un backend con microservicios desarrollados con JAVA, MAVEN y SPRING; haciendo uso de bases de datos relacionales (MySQL) y No-SQL (MongoDB). Estos servicios serán consumidos desde el frontend web desarrollado en Angular. El proyecto deberá cumplir con las reglas de buenas prácticas del Clean Code y una cobertura de código adecuada.
 ## :pizza: Contexto:
@@ -44,7 +44,7 @@ Analizadas las historias de usuario, el Product Owner ha incorporado las siguien
     - Creación de proyecto del frontend.
 ## :pizza: Especificaciones:
 ### Modelo de datos:
-![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/modelo_de_datos.png)
+![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/img_Document/modelo_de_datos.png)
 
 - Ingrediente: nombre, tipo (base, salsa y otros) y precio.
 - Pizza: nombre, descripción, foto, base (ingrediente), salsa(ingrediente), precio, me gusta, no me gusta.
@@ -55,7 +55,7 @@ Analizadas las historias de usuario, el Product Owner ha incorporado las siguien
 - Pedido: número de pedido, usuario, fecha y hora del pedido, dirección de entrega, preparado por, fecha y hora de entrega, entregada por, importe, estado.
 - Pizzas por Pedido: pedido, pizza, cantidad, precio
 ### Estado del pedido:
-![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/estado_del_pedido.png)
+![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/img_Document/estado_del_pedido.png)
 ### Restricciones:
 El precio de la pizza se calcula sumando el coste de los ingredientes, incrementados en un 50% en concepto de gastos de elaboración y envío.
 
