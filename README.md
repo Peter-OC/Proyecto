@@ -1,8 +1,19 @@
 ![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/img_Docment/pizzaHead.jpg)
 
-El objetivo que perseguimos con el desarrollo de esta aplicación es que los alumnos puedan aplicar lo aprendido en el curso desde el primer momento a un Proyecto real que irá creciendo según avance la formación y sus conocimientos vayan siendo más amplios. Además de la parte técnica, en el Proyecto se trabajarán otra serie de habilidades importantes en su perfil como el trabajo en equipo, gestión del tiempo y comunicación.
+## Participantes
+
+* [JMManresa](https://github.com/JMManresa)
+* [varo-amoros](https://github.com/vero-amoros)
+* [jperezco](https://github.com/jperezco)
+* [Peter-OC](https://github.com/Peter-OC)
+
 El proyecto consistirá en el desarrollo de una aplicación web para el sector hostelero (pizzería). La aplicación tendrá un backend con microservicios desarrollados con JAVA, MAVEN y SPRING; haciendo uso de bases de datos relacionales (MySQL) y No-SQL (MongoDB). Estos servicios serán consumidos desde el frontend web desarrollado en Angular. El proyecto deberá cumplir con las reglas de buenas prácticas del Clean Code y una cobertura de código adecuada.
+
 ## :pizza: Contexto:
+
+<details>
+  <summary>Mostrar contenido</summary>
+
 Una pizzería tradicional de amplia tradición, dentro del proceso de actualización de su modelo de negocio con la transformación digital y a la tendencia de los clientes a la comida a domicilio, ha solicitado un sistema web que permita a sus clientes realizar sus pedidos a domicilio y a sus empleados gestionarlos.
 Los clientes podrán consultar la carta con las pizzas disponibles y realizar los pedidos, así como hacer el seguimiento de los mismos. Siguiendo la tendencia de estos tiempos, están muy interesados en la retroalimentación con sus clientes a través de me gusta (likes), valoraciones, comentarios y otros aspectos de redes sociales. Así mismo ha insistido mucho que sea “muy bonito”, “con muchas fotos y colores” y “que se vea bien en los móviles”.
 
@@ -10,7 +21,14 @@ Los empleados cuentan con tres perfiles claramente diferenciados:
 - Los empleados de tienda gestionan la recepción y elaboración de los pedidos, registrando en la aplicación sus acciones para permitir el seguimiento de los pedidos por parte de los clientes.
 - Los repartidores servirán los pedidos, registrando a través de sus móviles el proceso y así permitir a los clientes continuar con el seguimiento de su pedido hasta la entrega.
 - El gerente se encarga de las acciones comerciales elaborando la carta y será el encargado de las autorizaciones a los usuarios asignando los diferentes perfiles.
+
+</details>
+
 ## :pizza: Product Backlog
+
+<details>
+  <summary>Mostrar contenido</summary>
+
 Analizadas las historias de usuario, el Product Owner ha incorporado las siguientes temáticas y tareas priorizadas al backlog:
 - Area de clientes
     - Consultar carta de pizzas.
@@ -43,8 +61,15 @@ Analizadas las historias de usuario, el Product Owner ha incorporado las siguien
     - Creación de proyecto del microservicio de tienda.
     - Creación de proyecto del microservicio del servidor de autenticación.
     - Creación de proyecto del frontend.
+
+</details>
+
 ## :pizza: Especificaciones:
 ### Modelo de datos:
+
+<details>
+  <summary>Mostrar contenido</summary>
+
 ![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/img_Docment/modelo_de_datos.png)
 
 - Ingrediente: nombre, tipo (base, salsa y otros) y precio.
@@ -55,13 +80,33 @@ Analizadas las historias de usuario, el Product Owner ha incorporado las siguien
 - Función: usuario, rol (usuario, tienda, repartidor, gerente).
 - Pedido: número de pedido, usuario, fecha y hora del pedido, dirección de entrega, preparado por, fecha y hora de entrega, entregada por, importe, estado.
 - Pizzas por Pedido: pedido, pizza, cantidad, precio
+
+</details>
+
 ### Estado del pedido:
+
+<details>
+  <summary>Mostrar contenido</summary>
+
 ![Diagrama de datos](https://raw.githubusercontent.com/Peter-OC/Proyecto/master/img_Docment/estado_del_pedido.png)
+
+</details>
+
 ### Restricciones:
+
+<details>
+  <summary>Mostrar contenido</summary>
+
 El precio de la pizza se calcula sumando el coste de los ingredientes, incrementados en un 50% en concepto de gastos de elaboración y envío.
+
+</details>
 
 ## :pizza: Arquitectura:
 ### Back End
+
+<details>
+  <summary>Mostrar contenido</summary>
+
 - Microservicio: Tienda
     - Servicio: Pizzas (y Comentarios)
         - No autenticados: Solo GET
@@ -80,7 +125,9 @@ El precio de la pizza se calcula sumando el coste de los ingredientes, increment
         - No autenticados: Solo POST
         - Autenticados: GET y PUT propio
         - Gerente: GET, POS, PUT, DELETE
+
 ### Restricciones:
+
 :one: - Los usuarios deben poder registrarse en la aplicación por medio de un formulario y hacer log-in.
 
 :two: - Debe dar soporte a la autentificación OAuth con JWT.
@@ -94,13 +141,22 @@ El precio de la pizza se calcula sumando el coste de los ingredientes, increment
 - Batería de pruebas
 - Documentación con OpenApi (opcional)
 - Despliegue con Docker (opcional)
+
+</details>
+
 ### Front End
+
+<details>
+  <summary>Mostrar contenido</summary>
+
 Aplicación Angular: Pizza Web
 - Anónimos: Consultar la carta
 - Autenticados: Consultar la carta, dejar comentarios, hacer pedidos, modificar o cancelar pedidos, consultar situación del pedido, ver historial de pedidos.
 - Personal (Autenticados): Consultar pedidos, cambiar estado pedido.
 - Gerente (Autenticados): Mantener pizzas e ingredientes, mantener usuarios.
+
 ### Restricciones:
+
 :one: - Debe ser accesible.
 
 :two: - Debe seguir un enfoque Mobile First.
@@ -111,3 +167,5 @@ Aplicación Angular: Pizza Web
 - Validaciones
 - Enrutamientos
 - Batería de pruebas
+
+</details>
