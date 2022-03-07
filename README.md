@@ -3,7 +3,7 @@
 ## Participantes
 
 * [JMManresa](https://github.com/JMManresa)
-* [varo-amoros](https://github.com/vero-amoros)
+* [vero-amoros](https://github.com/vero-amoros)
 * [jperezco](https://github.com/jperezco)
 * [Peter-OC](https://github.com/Peter-OC)
 
