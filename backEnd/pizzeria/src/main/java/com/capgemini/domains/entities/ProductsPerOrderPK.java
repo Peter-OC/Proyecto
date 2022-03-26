@@ -20,6 +20,13 @@ public class ProductsPerOrderPK implements Serializable {
 
 	public ProductsPerOrderPK() {
 	}
+	
+	public ProductsPerOrderPK(int idProduct, int idOrder) {
+		super();
+		this.idProduct = idProduct;
+		this.idOrder = idOrder;
+	}
+
 	public int getIdProduct() {
 		return this.idProduct;
 	}

@@ -17,7 +17,7 @@ import java.util.Objects;
  * 
  */
 @Entity
-@Table(name = "ingredient")
+@Table(name = "ingredients")
 @NamedQuery(name = "Ingredient.findAll", query = "SELECT i FROM Ingredient i")
 public class Ingredient extends EntityBase<Ingredient> implements Serializable {
 	private static final long serialVersionUID = 1L;
