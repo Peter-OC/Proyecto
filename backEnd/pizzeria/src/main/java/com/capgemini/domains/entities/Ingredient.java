@@ -87,15 +87,15 @@ public class Ingredient extends EntityBase<Ingredient> implements Serializable {
 	private String photo;
 
 	// bi-directional many-to-one association to IngredientsPerPizza
-	@OneToMany(mappedBy = "ingredient")
+	@OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<IngredientsPerPizza> ingredientsPerPizzas;
 
 	// bi-directional many-to-one association to Pizza
-	@OneToMany(mappedBy = "ingredientBase")
+	@OneToMany(mappedBy = "ingredientBase", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Pizza> pizzasBase;
 
 	// bi-directional many-to-one association to Pizza
-	@OneToMany(mappedBy = "ingredientSauce")
+	@OneToMany(mappedBy = "ingredientSauce", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Pizza> pizzasSauce;
 
 	public Ingredient() {
@@ -134,7 +134,7 @@ public class Ingredient extends EntityBase<Ingredient> implements Serializable {
 		this.pizzasSauce = pizzasSauce;
 	}
 
-	public int getIdIngredient() {
+	public int getIngredientId() {
 		return this.ingredientId;
 	}
 

@@ -64,7 +64,7 @@ public class IngredientServiceImpl implements IngredientService {
 	public Ingredient add(Ingredient item) throws DuplicateKeyException, InvalidDataException {
 		if (item == null)
 			throw new IllegalArgumentException();
-		if (dao.findById(item.getIdIngredient()).isPresent())
+		if (dao.findById(item.getIngredientId()).isPresent())
 			throw new DuplicateKeyException();
 		if (item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());
@@ -75,7 +75,7 @@ public class IngredientServiceImpl implements IngredientService {
 	public Ingredient change(Ingredient item) throws NotFoundException, InvalidDataException {
 		if (item == null)
 			throw new IllegalArgumentException();
-		if (dao.findById(item.getIdIngredient()).isEmpty())
+		if (dao.findById(item.getIngredientId()).isEmpty())
 			throw new NotFoundException();
 		if (item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());
@@ -86,7 +86,7 @@ public class IngredientServiceImpl implements IngredientService {
 	public void delete(Ingredient item) {
 		if (item == null)
 			throw new IllegalArgumentException();
-		deleteById(item.getIdIngredient());
+		deleteById(item.getIngredientId());
 
 	}
 

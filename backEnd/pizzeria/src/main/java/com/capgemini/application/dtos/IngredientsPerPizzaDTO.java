@@ -12,14 +12,14 @@ public class IngredientsPerPizzaDTO {
 	@JsonProperty("cantidad")
 	private int amount;
 	
-	@JsonProperty("Id_pizza")
-	private int pizza;
+	@JsonProperty("nombre_pizza")
+	private String nombrePizza;
 	
 	
 	public static IngredientsPerPizzaDTO from(IngredientsPerPizza source) {
 		return new IngredientsPerPizzaDTO(
 				source.getAmount(),
-				source.getPizza().getIdPizza()
+				source.getPizza().getProducts().get(0).getName()
 				);
 	}
 }

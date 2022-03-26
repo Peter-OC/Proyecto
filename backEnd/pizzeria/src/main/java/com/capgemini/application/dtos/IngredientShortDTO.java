@@ -18,7 +18,7 @@ public class IngredientShortDTO {
 	
 	public static IngredientShortDTO from(Ingredient source) {
 		return new IngredientShortDTO(
-				source.getIdIngredient(),
+				source.getIngredientId(),
 				source.getName()
 				);
 	}

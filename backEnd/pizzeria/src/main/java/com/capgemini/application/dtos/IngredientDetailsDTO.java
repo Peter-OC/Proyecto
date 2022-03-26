@@ -34,7 +34,7 @@ public class IngredientDetailsDTO {
 
 	public static IngredientDetailsDTO from(Ingredient source) {
 		return new IngredientDetailsDTO(
-				source.getIdIngredient(), 
+				source.getIngredientId(), 
 				source.getName(), 
 				source.getType().toString(),
 				source.getPrice(), 
