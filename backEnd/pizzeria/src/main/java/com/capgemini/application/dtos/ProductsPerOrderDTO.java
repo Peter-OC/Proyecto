@@ -11,8 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Value;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Value
 public class ProductsPerOrderDTO {
 
 	@JsonProperty("idProducto")
@@ -24,15 +25,17 @@ public class ProductsPerOrderDTO {
 	
 	public static ProductsPerOrderDTO from(ProductsPerOrder source) {
 		return new ProductsPerOrderDTO(
-				source.getProduct().getIdProduct(),
+				source.getOrder().getIdOrder(),
 				source.getProduct().getName(),
 				source.getAmount()
 				);
 	}
 	
-	public static ProductsPerOrder from(ProductsPerOrderDTO source) {
+	public static ProductsPerOrder from(ProductsPerOrderDTO source, Order order) {
 		return new ProductsPerOrder(
-				source.getAmount()
+				source.getAmount(),
+				new Product(source.getProductId()),
+				order
 				);
 				
 	}

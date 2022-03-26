@@ -68,6 +68,7 @@ public class OrderResource {
 			@RequestParam(required = false, defaultValue = "details") String mode) throws NotFoundException {
 		return OrderDetailsDTO.from(srv.getOne(id));
 	}
+	
 
 	@GetMapping(path = "/{id}", params = "mode=edit")
 	@ApiOperation(value = "Recupera un pedido")
