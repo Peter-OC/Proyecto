@@ -2,7 +2,12 @@ package com.capgemini.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import com.capgemini.domains.core.entities.EntityBase;
+
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -10,9 +15,9 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="category")
+@Table(name="categories")
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
-public class Category implements Serializable {
+public class Category extends EntityBase<Category> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,7 +28,49 @@ public class Category implements Serializable {
 	@Lob
 	private String description;
 
-	private String type;
+	
+	public static enum Type {
+        DRINK("drink"),
+        STARTER("starter"),
+        PIZZA("pizza");
+        String value;
+        Type (String value) {
+            this.value = value;
+        }
+        public String getValue() {
+            return value;
+        }
+        public static Type getEnum(String value) {
+            switch(value) {
+            case "drink": return Type.DRINK;
+            case "starter": return Type.STARTER;
+            case "pizza": return Type.PIZZA;
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + value);
+            }
+        }
+    }
+    @Converter
+    private static class TypeConverter implements AttributeConverter<Type, String> {
+        @Override
+        public String convertToDatabaseColumn(Type type) {
+            if (type == null) {
+                return null;
+            }
+            return type.getValue();
+        }
+        @Override
+        public Type convertToEntityAttribute(String value) {
+            if (value == null) {
+                return null;
+            }
+            return Type.getEnum(value);
+        }
+    }
+    @Convert(converter = TypeConverter.class)
+    @Column(name="type")
+    @NotNull
+    private Type type;
 
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="category")
@@ -31,6 +78,17 @@ public class Category implements Serializable {
 
 	public Category() {
 	}
+	
+	
+
+	public Category(int idCategory, String description, @NotNull Type type, List<Product> products) {
+		super();
+		this.idCategory = idCategory;
+		this.description = description;
+		this.type = type;
+		this.products = products;
+	}
+
 
 	public int getIdCategory() {
 		return this.idCategory;
@@ -48,11 +106,11 @@ public class Category implements Serializable {
 		this.description = description;
 	}
 
-	public String getType() {
+	public Type getType() {
 		return this.type;
 	}
 
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 
@@ -78,4 +136,31 @@ public class Category implements Serializable {
 		return product;
 	}
 
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idCategory);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Category other = (Category) obj;
+		return idCategory == other.idCategory;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Category [idCategory=" + idCategory + ", description=" + description + ", type=" + type + ", products="
+				+ products + "]";
+	}
+
+	
 }

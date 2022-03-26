@@ -2,8 +2,15 @@ package com.capgemini.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
+import com.capgemini.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -11,9 +18,9 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="comment")
+@Table(name="comments")
 @NamedQuery(name="Comment.findAll", query="SELECT c FROM Comment c")
-public class Comment implements Serializable {
+public class Comment extends EntityBase<Comment> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -22,6 +29,10 @@ public class Comment implements Serializable {
 	private int idComment;
 
 	@Temporal(TemporalType.DATE)
+	@NotNull
+	@PastOrPresent
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	@Column(name="date")
 	private Date date;
 
 	private Integer score;
@@ -44,6 +55,15 @@ public class Comment implements Serializable {
 	private List<Product> products;
 
 	public Comment() {
+	}
+
+	public Comment(int idComment, @NotNull @PastOrPresent Date date, String text, Product product, User user) {
+		super();
+		this.idComment = idComment;
+		this.date = date;
+		this.text = text;
+		this.product = product;
+		this.user = user;
 	}
 
 	public int getIdComment() {
@@ -115,5 +135,30 @@ public class Comment implements Serializable {
 
 		return product;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idComment);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comment other = (Comment) obj;
+		return idComment == other.idComment;
+	}
+
+	@Override
+	public String toString() {
+		return "Comment [idComment=" + idComment + ", date=" + date + ", score=" + score + ", text=" + text
+				+ ", product=" + product + ", user=" + user + ", products=" + products + "]";
+	}
+	
+	
 
 }
