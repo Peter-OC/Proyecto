@@ -2,22 +2,32 @@ package com.capgemini.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.capgemini.domains.core.entities.EntityBase;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * The persistent class for the product database table.
  * 
  */
 @Entity
-@Table(name="products")
-@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
-public class Product implements Serializable {
+@Table(name = "products")
+@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+public class Product extends EntityBase<Product> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_product")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_product")
 	private int idProduct;
 
 	@Lob
@@ -27,36 +37,48 @@ public class Product implements Serializable {
 
 	private Integer like;
 
+	@Length(min = 2, max = 50)
+	@NotBlank
 	private String name;
 
 	private String photo;
 
+	@NotNull
+	@DecimalMin(value = "0.0", inclusive = false)
+	@Digits(integer = 4, fraction = 2)
 	private float price;
 
-	//bi-directional many-to-one association to Comment
-	@OneToMany(mappedBy="product")
+	// bi-directional many-to-one association to Comment
+	@OneToMany(mappedBy = "product")
 	private List<Comment> comments;
 
-	//bi-directional many-to-one association to Pizza
+	// bi-directional many-to-one association to Pizza
 	@ManyToOne
-	@JoinColumn(name="id_pizza")
+	@JoinColumn(name = "id_pizza")
 	private Pizza pizza;
 
-	//bi-directional many-to-one association to Category
+	// bi-directional many-to-one association to Category
 	@ManyToOne
-	@JoinColumn(name="id_category")
+	@JoinColumn(name = "id_category")
 	private Category category;
 
-	//bi-directional many-to-one association to Comment
+	// bi-directional many-to-one association to Comment
 	@ManyToOne
-	@JoinColumn(name="id_comment")
+	@JoinColumn(name = "id_comment")
 	private Comment comment;
 
-	//bi-directional many-to-one association to ProductsPerOrder
-	@OneToMany(mappedBy="product")
+	// bi-directional many-to-one association to ProductsPerOrder
+	@OneToMany(mappedBy = "product")
 	private List<ProductsPerOrder> productsPerOrders;
 
 	public Product() {
+		super();
+		productsPerOrders = new ArrayList<>();
+	}
+
+	public Product(int idProduct) {
+		this();
+		this.idProduct = idProduct;
 	}
 	
 	public int getIdProduct() {
@@ -181,6 +203,31 @@ public class Product implements Serializable {
 		productsPerOrder.setProduct(null);
 
 		return productsPerOrder;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [idProduct=" + idProduct + ", description=" + description + ", dislike=" + dislike + ", like="
+				+ like + ", name=" + name + ", photo=" + photo + ", price=" + price + ", comments=" + comments
+				+ ", pizza=" + pizza + ", category=" + category + ", comment=" + comment + ", productsPerOrders="
+				+ productsPerOrders + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idProduct);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		return idProduct == other.idProduct;
 	}
 
 }
