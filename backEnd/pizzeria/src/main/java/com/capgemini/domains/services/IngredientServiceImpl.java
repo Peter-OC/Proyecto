@@ -39,17 +39,17 @@ public class IngredientServiceImpl implements IngredientService {
 
 	@Override
 	public <T> List<T> getByProjection(Class<T> type) {
-		return dao.findByIngredientIdIsNotNull(type);
+		return dao.findByIdIngredientIsNotNull(type);
 	}
 
 	@Override
 	public <T> Iterable<T> getByProjection(Sort sort, Class<T> type) {
-		return dao.findByIngredientIdIsNotNull(sort, type);
+		return dao.findByIdIngredientIsNotNull(sort, type);
 	}
 
 	@Override
 	public <T> Page<T> getByProjection(Pageable pageable, Class<T> type) {
-		return dao.findByIngredientIdIsNotNull(pageable, type);
+		return dao.findByIdIngredientIsNotNull(pageable, type);
 	}
 
 	@Override
