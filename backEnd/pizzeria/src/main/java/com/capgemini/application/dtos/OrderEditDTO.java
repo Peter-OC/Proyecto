@@ -13,12 +13,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Value;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Value
 public class OrderEditDTO {
 
-	@JsonProperty("productosDelPedido")
-	private List<ProductsPerOrderDTO> productosPorPedido;
 	@JsonProperty("idPedido")
 	private int idOrder;
 	@JsonProperty("idUsuario")
@@ -35,18 +34,19 @@ public class OrderEditDTO {
 	private float precio;
 	@JsonProperty("estadoPedido")
 	private String estado;
-	
+	@JsonProperty("productosDelPedido")
+	private List<ProductsPerOrderDTO> productosPorPedido;
 	
 	public static OrderEditDTO from(Order source) {
-		return new OrderEditDTO(
-				source.getProductsPerOrders().stream().map(item -> ProductsPerOrderDTO.from(item)).toList(),
+		return new OrderEditDTO(			
 				source.getIdOrder(),
 				source.getUser().getIdUser(),
 				source.getOrderDate(),
 				source.getAddress(),
 				source.getDeliveryDate(),
 				source.getPrice(),
-				source.getStatus() == null ? null : source.getStatus().getValue()
+				source.getStatus() == null ? null : source.getStatus().getValue(),
+				source.getProductsPerOrders().stream().map(item -> ProductsPerOrderDTO.from(item)).toList()
 				);
 	}
 	
@@ -97,7 +97,7 @@ public class OrderEditDTO {
 	private void incorporarNuevosProductosPorPedido(Order target) {
 		productosPorPedido.stream().filter(
 				dto -> target.getProductsPerOrders().stream().noneMatch(entity -> entity.getId().getIdProduct() == dto.getProductId()))
-				.forEach(dto -> target.addProductsPerOrder(ProductsPerOrderDTO.from(dto)));
+				.forEach(dto -> target.addProductsPerOrder(ProductsPerOrderDTO.from(dto, target)));
 		
 	}
 	
