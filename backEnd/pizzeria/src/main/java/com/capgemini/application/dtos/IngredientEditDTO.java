@@ -2,6 +2,7 @@ package com.capgemini.application.dtos;
 
 import com.capgemini.domains.entities.Ingredient;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ public class IngredientEditDTO {
 
 	private int ingredientId;
 	private String name;
+	@ApiModelProperty(value = "Tipos de Ingredientes.", allowableValues = "sauce,base,other")
 	private String type;
 	private float price;
 	private String photo;
@@ -20,7 +22,7 @@ public class IngredientEditDTO {
 		return new IngredientEditDTO(
 				source.getIngredientId(),
 				source.getName(),
-				source.getType().getValue(),
+				source.getType(),
 				source.getPrice(),
 				source.getPhoto()
 				);
@@ -30,7 +32,7 @@ public class IngredientEditDTO {
 		return new Ingredient(
 				source.getIngredientId(),
 				source.getName(),
-				Ingredient.Type.getEnum(source.getType()),
+				source.getType(),
 				source.getPrice(),
 				source.getPhoto()
 				);
@@ -44,7 +46,7 @@ public class IngredientEditDTO {
 	private void actualizaPropiedadesEntidad(Ingredient target) {
 		target.setIdIngredient(ingredientId);
 		target.setName(name);
-		target.setType(Ingredient.Type.getEnum(type));
+		target.setType(type);
 		target.setPrice(price);
 		target.setPhoto(photo);
 	}

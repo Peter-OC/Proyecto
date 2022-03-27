@@ -113,5 +113,31 @@ public class IngredientResource {
 	public void delete(@ApiParam(value = "Identificador del ingrediente") @PathVariable int id) {
 		srv.deleteById(id);
 	}
+	
+	
+	@GetMapping(path = "/salsas")
+	@ApiOperation(value = "Listado Ingredientes por tipo salsa")
+	public List<IngredientShortDTO> getOneDetails(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+	return srv.getSalsas(IngredientShortDTO.class);
+	}
+
+	@GetMapping(path = "/bases")
+	@ApiOperation(value = "Listado Ingredientes por tipo base")
+	public List<IngredientShortDTO> getOneDetails1(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+	return srv.getBases(IngredientShortDTO.class);
+	}
+
+	@GetMapping(path = "/otros")
+	@ApiOperation(value = "Listado Ingredientes por tipo otros")
+	public List<IngredientShortDTO> getOneDetails2(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+	return srv.getOtros(IngredientShortDTO.class);
+	}
+	
+	
+	
+	
 
 }

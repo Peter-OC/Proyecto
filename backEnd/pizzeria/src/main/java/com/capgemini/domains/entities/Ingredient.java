@@ -32,55 +32,8 @@ public class Ingredient extends EntityBase<Ingredient> implements Serializable {
 	@NotBlank
 	private String name;
 
-	public static enum Type {
-		BASE("base"), SAUCE("sauce"), OTHER("other");
-
-		String value;
-
-		Type(String value) {
-			this.value = value;
-		}
-
-		public String getValue() {
-			return value;
-		}
-
-		public static Type getEnum(String value) {
-			switch (value) {
-			case "base":
-				return Type.BASE;
-			case "sauce":
-				return Type.SAUCE;
-			case "other":
-				return Type.OTHER;
-			default:
-				throw new IllegalArgumentException("Enum incorrecto: " + value);
-			}
-		}
-	}
-
-	@Converter
-	private static class TypeConverter implements AttributeConverter<Type, String> {
-		@Override
-		public String convertToDatabaseColumn(Type type) {
-			if (type == null) {
-				return null;
-			}
-			return type.getValue();
-		}
-
-		@Override
-		public Type convertToEntityAttribute(String value) {
-			if (value == null) {
-				return null;
-			}
-			return Type.getEnum(value);
-		}
-	}
-
-	@Convert(converter = TypeConverter.class)
 	@NotNull
-	private Type type;
+	private String type;
 
 	private float price;
 
@@ -119,7 +72,7 @@ public class Ingredient extends EntityBase<Ingredient> implements Serializable {
 		this.name = name;
 	}
 
-	public Ingredient(int ingredientId, @Length(min = 2, max = 25) @NotBlank String name, @NotNull Type type,
+	public Ingredient(int ingredientId, @Length(min = 2, max = 25) @NotBlank String name, @NotNull String type,
 			float price, String photo) {
 		this();
 		this.ingredientId = ingredientId;
@@ -129,7 +82,7 @@ public class Ingredient extends EntityBase<Ingredient> implements Serializable {
 		this.photo = photo;
 	}
 
-	public Ingredient(int ingredientId, @Length(min = 2, max = 25) @NotBlank String name, @NotNull Type type,
+	public Ingredient(int ingredientId, @Length(min = 2, max = 25) @NotBlank String name, @NotNull String type,
 			float price, String photo, List<IngredientsPerPizza> ingredientsPerPizzas, List<Pizza> pizzasIngredient,
 			List<Pizza> pizzasSauce) {
 		super();
@@ -175,11 +128,11 @@ public class Ingredient extends EntityBase<Ingredient> implements Serializable {
 		this.price = price;
 	}
 
-	public Type getType() {
+	public String getType() {
 		return this.type;
 	}
 
-	public void setType(Type type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
