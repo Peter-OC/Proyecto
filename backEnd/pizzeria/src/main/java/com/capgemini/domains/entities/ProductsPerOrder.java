@@ -42,23 +42,21 @@ public class ProductsPerOrder extends EntityBase<ProductsPerOrder> implements Se
 	}
 	
 	public ProductsPerOrder(ProductsPerOrderPK id) {
-		super();
-		this.id = id;
 	}
 	
-	
-
-	public ProductsPerOrder(@Positive int amount) {
+	public ProductsPerOrder(@Positive int amount, Product product) {
 		this();
+		this.product = product;
 		this.id =  new ProductsPerOrderPK(product.getIdProduct(), order.getIdOrder());
 		this.amount = amount;
+		
 	}
 
-	public ProductsPerOrder(int amount, Product product, Order order) {
+	public ProductsPerOrder(@Positive int amount, Product product, Order order) {
 		this();		
 		this.amount = amount;
-		this.product = product;	
 		this.order = order;
+		this.product = product;		
 		this.id = new ProductsPerOrderPK(product.getIdProduct(), order.getIdOrder());
 		
 	}

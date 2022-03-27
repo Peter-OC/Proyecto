@@ -120,6 +120,10 @@ public class Order extends EntityBase<Order> implements Serializable {
 		productsPerOrders = new ArrayList<ProductsPerOrder>();
 	}
 	
+	public Order(int idOrder) {
+		this();
+		this.idOrder = idOrder;
+	}
 
 	public Order(User user, @PastOrPresent @NotNull Date orderDate, @NotBlank @Length(max = 100) String address,
 			@PastOrPresent Date deliveryDate,

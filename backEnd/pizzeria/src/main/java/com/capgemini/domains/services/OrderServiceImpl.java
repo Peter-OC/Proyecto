@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.application.dtos.OrderDetailsDTO;
 import com.capgemini.domains.contracts.repositories.OrderRepository;
 import com.capgemini.domains.contracts.services.OrderService;
 import com.capgemini.domains.entities.Order;
@@ -59,6 +60,12 @@ public class OrderServiceImpl implements OrderService {
 			throw new NotFoundException();
 		return item.get();
 	}
+	
+
+//	@Override
+//	public List<Order> getOrdered(Class<OrderDetailsDTO> type) {
+//		return dao.findByStatus("ordered", type);
+//	}
 
 	@Override
 	public Order add(Order item) throws DuplicateKeyException, InvalidDataException {

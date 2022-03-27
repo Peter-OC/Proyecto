@@ -56,12 +56,13 @@ public class User extends EntityBase<User> implements Serializable {
 		this.password = password;
 	}
 		
-	public User(int idUser, @NotBlank @Length(max = 50) String address, @NotBlank @Length(max = 50) String username,
-			@NotBlank @Length(max = 25) String firstName, @NotBlank @Length(min=2, max=100) String function, @Length(max = 25) String lastName,
+	public User(@NotBlank @Length(max = 50) String address,
+			@NotBlank @Length(max = 25) String firstName, 
+			@NotBlank @Length(min=2, max=100) String function, 
+			@Length(max = 25) String lastName,
 			@NotBlank @Length(min = 8, max = 15) String password) {
-		super();
+		this();
 		this.address = address;
-		this.username = username;
 		this.firstName = firstName;
 		this.function = function;
 		this.lastName = lastName;
