@@ -104,6 +104,15 @@ public class Ingredient extends EntityBase<Ingredient> implements Serializable {
 		pizzasSauce = new ArrayList<Pizza>();
 	}
 
+	
+	
+	public Ingredient(int ingredientId) {
+		this();
+		this.ingredientId = ingredientId;
+	}
+
+
+
 	public Ingredient(int idIngredient, @Length(min = 2, max = 25) @NotBlank String name) {
 		this();
 		this.ingredientId = idIngredient;

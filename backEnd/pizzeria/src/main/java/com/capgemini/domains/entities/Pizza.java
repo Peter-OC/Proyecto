@@ -3,8 +3,11 @@ package com.capgemini.domains.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.capgemini.domains.core.entities.EntityBase;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -14,38 +17,63 @@ import java.util.List;
 @Entity
 @Table(name="pizzas")
 @NamedQuery(name="Pizza.findAll", query="SELECT p FROM Pizza p")
-public class Pizza implements Serializable {
+public class Pizza extends EntityBase<Pizza> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_pizza")
 	private int idPizza;
-
-	//bi-directional many-to-one association to IngredientsPerPizza
-	@OneToMany(mappedBy="pizza")
-	private List<IngredientsPerPizza> ingredientsPerPizzas;
-
+	
 	//bi-directional many-to-one association to Ingredient
 	@ManyToOne
 	@JoinColumn(name="base")
 	private Ingredient ingredientBase;
-
+	
 	//bi-directional many-to-one association to Ingredient
 	@ManyToOne
 	@JoinColumn(name="sauce")
 	private Ingredient ingredientSauce;
 
+	//bi-directional many-to-one association to IngredientsPerPizza
+	@OneToMany(mappedBy="pizza")
+	private List<IngredientsPerPizza> ingredientsPerPizzas;
+
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="pizza")
 	private List<Product> products;
 
+	
 	public Pizza() {
 		super();
 		products = new ArrayList<Product>();
+		ingredientsPerPizzas = new ArrayList<IngredientsPerPizza>();
 	}
 
-	public int getIdPizza() {
+	public Pizza(int idPizza) {
+		this();
+		this.idPizza = idPizza;
+	}
+	
+
+	public Pizza(int idPizza, Ingredient ingredientBase, Ingredient ingredientSauce) {
+		super();
+		this.idPizza = idPizza;
+		this.ingredientBase = ingredientBase;
+		this.ingredientSauce = ingredientSauce;
+	}
+
+	public Pizza(int idPizza, List<IngredientsPerPizza> ingredientsPerPizzas, Ingredient ingredientBase,
+			Ingredient ingredientSauce, List<Product> products) {
+		this();
+		this.idPizza = idPizza;
+		this.ingredientsPerPizzas = ingredientsPerPizzas;
+		this.ingredientBase = ingredientBase;
+		this.ingredientSauce = ingredientSauce;
+		this.products = products;
+	}
+
+	public int getPizzaId() {
 		return this.idPizza;
 	}
 
@@ -113,4 +141,21 @@ public class Pizza implements Serializable {
 		return product;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(idPizza);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pizza other = (Pizza) obj;
+		return idPizza == other.idPizza;
+	}
+	
 }
