@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.HttpStatus;
 
+import com.capgemini.application.dtos.IngredientShortDTO;
 import com.capgemini.application.dtos.OrderDetailsDTO;
 import com.capgemini.application.dtos.OrderEditDTO;
 import com.capgemini.application.dtos.OrderShortDTO;
@@ -69,7 +70,50 @@ public class OrderResource {
 		return OrderDetailsDTO.from(srv.getOne(id));
 	}
 	
-
+	@GetMapping(path = "/ordered")
+	@ApiOperation(value = "Listado Pedidos por estado ordered")
+	public List<OrderDetailsDTO> getOrdereds(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getOrdered(OrderDetailsDTO.class);
+	}
+	
+	@GetMapping(path = "/inProcess")
+	@ApiOperation(value = "Listado Pedidos por estado en proceso")
+	public List<OrderDetailsDTO> getInProcess(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getInProcess(OrderDetailsDTO.class);
+	}
+	
+	
+	@GetMapping(path = "/readies")
+	@ApiOperation(value = "Listado Pedidos por estado listo")
+	public List<OrderDetailsDTO> getOneReadies(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getReady(OrderDetailsDTO.class);
+	}
+	
+	@GetMapping(path = "/sents")
+	@ApiOperation(value = "Listado Pedidos por estado enviado")
+	public List<OrderDetailsDTO> getOneSents(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getSent(OrderDetailsDTO.class);
+	}
+	
+	@GetMapping(path = "/receiveds")
+	@ApiOperation(value = "Listado Pedidos por estado recibido")
+	public List<OrderDetailsDTO> getOneReceiveds(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getReceived(OrderDetailsDTO.class);
+	}
+	
+	@GetMapping(path = "/canceleds")
+	@ApiOperation(value = "Listado Pedidos por estado cancelado")
+	public List<OrderDetailsDTO> getOneDetails(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getCanceled(OrderDetailsDTO.class);
+	}
+	
+	
 	@GetMapping(path = "/{id}", params = "mode=edit")
 	@ApiOperation(value = "Recupera un pedido")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Pedido encontrado"),

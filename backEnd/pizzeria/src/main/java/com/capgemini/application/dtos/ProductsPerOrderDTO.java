@@ -25,7 +25,7 @@ public class ProductsPerOrderDTO {
 	
 	public static ProductsPerOrderDTO from(ProductsPerOrder source) {
 		return new ProductsPerOrderDTO(
-				source.getOrder().getIdOrder(),
+				source.getProduct().getIdProduct(),
 				source.getProduct().getName(),
 				source.getAmount()
 				);

@@ -10,6 +10,7 @@ import com.capgemini.domains.entities.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,7 @@ public class OrderEditDTO {
 	@JsonProperty("precioPedido")
 	private float precio;
 	@JsonProperty("estadoPedido")
+	@ApiModelProperty(value = "Estados del pedido.", allowableValues = "ordered,in_process,ready,sent,received,canceled")
 	private String estado;
 	@JsonProperty("productosDelPedido")
 	private List<ProductsPerOrderDTO> productosPorPedido;
@@ -45,7 +47,7 @@ public class OrderEditDTO {
 				source.getAddress(),
 				source.getDeliveryDate(),
 				source.getPrice(),
-				source.getStatus() == null ? null : source.getStatus().getValue(),
+				source.getStatus() == null ? null : source.getStatus(),
 				source.getProductsPerOrders().stream().map(item -> ProductsPerOrderDTO.from(item)).toList()
 				);
 	}
@@ -58,7 +60,7 @@ public class OrderEditDTO {
 				source.getAddress(),
 				source.getOrderDelivery(),
 				source.getPrecio(),
-				source.getEstado() == null ? null : Order.Status.getEnum(source.getEstado())			
+				source.getEstado() == null ? null : source.getEstado()			
 				);			
 	}
 	
@@ -77,7 +79,7 @@ public class OrderEditDTO {
 		target.setAddress(address);
 		target.setDeliveryDate(orderDelivery);
 		target.setPrice(precio);
-		target.setStatus(estado == null ? null : Order.Status.getEnum(estado));	
+		target.setStatus(estado == null ? null : estado);	
 		}
 	
 	private void borrarProductosPorPedidoSobrantes(Order target) {

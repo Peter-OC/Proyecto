@@ -54,61 +54,10 @@ public class Order extends EntityBase<Order> implements Serializable {
 	@Digits(integer = 5, fraction = 2)
 	private float price;
 
-	public static enum Status {
-		ORDERED("ordered"),
-		IN_PROCESS("in_process"),
-		READY("ready"),
-		SENT("sent"),
-		RECEIVED("received"),
-		CANCELED("canceled");
-		
-		String value;
-		
-		Status (String value) {
-			this.value = value;
-		}
-		
-		public String getValue() {
-			return value;
-		}
-		
-		public static Status getEnum(String value) {
-			switch(value) {
-			case "ordered": return Status.ORDERED;
-			case "in_process": return Status.IN_PROCESS;
-			case "ready": return Status.READY;
-			case "sent": return Status.SENT;
-			case "received": return Status.RECEIVED;
-			case "canceled": return Status.CANCELED;
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + value);
-			}
-		}
-	}
 	
-	@Converter
-	private static class StatusConverter implements AttributeConverter<Status, String> {
-		@Override
-		public String convertToDatabaseColumn(Status status) {
-			if (status == null) {
-				return null;
-		    }
-		    return status.getValue();
-		}
-		
-		@Override
-		public Status convertToEntityAttribute(String value) {
-			if (value == null) {
-				return null;
-		    }
-		    return Status.getEnum(value);
-		}
-	}
-	
-	@Convert(converter = StatusConverter.class)
 	@Column(name="status_order")
 	@NotNull
-	private Status status;
+	private String status;
 	
 	//bi-directional many-to-one association to ProductsPerOrder
 	@OneToMany(mappedBy="order", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -128,7 +77,7 @@ public class Order extends EntityBase<Order> implements Serializable {
 	public Order(User user, @PastOrPresent @NotNull Date orderDate, @NotBlank @Length(max = 100) String address,
 			@PastOrPresent Date deliveryDate,
 			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 5, fraction = 2) float price,
-			@NotNull Status status) {
+			@NotNull String status) {
 		this();
 		this.user = user;
 		this.orderDate = orderDate;
@@ -141,7 +90,7 @@ public class Order extends EntityBase<Order> implements Serializable {
 	public Order(int idOrder, User user, @PastOrPresent @NotNull Date orderDate,
 			@NotBlank @Length(max = 100) String address, @PastOrPresent @NotNull Date deliveryDate,
 			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 5, fraction = 2) float price,
-			@NotNull Status status) {
+			@NotNull String status) {
 		this();
 		this.idOrder = idOrder;
 		this.user = user;
@@ -192,11 +141,11 @@ public class Order extends EntityBase<Order> implements Serializable {
 		this.price = price;
 	}
 
-	public Status getStatus() {
+	public String getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
