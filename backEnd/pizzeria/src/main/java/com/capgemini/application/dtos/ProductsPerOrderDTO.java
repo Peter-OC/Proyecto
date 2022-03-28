@@ -1,16 +1,10 @@
 package com.capgemini.application.dtos;
 
-import java.util.Date;
-
 import com.capgemini.domains.entities.Order;
 import com.capgemini.domains.entities.Product;
 import com.capgemini.domains.entities.ProductsPerOrder;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.Value;
 
 @Value

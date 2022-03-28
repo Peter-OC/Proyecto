@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.HttpStatus;
 
-import com.capgemini.application.dtos.IngredientShortDTO;
 import com.capgemini.application.dtos.OrderDetailsDTO;
 import com.capgemini.application.dtos.OrderEditDTO;
 import com.capgemini.application.dtos.OrderShortDTO;
@@ -49,22 +47,18 @@ public class OrderResource {
 	@GetMapping
 	@ApiOperation(value = "Listado de los pedidos")
 	public List<OrderShortDTO> getAll() {
-//		return srv.getAll().stream().map(Order -> OrderShortDTO.from(Order)).toList();
 		return srv.getByProjection(OrderShortDTO.class);
 	}
 
-//	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping(params = "page")
 	@ApiOperation(value = "Listado paginable de los pedidos")
 	public Page<OrderShortDTO> getAll(@ApiParam(required = false) Pageable page) {
-//		var content = srv.getAll(page);
-//		return new PageImpl(content.getContent().stream().map(item -> OrderShortDTO.from(item)).toList(), page,
-//				content.getTotalElements());
 		return srv.getByProjection(page, OrderShortDTO.class);
 
 	}
 
 	@GetMapping(path = "/{id}")
+	@ApiOperation(value = "Listado detallado de los pedidos")
 	public OrderDetailsDTO getOneDetails(@PathVariable int id,
 			@RequestParam(required = false, defaultValue = "details") String mode) throws NotFoundException {
 		return OrderDetailsDTO.from(srv.getOne(id));

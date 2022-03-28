@@ -41,9 +41,6 @@ public class ProductsPerOrder extends EntityBase<ProductsPerOrder> implements Se
 	public ProductsPerOrder() {
 	}
 	
-	public ProductsPerOrder(ProductsPerOrderPK id) {
-	}
-	
 	public ProductsPerOrder(@Positive int amount, Product product) {
 		this();
 		this.product = product;

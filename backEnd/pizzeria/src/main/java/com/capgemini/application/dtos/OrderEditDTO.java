@@ -4,16 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.capgemini.domains.entities.Order;
-import com.capgemini.domains.entities.Product;
-import com.capgemini.domains.entities.ProductsPerOrder;
 import com.capgemini.domains.entities.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.Value;
 
 @Value
