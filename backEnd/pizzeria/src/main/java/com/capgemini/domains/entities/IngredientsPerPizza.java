@@ -31,6 +31,15 @@ public class IngredientsPerPizza implements Serializable {
 
 	public IngredientsPerPizza() {
 	}
+	
+	
+	public IngredientsPerPizza(int amount, Ingredient ingredient, Pizza pizza) {
+		super();
+		this.amount = amount;
+		this.ingredient = ingredient;
+		this.pizza = pizza;
+		this.id = new IngredientsPerPizzaPK(pizza.getPizzaId(), ingredient.getIngredientId());
+	}
 
 	public IngredientsPerPizzaPK getId() {
 		return this.id;

@@ -79,7 +79,7 @@ public class IngredientResource {
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
 		entity = srv.add(entity);
-		//item.update(entity);
+		item.update(entity);
 		srv.change(entity);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(entity.getIngredientId()).toUri();
@@ -94,8 +94,7 @@ public class IngredientResource {
 	@ApiResponses({ @ApiResponse(code = 201, message = "Ingrediente añadido"),
 			@ApiResponse(code = 400, message = "Error al validar los datos o discrepancias en los identificadores"),
 			@ApiResponse(code = 404, message = "Ingrediente no encontrado") })
-	public void update(@ApiParam(value = "Identificador del ingrediente") @PathVariable int id,
-			@Valid @RequestBody IngredientEditDTO item) throws InvalidDataException, NotFoundException {
+	public void update(@ApiParam(value = "Identificador del ingrediente") @PathVariable int id, @Valid @RequestBody IngredientEditDTO item) throws InvalidDataException, NotFoundException {
 		if (id != item.getIngredientId())
 			throw new InvalidDataException("No coinciden los identificadores");
 		var entity = srv.getOne(id);
@@ -117,23 +116,23 @@ public class IngredientResource {
 	
 	@GetMapping(path = "/salsas")
 	@ApiOperation(value = "Listado Ingredientes por tipo salsa")
-	public List<IngredientShortDTO> getOneDetails(@RequestParam(required = false, defaultValue = "details") String mode)
+	public List<IngredientDetailsDTO> getSalsas(@RequestParam(required = false, defaultValue = "details") String mode)
 	throws NotFoundException {
-	return srv.getSalsas(IngredientShortDTO.class);
+	return srv.getSalsas(IngredientDetailsDTO.class);
 	}
 
 	@GetMapping(path = "/bases")
 	@ApiOperation(value = "Listado Ingredientes por tipo base")
-	public List<IngredientShortDTO> getOneDetails1(@RequestParam(required = false, defaultValue = "details") String mode)
+	public List<IngredientDetailsDTO> getBases(@RequestParam(required = false, defaultValue = "details") String mode)
 	throws NotFoundException {
-	return srv.getBases(IngredientShortDTO.class);
+	return srv.getBases(IngredientDetailsDTO.class);
 	}
 
 	@GetMapping(path = "/otros")
 	@ApiOperation(value = "Listado Ingredientes por tipo otros")
-	public List<IngredientShortDTO> getOneDetails2(@RequestParam(required = false, defaultValue = "details") String mode)
+	public List<IngredientDetailsDTO> getOthers(@RequestParam(required = false, defaultValue = "details") String mode)
 	throws NotFoundException {
-	return srv.getOtros(IngredientShortDTO.class);
+	return srv.getOtros(IngredientDetailsDTO.class);
 	}
 	
 	
