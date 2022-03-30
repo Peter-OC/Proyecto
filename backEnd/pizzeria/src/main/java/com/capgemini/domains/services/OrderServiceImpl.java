@@ -62,10 +62,41 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 
-//	@Override
-//	public List<Order> getOrdered(Class<OrderDetailsDTO> type) {
-//		return dao.findByStatus("ordered", type);
-//	}
+	@Override
+	public <T> List<T> getOrdered(Class<T> type) {
+	// TODO Auto-generated method stub
+		return dao.findByStatus("ordered", type);
+	}
+	
+	@Override
+	public <T> List<T> getInProcess(Class<T> type) {
+	// TODO Auto-generated method stub
+		return dao.findByStatus("in_process", type);
+	}
+	
+	@Override
+	public <T> List<T> getReady(Class<T> type) {
+	// TODO Auto-generated method stub
+		return dao.findByStatus("ready", type);
+	}
+	
+	@Override
+	public <T> List<T> getSent(Class<T> type) {
+	// TODO Auto-generated method stub
+		return dao.findByStatus("sent", type);
+	}
+	
+	@Override
+	public <T> List<T> getReceived(Class<T> type) {
+	// TODO Auto-generated method stub
+		return dao.findByStatus("received", type);
+	}
+	
+	@Override
+	public <T> List<T> getCanceled(Class<T> type) {
+	// TODO Auto-generated method stub
+		return dao.findByStatus("canceled", type);
+	}
 
 	@Override
 	public Order add(Order item) throws DuplicateKeyException, InvalidDataException {

@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,28 +47,67 @@ public class OrderResource {
 	@GetMapping
 	@ApiOperation(value = "Listado de los pedidos")
 	public List<OrderShortDTO> getAll() {
-//		return srv.getAll().stream().map(Order -> OrderShortDTO.from(Order)).toList();
 		return srv.getByProjection(OrderShortDTO.class);
 	}
 
-//	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping(params = "page")
 	@ApiOperation(value = "Listado paginable de los pedidos")
 	public Page<OrderShortDTO> getAll(@ApiParam(required = false) Pageable page) {
-//		var content = srv.getAll(page);
-//		return new PageImpl(content.getContent().stream().map(item -> OrderShortDTO.from(item)).toList(), page,
-//				content.getTotalElements());
 		return srv.getByProjection(page, OrderShortDTO.class);
 
 	}
 
 	@GetMapping(path = "/{id}")
+	@ApiOperation(value = "Listado detallado de los pedidos")
 	public OrderDetailsDTO getOneDetails(@PathVariable int id,
 			@RequestParam(required = false, defaultValue = "details") String mode) throws NotFoundException {
 		return OrderDetailsDTO.from(srv.getOne(id));
 	}
 	
-
+	@GetMapping(path = "/ordered")
+	@ApiOperation(value = "Listado Pedidos por estado ordered")
+	public List<OrderDetailsDTO> getOrdereds(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getOrdered(OrderDetailsDTO.class);
+	}
+	
+	@GetMapping(path = "/inProcess")
+	@ApiOperation(value = "Listado Pedidos por estado en proceso")
+	public List<OrderDetailsDTO> getInProcess(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getInProcess(OrderDetailsDTO.class);
+	}
+	
+	
+	@GetMapping(path = "/readies")
+	@ApiOperation(value = "Listado Pedidos por estado listo")
+	public List<OrderDetailsDTO> getOneReadies(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getReady(OrderDetailsDTO.class);
+	}
+	
+	@GetMapping(path = "/sents")
+	@ApiOperation(value = "Listado Pedidos por estado enviado")
+	public List<OrderDetailsDTO> getOneSents(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getSent(OrderDetailsDTO.class);
+	}
+	
+	@GetMapping(path = "/receiveds")
+	@ApiOperation(value = "Listado Pedidos por estado recibido")
+	public List<OrderDetailsDTO> getOneReceiveds(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getReceived(OrderDetailsDTO.class);
+	}
+	
+	@GetMapping(path = "/canceleds")
+	@ApiOperation(value = "Listado Pedidos por estado cancelado")
+	public List<OrderDetailsDTO> getOneDetails(@RequestParam(required = false, defaultValue = "details") String mode)
+	throws NotFoundException {
+		return srv.getCanceled(OrderDetailsDTO.class);
+	}
+	
+	
 	@GetMapping(path = "/{id}", params = "mode=edit")
 	@ApiOperation(value = "Recupera un pedido")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Pedido encontrado"),
