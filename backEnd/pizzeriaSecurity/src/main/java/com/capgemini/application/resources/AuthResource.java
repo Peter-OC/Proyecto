@@ -78,6 +78,6 @@ public class AuthResource {
 /*
  * /register (anonimo)
  * /Changepassword
- * /profile (Autentication) (get, put) modificar sus datos menos la contraseña
+ * /profile (Autentication) (get, put) modificar sus datos menos la contraseña CRUD ---
  * /users (Admin)  (get, getAll, post, put, delete) + roles 
 */

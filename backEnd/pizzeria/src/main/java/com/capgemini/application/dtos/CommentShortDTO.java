@@ -23,11 +23,8 @@ public class CommentShortDTO {
 	@JsonProperty("comentario")
 	private String text;
 
-	@JsonProperty("producto")
-	private Product product;
-
 	@JsonProperty("usuario")
-	private User user;
+	private String user;
 
 
 	
@@ -36,8 +33,7 @@ public class CommentShortDTO {
 				source.getIdComment(),
 				source.getDate(),
 				source.getText(),
-				source.getProduct(),
-				source.getUser()
+				source.getUser().getIdUser()
 				);
 	}
 }

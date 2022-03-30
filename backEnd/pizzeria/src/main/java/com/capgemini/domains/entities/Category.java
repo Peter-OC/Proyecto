@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import com.capgemini.domains.core.entities.EntityBase;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,20 +74,26 @@ public class Category extends EntityBase<Category> implements Serializable {
     private Type type;
 
 	//bi-directional many-to-one association to Product
-	@OneToMany(mappedBy="category")
+	@OneToMany(mappedBy="category", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Product> products;
 
 	public Category() {
+		products = new ArrayList<>();
 	}
 	
 	
 
-	public Category(int idCategory, String description, @NotNull Type type, List<Product> products) {
+	public Category(int idCategory, String description, @NotNull Type type) {
 		super();
 		this.idCategory = idCategory;
 		this.description = description;
 		this.type = type;
-		this.products = products;
+	}
+	
+
+	public Category(int idCategory) {
+		this();
+		this.idCategory = idCategory;
 	}
 
 

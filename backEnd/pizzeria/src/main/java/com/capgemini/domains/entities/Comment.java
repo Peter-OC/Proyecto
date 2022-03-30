@@ -30,7 +30,6 @@ public class Comment extends EntityBase<Comment> implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@NotNull
-	@PastOrPresent
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@Column(name="date")
 	private Date date;
@@ -64,6 +63,15 @@ public class Comment extends EntityBase<Comment> implements Serializable {
 		this.text = text;
 		this.product = product;
 		this.user = user;
+	}
+	
+	
+
+	public Comment(int idComment, Integer score, String text) {
+		super();
+		this.idComment = idComment;
+		this.score = score;
+		this.text = text;
 	}
 
 	public int getIdComment() {

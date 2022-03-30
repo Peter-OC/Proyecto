@@ -14,8 +14,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer>{
 	<T> Iterable<T> findByIdOrderIsNotNull(Sort sort, Class<T> type);
 	<T> Page<T> findByIdOrderIsNotNull(Pageable pageable, Class<T> type);
 	
-//	<T> List<T> findByStatus(String estado, Class<T> type);
-//	<T> Iterable<T> findByStatus(String estado, Sort sort, Class<T> type);
-//	<T> Page<T> findByStatus(String estado, Pageable pageable, Class<T> type);
+	<T> List<T> findByStatus(String estado, Class<T> type);
+
 	
 }

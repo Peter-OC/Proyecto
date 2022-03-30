@@ -36,19 +36,14 @@ public class ProductDetailsDTO {
 	@JsonProperty("precio")
 	private float price;
 	
-	@JsonProperty("lista_comentarios")
-	private List<Comment> comments;
-	
 	@JsonProperty("pizza")
-	private Pizza pizza;
+	private Integer pizza;
 	
 	@JsonProperty("categoria")
-	private Category category;
+	private String category;
 	
-	@JsonProperty("comentario")
-	private Comment comment;
-
-
+	@JsonProperty("lista_comentarios")
+	private List<CommentShortDTO> comments;
 	
 	public static ProductDetailsDTO from(Product source) {
 		return new ProductDetailsDTO(
@@ -57,12 +52,11 @@ public class ProductDetailsDTO {
 				source.getDislike(),
 				source.getLike(),
 				source.getName(),
-				source.getPhoto(),				
+				source.getPhoto(),
 				source.getPrice(),
-				source.getComments(),
-				source.getPizza(),
-				source.getCategory(),
-				source.getComment()
+				source.getPizza() == null ? null: source.getPizza().getPizzaId(),
+				source.getCategory().getType().getValue(),
+				source.getComments().stream().map(item -> CommentShortDTO.from(item)).toList()
 				);
 	}
 }
