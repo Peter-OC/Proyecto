@@ -17,7 +17,7 @@ public class OrderDetailsDTO {
 	@JsonProperty("idPedido")
 	private int idOrder;
 	@JsonProperty("idCliente")
-	private int idCustomer;
+	private String idCustomer;
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@JsonProperty("horaPedido")
 	private Date orderDate;
@@ -29,7 +29,7 @@ public class OrderDetailsDTO {
 	public static OrderDetailsDTO from(Order source) {
 		return new OrderDetailsDTO(
 				source.getIdOrder(),
-				source.getUser().getIdUser(),
+				source.getUser().getEmail(),
 				source.getOrderDate(),
 				source.getAddress(),
 				source.getProductsPerOrders().stream().map(item -> ProductsPerOrderDTO.from(item)).toList()

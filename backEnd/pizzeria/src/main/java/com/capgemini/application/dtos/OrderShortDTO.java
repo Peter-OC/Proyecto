@@ -16,7 +16,7 @@ public class OrderShortDTO {
 	@JsonProperty("idPedido")
 	private int idOrder;
 	@JsonProperty("idCliente")
-	private int idCustomer;
+	private String idCustomer;
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@JsonProperty("horaPedido")
 	private Date orderDate;
@@ -26,7 +26,7 @@ public class OrderShortDTO {
 	public static OrderShortDTO from(Order source) {
 		return new OrderShortDTO(
 				source.getIdOrder(),
-				source.getUser().getIdUser(),
+				source.getUser().getEmail(),
 				source.getOrderDate(),
 				source.getAddress()
 				);
