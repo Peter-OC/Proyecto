@@ -17,7 +17,7 @@ public class OrderEditDTO {
 	@JsonProperty("idPedido")
 	private int idOrder;
 	@JsonProperty("idUsuario")
-	private String idUser;
+	private int idUser;
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@JsonProperty("horaPedido")
 	private Date orderDate;

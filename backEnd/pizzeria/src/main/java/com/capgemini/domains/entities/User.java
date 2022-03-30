@@ -18,7 +18,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_user")
-	private String idUser;
+	private int idUser;
 
 	private String address;
 
@@ -46,16 +46,16 @@ public class User implements Serializable {
 	}
 	
 
-	public User(String idUser) {
+	public User(int idUser) {
 		super();
 		this.idUser = idUser;
 	}
 
-	public String getIdUser() {
+	public int getIdUser() {
 		return this.idUser;
 	}
 
-	public void setIdUser(String idUser) {
+	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
 
