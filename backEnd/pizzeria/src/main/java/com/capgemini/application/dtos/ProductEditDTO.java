@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
-public class ProductDetailsDTO {
+public class ProductEditDTO {
 
 	@JsonProperty("id")
 	private int idProduct;
@@ -25,7 +25,7 @@ public class ProductDetailsDTO {
 	private Integer dislike;
 
 	@JsonProperty("me_gusta")
-	private Integer like;
+	private Integer thelike;
 
 	@JsonProperty("nombre")
 	private String name;
@@ -36,27 +36,64 @@ public class ProductDetailsDTO {
 	@JsonProperty("precio")
 	private float price;
 	
+	
 	@JsonProperty("pizza")
 	private Integer pizza;
 	
 	@JsonProperty("categoria")
-	private String category;
+	private int category;
 	
 	@JsonProperty("lista_comentarios")
 	private List<CommentShortDTO> comments;
+
 	
-	public static ProductDetailsDTO from(Product source) {
-		return new ProductDetailsDTO(
+	public static ProductEditDTO from(Product source) {
+		return new ProductEditDTO(
 				source.getIdProduct(),
 				source.getDescription(),
 				source.getDislike(),
 				source.getLike(),
 				source.getName(),
-				source.getPhoto(),
+				source.getPhoto(),				
 				source.getPrice(),
 				source.getPizza() == null ? null: source.getPizza().getPizzaId(),
-				source.getCategory().getType().getValue(),
+				source.getCategory().getIdCategory(),
 				source.getComments().stream().map(item -> CommentShortDTO.from(item)).toList()
 				);
 	}
+	
+	public static  Product from(ProductEditDTO source) {
+		return new Product(
+				source.getIdProduct(),
+				source.getDescription(),
+				source.getDislike(),
+				source.getThelike(),
+				source.getName(),
+				source.getPhoto(),				
+				source.getPrice(),
+				new Pizza(source.getPizza()),
+				new Category(source.getCategory())
+				);
+	}
+	
+	
+	public Product update(Product target) {
+		actualizaPropiedadesEntidad(target);
+		return target;
+	}
+	
+	
+	
+    private void actualizaPropiedadesEntidad(Product target) {
+    	target.setIdProduct(idProduct);
+		target.setDescription(description);
+		target.setDislike(dislike);
+		target.setLike(thelike);
+		target.setName(name);
+		target.setPhoto(photo);
+		target.setPrice(price);
+		target.setCategory(new Category(category));
+    }
+   
+	
 }
