@@ -1,6 +1,7 @@
 package com.capgemini.application.dtos;
 
 import com.capgemini.domains.entities.Ingredient;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,11 +11,20 @@ import lombok.Data;
 public class IngredientEditDTO {
 
 
+	@JsonProperty("idIngrediente")
 	private int ingredientId;
+	
+	@JsonProperty("ingrediente")
 	private String name;
+	
+	@JsonProperty("tipo")
 	@ApiModelProperty(value = "Tipos de Ingredientes.", allowableValues = "sauce,base,other")
 	private String type;
+	
+	@JsonProperty("precio")
 	private float price;
+	
+	@JsonProperty("foto")
 	private String photo;
 
 	

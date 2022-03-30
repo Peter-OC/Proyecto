@@ -2,12 +2,16 @@ package com.capgemini.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.capgemini.domains.core.entities.EntityBase;
+
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +31,21 @@ public class Ingredient extends EntityBase<Ingredient> implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ingredient")
 	private int ingredientId;
-
-	@Length(min = 2, max = 25)
+	
 	@NotBlank
+	@Length(max = 25)
 	private String name;
 
 	@NotNull
+	@ApiModelProperty(value = "Tipos de Ingredientes.", allowableValues = "sauce,base,other")
 	private String type;
 
+	@NotNull
+	@DecimalMin(value = "0.0", inclusive = false)
+	@Digits(integer = 4, fraction = 2)
 	private float price;
 
+	@Length(max = 200)
 	private String photo;
 
 	// bi-directional many-to-one association to IngredientsPerPizza

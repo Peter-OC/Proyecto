@@ -28,9 +28,6 @@ public class IngredientDetailsDTO {
 	@JsonProperty("photoURL")
 	private String photo;
 	
-	@JsonProperty("Lista-pizzas")
-	private List<IngredientsPerPizzaDTO> ingredientsPerPizzas;
-	
 
 	public static IngredientDetailsDTO from(Ingredient source) {
 		return new IngredientDetailsDTO(
@@ -38,8 +35,7 @@ public class IngredientDetailsDTO {
 				source.getName(), 
 				source.getType().toString(),
 				source.getPrice(), 
-				source.getPhoto(),
-				source.getIngredientsPerPizzas().stream().map(item -> IngredientsPerPizzaDTO.from(item)).toList()
+				source.getPhoto()
 				);
 	}
 }

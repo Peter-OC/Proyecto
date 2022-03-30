@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -35,7 +36,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import org.springframework.http.HttpStatus;
 
@@ -66,6 +66,12 @@ public class PizzaResource {
 	public PizzaDetailsDTO getOneDetails(@PathVariable int id,
 			@RequestParam(required = false, defaultValue = "details") String mode) throws NotFoundException {
 		return PizzaDetailsDTO.from(srv.getOne(id));
+	}
+	@GetMapping(path = "/{id}", params = { "mode=edit" })
+	@ApiOperation(value = "Detalles de una Pizza")
+	public PizzaEditDTO getOneEdit(@PathVariable int id,
+			@RequestParam(required = false, defaultValue = "edit") String mode) throws NotFoundException {
+		return PizzaEditDTO.from(srv.getOne(id));
 	}
 
 	@PostMapping
