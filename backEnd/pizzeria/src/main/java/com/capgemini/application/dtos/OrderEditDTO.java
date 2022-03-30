@@ -79,22 +79,26 @@ public class OrderEditDTO {
 	
 	private void borrarProductosPorPedidoSobrantes(Order target) {
 		target.getProductsPerOrders().stream()
-								.filter(entity -> productosPorPedido.stream().noneMatch(dto -> entity.getId().getIdProduct() == dto.getProductId())).toList()
+								.filter(entity -> productosPorPedido.stream()
+								.noneMatch(dto -> entity.getId().getIdProduct() == dto.getProductId())).toList()
 								.forEach(item -> target.removeProductsPerOrder(item));
 	}
 
 	private void actualizarProductosPorPedidoCambiados(Order target) {
 		target.getProductsPerOrders().forEach(entity -> {
-			var dto = productosPorPedido.stream().filter(item -> item.getProductId() == entity.getId().getIdProduct()).findFirst().get();
+			var dto = productosPorPedido.stream()
+					.filter(item -> item.getProductId() == entity.getId().getIdProduct()).findFirst().get();
 			if (entity.getAmount() != dto.getAmount())
 				entity.setAmount(dto.getAmount());
 		});
 	}
 	
+
 	private void incorporarNuevosProductosPorPedido(Order target) {
 		productosPorPedido.stream().filter(
-				dto -> target.getProductsPerOrders().stream().noneMatch(entity -> entity.getId().getIdProduct() == dto.getProductId()))
-				.forEach(dto -> target.addProductsPerOrder(ProductsPerOrderDTO.from(dto, target)));
+				dto -> target.getProductsPerOrders().stream()
+							.noneMatch(entity -> entity.getId().getIdProduct() == dto.getProductId()))
+							.forEach(dto -> target.addProductsPerOrder(ProductsPerOrderDTO.from(dto, target)));
 		
 	}
 	

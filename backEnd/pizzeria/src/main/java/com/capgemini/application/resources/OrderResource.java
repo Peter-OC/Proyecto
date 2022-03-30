@@ -39,13 +39,14 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api/order")
-@Api(value = "/Order", description = "Mantenimiento de pedidos", produces = "application/json, application/xml", consumes = "application/json, application/xml")
+@Api(value = "/Order", description = "Mantenimiento de pedidos", produces = "application/json, application/xml",
+	 consumes = "application/json, application/xml")
 public class OrderResource {
 	@Autowired
 	private OrderService srv;
 
 	@GetMapping
-	@ApiOperation(value = "Listado de los pedidos")
+	@ApiOperation(value = "Listado de todos los pedidos")
 	public List<OrderShortDTO> getAll() {
 		return srv.getByProjection(OrderShortDTO.class);
 	}
@@ -66,14 +67,14 @@ public class OrderResource {
 	
 	@GetMapping(path = "/ordered")
 	@ApiOperation(value = "Listado Pedidos por estado ordered")
-	public List<OrderDetailsDTO> getOrdereds(@RequestParam(required = false, defaultValue = "details") String mode)
+	public List<OrderDetailsDTO> getOrdereds(@RequestParam(required=false, defaultValue = "details")String mode)
 	throws NotFoundException {
 		return srv.getOrdered(OrderDetailsDTO.class);
 	}
 	
 	@GetMapping(path = "/inProcess")
 	@ApiOperation(value = "Listado Pedidos por estado en proceso")
-	public List<OrderDetailsDTO> getInProcess(@RequestParam(required = false, defaultValue = "details") String mode)
+	public List<OrderDetailsDTO> getInProcess(@RequestParam(required=false, defaultValue = "details")String mode)
 	throws NotFoundException {
 		return srv.getInProcess(OrderDetailsDTO.class);
 	}
@@ -81,14 +82,14 @@ public class OrderResource {
 	
 	@GetMapping(path = "/readies")
 	@ApiOperation(value = "Listado Pedidos por estado listo")
-	public List<OrderDetailsDTO> getOneReadies(@RequestParam(required = false, defaultValue = "details") String mode)
+	public List<OrderDetailsDTO> getOneReadies(@RequestParam(required=false, defaultValue = "details")String mode)
 	throws NotFoundException {
 		return srv.getReady(OrderDetailsDTO.class);
 	}
 	
 	@GetMapping(path = "/sents")
 	@ApiOperation(value = "Listado Pedidos por estado enviado")
-	public List<OrderDetailsDTO> getOneSents(@RequestParam(required = false, defaultValue = "details") String mode)
+	public List<OrderDetailsDTO> getOneSents(@RequestParam(required=false, defaultValue = "details") String mode)
 	throws NotFoundException {
 		return srv.getSent(OrderDetailsDTO.class);
 	}
@@ -114,7 +115,8 @@ public class OrderResource {
 			@ApiResponse(code = 404, message = "Pedido no encontrado") })
 
 	public OrderEditDTO getOneEdit(@ApiParam(value = "Identificador del pedido") @PathVariable int id,
-			@ApiParam(value = "Versión completa o editable", required = false, allowableValues = "details,edit") @RequestParam(required = true) String mode)
+			@ApiParam(value = "Versión completa o editable", required = false, allowableValues = "details,edit") 
+			@RequestParam(required = true) String mode)
 			throws NotFoundException {
 		return OrderEditDTO.from(srv.getOne(id));
 	}

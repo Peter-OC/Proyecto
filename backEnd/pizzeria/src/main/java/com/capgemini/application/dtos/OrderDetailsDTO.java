@@ -18,6 +18,8 @@ public class OrderDetailsDTO {
 	private int idOrder;
 	@JsonProperty("idCliente")
 	private int idCustomer;
+	@JsonProperty("precio")
+	private float price;
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@JsonProperty("horaPedido")
 	private Date orderDate;
@@ -30,6 +32,7 @@ public class OrderDetailsDTO {
 		return new OrderDetailsDTO(
 				source.getIdOrder(),
 				source.getUser().getIdUser(),
+				source.getPrice(),
 				source.getOrderDate(),
 				source.getAddress(),
 				source.getProductsPerOrders().stream().map(item -> ProductsPerOrderDTO.from(item)).toList()
