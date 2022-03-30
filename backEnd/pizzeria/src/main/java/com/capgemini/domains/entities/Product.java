@@ -35,7 +35,7 @@ public class Product extends EntityBase<Product> implements Serializable {
 
 	private Integer dislike;
 
-	private Integer like;
+	private Integer thelike;
 
 	@Length(min = 2, max = 50)
 	@NotBlank
@@ -81,6 +81,23 @@ public class Product extends EntityBase<Product> implements Serializable {
 		this.idProduct = idProduct;
 	}
 	
+	
+	
+	public Product(int idProduct, String description, Integer dislike, Integer thelike,
+			@Length(min = 2, max = 50) @NotBlank String name, String photo,
+			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 4, fraction = 2) float price, Pizza pizza, Category category) {
+		this();
+		this.idProduct = idProduct;
+		this.description = description;
+		this.dislike = dislike;
+		this.thelike = thelike;
+		this.name = name;
+		this.photo = photo;
+		this.price = price;
+		this.pizza = pizza;
+		this.category = category;
+	}
+
 	public int getIdProduct() {
 		return this.idProduct;
 	}
@@ -106,11 +123,11 @@ public class Product extends EntityBase<Product> implements Serializable {
 	}
 
 	public Integer getLike() {
-		return this.like;
+		return this.thelike;
 	}
 
-	public void setLike(Integer like) {
-		this.like = like;
+	public void setLike(Integer thelike) {
+		this.thelike = thelike;
 	}
 
 	public String getName() {
@@ -207,8 +224,8 @@ public class Product extends EntityBase<Product> implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [idProduct=" + idProduct + ", description=" + description + ", dislike=" + dislike + ", like="
-				+ like + ", name=" + name + ", photo=" + photo + ", price=" + price + ", comments=" + comments
+		return "Product [idProduct=" + idProduct + ", description=" + description + ", dislike=" + dislike + ", thelike="
+				+ thelike + ", name=" + name + ", photo=" + photo + ", price=" + price + ", comments=" + comments
 				+ ", pizza=" + pizza + ", category=" + category + ", comment=" + comment + ", productsPerOrders="
 				+ productsPerOrders + "]";
 	}
