@@ -32,7 +32,7 @@ public class OrderEditDTO {
 	@ApiModelProperty(value = "Estados del pedido.", allowableValues = "ordered,in_process,ready,sent,received,canceled")
 	private String estado;
 	@JsonProperty("productosDelPedido")
-	private List<ProductsPerOrderDTO> productosPorPedido;
+	private List<ProductsPerOrderDTO> productos;
 	
 	public static OrderEditDTO from(Order source) {
 		return new OrderEditDTO(			
@@ -73,29 +73,33 @@ public class OrderEditDTO {
 		target.setOrderDate(orderDate);
 		target.setAddress(address);
 		target.setDeliveryDate(orderDelivery);
+		target.getProductsPerOrders().stream()
+				.forEach(item -> item.getPrice());
 		target.setPrice(precio);
 		target.setStatus(estado == null ? null : estado);	
 		}
 	
 	private void borrarProductosPorPedidoSobrantes(Order target) {
 		target.getProductsPerOrders().stream()
-								.filter(entity -> productosPorPedido.stream()
+								.filter(entity -> productos.stream()
 								.noneMatch(dto -> entity.getId().getIdProduct() == dto.getProductId())).toList()
 								.forEach(item -> target.removeProductsPerOrder(item));
 	}
 
 	private void actualizarProductosPorPedidoCambiados(Order target) {
 		target.getProductsPerOrders().forEach(entity -> {
-			var dto = productosPorPedido.stream()
+			var dto = productos.stream()
 					.filter(item -> item.getProductId() == entity.getId().getIdProduct()).findFirst().get();
 			if (entity.getAmount() != dto.getAmount())
 				entity.setAmount(dto.getAmount());
+			if (entity.getPrice() != dto.getPrecio())
+				entity.setPrice(dto.getPrecio());
 		});
 	}
 	
 
 	private void incorporarNuevosProductosPorPedido(Order target) {
-		productosPorPedido.stream().filter(
+		productos.stream().filter(
 				dto -> target.getProductsPerOrders().stream()
 							.noneMatch(entity -> entity.getId().getIdProduct() == dto.getProductId()))
 							.forEach(dto -> target.addProductsPerOrder(ProductsPerOrderDTO.from(dto, target)));
