@@ -60,10 +60,10 @@ public class OrderEditDTO {
 	}
 	
 	public Order update(Order target) {
-		actualizaPropiedadesEntidad(target);
 		borrarProductosPorPedidoSobrantes(target);
 		actualizarProductosPorPedidoCambiados(target);
 		incorporarNuevosProductosPorPedido(target);
+		actualizaPropiedadesEntidad(target);
 		return target;
 	}
 	
@@ -73,9 +73,7 @@ public class OrderEditDTO {
 		target.setOrderDate(orderDate);
 		target.setAddress(address);
 		target.setDeliveryDate(orderDelivery);
-		target.getProductsPerOrders().stream()
-				.forEach(item -> item.getPrice());
-		target.setPrice(precio);
+		target.setPrice((float) target.getProductsPerOrders().stream().mapToDouble(item -> item.getPrice()).sum());
 		target.setStatus(estado == null ? null : estado);	
 		}
 	
