@@ -6,6 +6,7 @@ import com.capgemini.domains.entities.Category;
 import com.capgemini.domains.entities.Comment;
 import com.capgemini.domains.entities.Pizza;
 import com.capgemini.domains.entities.Product;
+import com.capgemini.domains.entities.Category.Type;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -38,7 +39,7 @@ public class ProductEditDTO {
 	
 	
 	@JsonProperty("pizza")
-	private Integer pizza;
+	private PizzaEditDTO pizza;
 	
 	@JsonProperty("categoria")
 	private int category;
@@ -56,7 +57,7 @@ public class ProductEditDTO {
 				source.getName(),
 				source.getPhoto(),				
 				source.getPrice(),
-				source.getPizza() == null ? null: source.getPizza().getPizzaId(),
+				source.getCategory().getType() == Type.PIZZA ? PizzaEditDTO.from(source.getPizza()) : null,
 				source.getCategory().getIdCategory(),
 				source.getComments().stream().map(item -> CommentShortDTO.from(item)).toList()
 				);
@@ -71,7 +72,7 @@ public class ProductEditDTO {
 				source.getName(),
 				source.getPhoto(),				
 				source.getPrice(),
-				new Pizza(source.getPizza()),
+				null,
 				new Category(source.getCategory())
 				);
 	}
@@ -85,7 +86,6 @@ public class ProductEditDTO {
 	
 	
     private void actualizaPropiedadesEntidad(Product target) {
-    	target.setIdProduct(idProduct);
 		target.setDescription(description);
 		target.setDislike(dislike);
 		target.setLike(thelike);
