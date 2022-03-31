@@ -14,11 +14,13 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {RatingModule} from 'primeng/rating';
 import { PaginatorModule } from 'primeng/paginator';
+import { PedidosModule } from './pedidos';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { PaginatorModule } from 'primeng/paginator';
     RatingModule,
     FormsModule,
     TableModule,
+    PedidosModule,
   ],
   providers: [LoggerService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

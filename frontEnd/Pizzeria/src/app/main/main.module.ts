@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
 import { AjaxWaitComponent } from './ajax-wait';
-import { SecurityModule } from '../security';
 import { RouterModule } from '@angular/router';
 import { CommonServicesModule } from '../common-services';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +20,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HeaderComponent, PageNotFoundComponent,
   ],
   imports: [
-    CommonModule, CommonServicesModule, SecurityModule, RouterModule.forChild([]),
+    CommonModule, CommonServicesModule, RouterModule.forChild([]),
   ]
 })
 export class MainModule {
