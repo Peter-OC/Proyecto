@@ -16,16 +16,16 @@ public class IngredientDetailsDTO {
 	@JsonProperty("id")
 	private int ingredientId;
 	
-	@JsonProperty("name")
+	@JsonProperty("nombre")
 	private String name;
 	
-	@JsonProperty("type")
+	@JsonProperty("tipo")
 	private String type;
 	
-	@JsonProperty("price")
+	@JsonProperty("precio")
 	private float price;
 	
-	@JsonProperty("photoURL")
+	@JsonProperty("foto")
 	private String photo;
 	
 
