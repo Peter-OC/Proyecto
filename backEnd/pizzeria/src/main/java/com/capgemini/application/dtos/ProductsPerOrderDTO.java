@@ -24,13 +24,14 @@ public class ProductsPerOrderDTO {
 				source.getProduct().getIdProduct(),
 				source.getProduct().getName(),
 				source.getAmount(),
-				source.getProduct().getPrice()
+				source.getPrice()*source.getAmount()
 				);
 	}
 	
 	public static ProductsPerOrder from(ProductsPerOrderDTO source, Order order) {
 		return new ProductsPerOrder(
 				source.getAmount(),
+				source.getPrecio()*source.getAmount(),
 				new Product(source.getProductId()),
 				order
 				);

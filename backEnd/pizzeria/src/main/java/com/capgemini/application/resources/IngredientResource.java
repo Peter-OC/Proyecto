@@ -40,7 +40,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/ingredient")
+@RequestMapping("/api/ingredientes")
 @Api(value = "/Ingredient", description = "Mantenimiento de ingredientes", produces = "application/json, application/xml", consumes = "application/json, application/xml")
 public class IngredientResource {
 	@Autowired

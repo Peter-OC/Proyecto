@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
@@ -23,6 +24,7 @@ public class User extends EntityBase<User> implements Serializable {
 
 	@Id
 	@NotBlank
+	@Email
 	@Length(max=50)
 	private String username;
 
@@ -37,6 +39,7 @@ public class User extends EntityBase<User> implements Serializable {
 
 	@NotBlank
 	@Length(min=2, max=100)
+	@Column(name="roles")
 	private String function;
 
 	@Column(name="last_name")
@@ -44,7 +47,7 @@ public class User extends EntityBase<User> implements Serializable {
 	private String lastName;
 
 	@NotBlank
-	@Length(min=8, max=15)
+	@Length(max=100)
 	private String password;
 
 	public User() {
@@ -55,13 +58,30 @@ public class User extends EntityBase<User> implements Serializable {
 		this.username = username;
 		this.password = password;
 	}
+	
+	
 		
-	public User(@NotBlank @Length(max = 50) String address,
+	public User(@NotBlank @Length(min = 2, max = 100) String function) {
+		super();
+		this.function = function;
+	}
+
+	public User(@NotBlank @Length(max = 50) String address, @NotBlank @Length(max = 25) String firstName,
+			@Length(max = 25) String lastName) {
+		super();
+		this.address = address;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public User(String username, 
+			@NotBlank @Length(max = 50) String address,
 			@NotBlank @Length(max = 25) String firstName, 
 			@NotBlank @Length(min=2, max=100) String function, 
 			@Length(max = 25) String lastName,
-			@NotBlank @Length(min = 8, max = 15) String password) {
+			@NotBlank String password) {
 		this();
+		this.username = username;
 		this.address = address;
 		this.firstName = firstName;
 		this.function = function;
