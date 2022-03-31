@@ -1,7 +1,5 @@
 package com.capgemini.application.dtos;
 
-import org.springframework.beans.factory.parsing.SourceExtractor;
-
 import com.capgemini.domains.entities.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,8 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data @AllArgsConstructor
-public class UserEditDTO {
-
+public class ProfileDTO {
+	
 	@JsonProperty("nombre")
 	private String first_name;
 
@@ -19,16 +17,21 @@ public class UserEditDTO {
 	
 	@JsonProperty("direcion")
 	private String address;
+
 	
-	@JsonProperty("rol")
-	private String[] function;
-	
-	public static UserEditDTO from(User source) {
-		return new UserEditDTO(
+	public static ProfileDTO from(User source) {
+		return new ProfileDTO(
 				source.getFirstName(),
 				source.getLastName(),
-				source.getAddress(),
-				source.getFunction().split(",")
+				source.getAddress()
+				);
+	}
+	
+	public static User from(ProfileDTO source) {
+		return new User(
+				source.getFirst_name(),
+				source.getLast_name(),
+				source.getAddress()
 				);
 	}
 }
