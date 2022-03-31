@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.capgemini.application.dtos.IngredientDetailsDTO;
 import com.capgemini.application.dtos.IngredientsPerPizzaDTO;
 import com.capgemini.application.dtos.PizzaEditDTO;
 import com.capgemini.application.dtos.ProductDetailsDTO;
@@ -29,7 +31,7 @@ import com.capgemini.application.dtos.ProductEditDTO;
 import com.capgemini.application.dtos.ProductShortDTO;
 import com.capgemini.domains.contracts.services.PizzaService;
 import com.capgemini.domains.contracts.services.ProductService;
-import com.capgemini.domains.entities.Category.Type;
+import com.capgemini.domains.entities.Product.Type;
 import com.capgemini.exceptions.DuplicateKeyException;
 import com.capgemini.exceptions.InvalidDataException;
 import com.capgemini.exceptions.NotFoundException;
@@ -95,7 +97,7 @@ public class ProductResource {
 
 		var entity = ProductEditDTO.from(item);
 
-		if(entity.getCategory().getIdCategory() == 3) {
+		if(entity.getType() == Type.PIZZA) {
 			var pizza = PizzaEditDTO.from(item.getPizza());
 			if (pizza.isInvalid())
 				throw new InvalidDataException(pizza.getErrorsMessage());
@@ -131,7 +133,7 @@ public class ProductResource {
 
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
-		if(entity.getCategory().getIdCategory() == 3) {
+		if(entity.getType() == Type.PIZZA) {
 			var pizza =  entity.getPizza();
 			var dto = item.getPizza();
 			dto.update(pizza);
@@ -140,14 +142,36 @@ public class ProductResource {
 			srvPizza.change(pizza);
 		}
 	}
-//
-//	@DeleteMapping("/{id}")
-//	@ResponseStatus(HttpStatus.NO_CONTENT)
-//	@ApiOperation(value = "Borrar un producto existente")
-//	@ApiResponses({ @ApiResponse(code = 204, message = "Producto borrado"),
-//			@ApiResponse(code = 404, message = "Producto no encontrado") })
-//	public void delete(@ApiParam(value = "Identificador del producto") @PathVariable int id) {
-//		srv.deleteById(id);
-//	}
 
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ApiOperation(value = "Borrar un producto existente")
+	@ApiResponses({ @ApiResponse(code = 204, message = "Producto borrado"),
+			@ApiResponse(code = 404, message = "Producto no encontrado") })
+	public void delete(@ApiParam(value = "Identificador del producto") @PathVariable int id) {
+		srv.deleteById(id);
+	}
+
+	@GetMapping(path = "/pizzas2")
+	@ApiOperation(value = "Listado de pizzas")
+	public List<ProductDetailsDTO> getSalsas(@RequestParam(required = false, defaultValue = "details") String mode)
+			throws NotFoundException {
+		return srv.getPizzas(ProductDetailsDTO.class);
+	}
+
+	@GetMapping(path = "/bebidas")
+	@ApiOperation(value = "Listado de bebidas")
+	public List<ProductDetailsDTO> getBases(@RequestParam(required = false, defaultValue = "details") String mode)
+			throws NotFoundException {
+		return srv.getBebidas(ProductDetailsDTO.class);
+	}
+
+	@GetMapping(path = "/entrantes")
+	@ApiOperation(value = "Listado de entrantes")
+	public List<ProductDetailsDTO> getOthers(@RequestParam(required = false, defaultValue = "details") String mode)
+			throws NotFoundException {
+		return srv.getEntrantes(ProductDetailsDTO.class);
+	}
+	
+	
 }

@@ -2,11 +2,8 @@ package com.capgemini.application.dtos;
 
 import java.util.List;
 
-import com.capgemini.domains.entities.Category;
-import com.capgemini.domains.entities.Comment;
-import com.capgemini.domains.entities.Pizza;
 import com.capgemini.domains.entities.Product;
-import com.capgemini.domains.entities.Category.Type;
+import com.capgemini.domains.entities.Product.Type;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -57,8 +54,8 @@ public class ProductEditDTO {
 				source.getName(),
 				source.getPhoto(),				
 				source.getPrice(),
-				source.getCategory().getType() == Type.PIZZA ? PizzaEditDTO.from(source.getPizza()) : null,
-				source.getCategory().getIdCategory(),
+				source.getType() == Type.PIZZA ? PizzaEditDTO.from(source.getPizza()) : null,
+				source.getType().getValue(),
 				source.getComments().stream().map(item -> CommentShortDTO.from(item)).toList()
 				);
 	}
@@ -73,17 +70,14 @@ public class ProductEditDTO {
 				source.getPhoto(),				
 				source.getPrice(),
 				null,
-				new Category(source.getCategory())
+				Product.Type.getEnum(source.getCategory())
 				);
 	}
-	
 	
 	public Product update(Product target) {
 		actualizaPropiedadesEntidad(target);
 		return target;
 	}
-	
-	
 	
     private void actualizaPropiedadesEntidad(Product target) {
 		target.setDescription(description);
@@ -92,8 +86,6 @@ public class ProductEditDTO {
 		target.setName(name);
 		target.setPhoto(photo);
 		target.setPrice(price);
-		target.setCategory(new Category(category));
+		target.setType(Product.Type.getEnum(category));
     }
-   
-	
 }
