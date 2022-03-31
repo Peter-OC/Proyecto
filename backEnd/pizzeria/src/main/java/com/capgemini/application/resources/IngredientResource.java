@@ -48,8 +48,8 @@ public class IngredientResource {
 
 	@GetMapping
 	@ApiOperation(value = "Listado de los ingredientes")
-	public List<IngredientShortDTO> getAll() {
-		return srv.getAll().stream().map(item -> IngredientShortDTO.from(item)).toList();
+	public List<IngredientDetailsDTO> getAll() {
+		return srv.getAll().stream().map(item -> IngredientDetailsDTO.from(item)).toList();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

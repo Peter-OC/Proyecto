@@ -8,6 +8,7 @@ import { INGREDIENTES_COMPONENTES } from './componente.component';
 import { ButtonModule } from 'primeng/button';
 import { Table, TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
+import {ToolbarModule} from 'primeng/toolbar';
 
 @NgModule({
   declarations: [INGREDIENTES_COMPONENTES],
@@ -21,6 +22,7 @@ import { RatingModule } from 'primeng/rating';
     TableModule,
     RatingModule,
     FormsModule,
+    ToolbarModule
   ],
   exports: [INGREDIENTES_COMPONENTES],
 })
