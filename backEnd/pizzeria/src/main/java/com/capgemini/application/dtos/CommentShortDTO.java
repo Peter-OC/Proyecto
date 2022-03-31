@@ -24,7 +24,7 @@ public class CommentShortDTO {
 	private String text;
 
 	@JsonProperty("usuario")
-	private String user;
+	private int user;
 
 
 	

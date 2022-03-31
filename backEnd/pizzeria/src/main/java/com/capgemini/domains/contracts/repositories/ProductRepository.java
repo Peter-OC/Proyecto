@@ -15,4 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	<T> Iterable<T> findByIdProductIsNotNull(Sort sort, Class<T> type);
 
 	<T> Page<T> findByIdProductIsNotNull(Pageable pageable, Class<T> type);
+	
+	//List<Product> findByCategory
 }

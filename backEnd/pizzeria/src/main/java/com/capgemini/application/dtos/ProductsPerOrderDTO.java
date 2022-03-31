@@ -16,18 +16,22 @@ public class ProductsPerOrderDTO {
 	private String product;
 	@JsonProperty("cantidadProducto")
 	private int amount;
+	@JsonProperty("precio")
+	private float precio;
 	
 	public static ProductsPerOrderDTO from(ProductsPerOrder source) {
 		return new ProductsPerOrderDTO(
 				source.getProduct().getIdProduct(),
 				source.getProduct().getName(),
-				source.getAmount()
+				source.getAmount(),
+				source.getPrice()
 				);
 	}
 	
 	public static ProductsPerOrder from(ProductsPerOrderDTO source, Order order) {
 		return new ProductsPerOrder(
 				source.getAmount(),
+				source.getPrecio(),
 				new Product(source.getProductId()),
 				order
 				);

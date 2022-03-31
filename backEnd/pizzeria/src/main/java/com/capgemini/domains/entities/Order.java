@@ -53,7 +53,6 @@ public class Order extends EntityBase<Order> implements Serializable {
 	@DecimalMin(value = "0.0", inclusive = false)
 	@Digits(integer = 5, fraction = 2)
 	private float price;
-
 	
 	@Column(name="status_order")
 	@NotNull
@@ -132,7 +131,7 @@ public class Order extends EntityBase<Order> implements Serializable {
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-
+	
 	public float getPrice() {
 		return this.price;
 	}
@@ -140,7 +139,7 @@ public class Order extends EntityBase<Order> implements Serializable {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
+	
 	public String getStatus() {
 		return this.status;
 	}
@@ -172,8 +171,8 @@ public class Order extends EntityBase<Order> implements Serializable {
 		return productsPerOrder;
 	}
 	
-	public ProductsPerOrder addProductsPerOrder(int amount, Product product) {
-		var productsPerOrder = new ProductsPerOrder(amount, product, this);
+	public ProductsPerOrder addProductsPerOrder(int amount, float price ,Product product) {
+		var productsPerOrder = new ProductsPerOrder(amount, price, product, this);
 		getProductsPerOrders().add(productsPerOrder);
 		return productsPerOrder;
 	}
@@ -185,8 +184,8 @@ public class Order extends EntityBase<Order> implements Serializable {
 		return productsPerOrder;
 	}
 	
-	public ProductsPerOrder removeProductsPerOrder(int amount, Product product) {
-		var productsPerOrder = new ProductsPerOrder(amount, product, this);
+	public ProductsPerOrder removeProductsPerOrder(int amount, float price, Product product) {
+		var productsPerOrder = new ProductsPerOrder(amount, price, product, this);
 		getProductsPerOrders().remove(productsPerOrder);
 		return productsPerOrder;
 	}

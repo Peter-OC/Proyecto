@@ -22,10 +22,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.capgemini.application.dtos.IngredientsPerPizzaDTO;
+import com.capgemini.application.dtos.PizzaEditDTO;
 import com.capgemini.application.dtos.ProductDetailsDTO;
 import com.capgemini.application.dtos.ProductEditDTO;
 import com.capgemini.application.dtos.ProductShortDTO;
+import com.capgemini.domains.contracts.services.PizzaService;
 import com.capgemini.domains.contracts.services.ProductService;
+import com.capgemini.domains.entities.Category.Type;
 import com.capgemini.exceptions.DuplicateKeyException;
 import com.capgemini.exceptions.InvalidDataException;
 import com.capgemini.exceptions.NotFoundException;
@@ -44,6 +48,8 @@ import org.springframework.http.HttpStatus;
 public class ProductResource {
 	@Autowired
 	private ProductService srv;
+	@Autowired
+	private PizzaService srvPizza;
 
 	@GetMapping
 	@ApiOperation(value = "Listado de los productos")
@@ -86,12 +92,22 @@ public class ProductResource {
 			@ApiResponse(code = 404, message = "Producto no encontrado") })
 	public ResponseEntity<Object> create(@Valid @RequestBody ProductEditDTO item)
 			throws InvalidDataException, DuplicateKeyException, NotFoundException {
+
 		var entity = ProductEditDTO.from(item);
+
+		if(entity.getCategory().getIdCategory() == 3) {
+			var pizza = PizzaEditDTO.from(item.getPizza());
+			if (pizza.isInvalid())
+				throw new InvalidDataException(pizza.getErrorsMessage());
+			pizza = srvPizza.add(pizza);
+			for(var dto : item.getPizza().getIngredients())
+				pizza.addIngredientsPerPizza(IngredientsPerPizzaDTO.from(dto, pizza));
+			srvPizza.change(pizza);
+			entity.setPizza(pizza);
+		}
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
 		entity = srv.add(entity);
-		item.update(entity);
-		srv.change(entity);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(entity.getIdProduct()).toUri();
 		return ResponseEntity.created(location).build();
@@ -111,9 +127,18 @@ public class ProductResource {
 			throw new InvalidDataException("No coinciden los identificadores");
 		var entity = srv.getOne(id);
 		item.update(entity);
+		srv.change(entity);
+
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
-		srv.change(entity);
+		if(entity.getCategory().getIdCategory() == 3) {
+			var pizza =  entity.getPizza();
+			var dto = item.getPizza();
+			dto.update(pizza);
+			if (pizza.isInvalid())
+				throw new InvalidDataException(entity.getErrorsMessage());
+			srvPizza.change(pizza);
+		}
 	}
 //
 //	@DeleteMapping("/{id}")

@@ -28,11 +28,11 @@ public class CommentDetailsDTO {
 	@JsonProperty("comentario")
 	private String text;
 
-	@JsonProperty("producto")
-	private Product product;
+	@JsonProperty("nombreProducto")
+	private String product;
 
-	@JsonProperty("usuario")
-	private User user;
+	@JsonProperty("idUsuario")
+	private int user;
 
 
 	
@@ -42,8 +42,8 @@ public class CommentDetailsDTO {
 				source.getDate(),
 				source.getScore(),
 				source.getText(),
-				source.getProduct(),
-				source.getUser()
+				source.getProduct().getName(),
+				source.getUser().getIdUser()				
 				);
 	}
 }

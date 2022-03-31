@@ -3,6 +3,7 @@ package com.capgemini.application.dtos;
 import java.util.List;
 
 import com.capgemini.domains.entities.Category;
+import com.capgemini.domains.entities.Category.Type;
 import com.capgemini.domains.entities.Comment;
 import com.capgemini.domains.entities.Pizza;
 import com.capgemini.domains.entities.Product;
@@ -36,14 +37,13 @@ public class ProductDetailsDTO {
 	@JsonProperty("precio")
 	private float price;
 	
-	@JsonProperty("pizza")
-	private Integer pizza;
-	
 	@JsonProperty("categoria")
 	private String category;
 	
 	@JsonProperty("lista_comentarios")
 	private List<CommentShortDTO> comments;
+	
+	private PizzaDetailsDTO pizza;
 	
 	public static ProductDetailsDTO from(Product source) {
 		return new ProductDetailsDTO(
@@ -54,9 +54,9 @@ public class ProductDetailsDTO {
 				source.getName(),
 				source.getPhoto(),
 				source.getPrice(),
-				source.getPizza() == null ? null: source.getPizza().getPizzaId(),
 				source.getCategory().getType().getValue(),
-				source.getComments().stream().map(item -> CommentShortDTO.from(item)).toList()
+				source.getComments().stream().map(item -> CommentShortDTO.from(item)).toList(),
+				source.getCategory().getType() == Type.PIZZA ? PizzaDetailsDTO.from(source.getPizza()) : null
 				);
 	}
 }

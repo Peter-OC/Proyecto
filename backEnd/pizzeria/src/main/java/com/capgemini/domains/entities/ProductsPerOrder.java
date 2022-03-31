@@ -25,6 +25,9 @@ public class ProductsPerOrder extends EntityBase<ProductsPerOrder> implements Se
 
 	@Positive
 	private int amount;
+	
+	@Positive
+	private float price;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
@@ -41,17 +44,19 @@ public class ProductsPerOrder extends EntityBase<ProductsPerOrder> implements Se
 	public ProductsPerOrder() {
 	}
 	
-	public ProductsPerOrder(@Positive int amount, Product product) {
+	public ProductsPerOrder(@Positive int amount, @Positive float price, Product product) {
 		this();
 		this.product = product;
+		this.price = price;
 		this.id =  new ProductsPerOrderPK(product.getIdProduct(), order.getIdOrder());
 		this.amount = amount;
 		
 	}
 
-	public ProductsPerOrder(@Positive int amount, Product product, Order order) {
+	public ProductsPerOrder(@Positive int amount, @Positive float price, Product product, Order order) {
 		this();		
 		this.amount = amount;
+		this.price = price;
 		this.order = order;
 		this.product = product;		
 		this.id = new ProductsPerOrderPK(product.getIdProduct(), order.getIdOrder());
@@ -72,6 +77,14 @@ public class ProductsPerOrder extends EntityBase<ProductsPerOrder> implements Se
 
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+	
+	public float getPrice() {
+		return this.price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
 	}
 
 	public Product getProduct() {
