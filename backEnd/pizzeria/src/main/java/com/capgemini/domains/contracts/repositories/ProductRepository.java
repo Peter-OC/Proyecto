@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.capgemini.domains.entities.Product;
+import com.capgemini.domains.entities.Product.Type;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	<T> List<T> findByIdProductIsNotNull(Class<T> type);
@@ -16,5 +17,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 	<T> Page<T> findByIdProductIsNotNull(Pageable pageable, Class<T> type);
 	
-	//List<Product> findByCategory
+	<T> List<T> findByType(Type category, Class<T> type);
 }

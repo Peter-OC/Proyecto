@@ -6,6 +6,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -25,6 +26,46 @@ import java.util.Objects;
 public class Product extends EntityBase<Product> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public static enum Type {
+        STARTER(1),
+        DRINK(2),
+        PIZZA(3);
+        int value;
+        Type (int value) {
+            this.value = value;
+        }
+        public int getValue() {
+            return value;
+        }
+        public static Type getEnum(int value) {
+            switch(value) {
+            case 1: return Type.STARTER;
+            case 2: return Type.DRINK;
+            case 3: return Type.PIZZA;
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + value);
+            }
+        }
+	}
+	
+	@Converter
+    private static class TypeConverter implements AttributeConverter<Type, Integer> {
+        @Override
+        public Integer convertToDatabaseColumn(Type type) {
+            if (type == null) {
+                return null;
+            }
+            return type.getValue();
+        }
+        @Override
+        public Type convertToEntityAttribute(Integer value) {
+            if (value == null) {
+                return null;
+            }
+            return Type.getEnum(value);
+        }
+    }
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_product")
@@ -33,8 +74,10 @@ public class Product extends EntityBase<Product> implements Serializable {
 	@Lob
 	private String description;
 
+	@Positive
 	private Integer dislike;
-
+	
+	@Positive
 	private Integer thelike;
 
 	@Length(min = 2, max = 50)
@@ -46,10 +89,11 @@ public class Product extends EntityBase<Product> implements Serializable {
 	@NotNull
 	@DecimalMin(value = "0.0", inclusive = false)
 	@Digits(integer = 4, fraction = 2)
+	@Positive
 	private float price;
 
 	// bi-directional many-to-one association to Comment
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments;
 
 	// bi-directional many-to-one association to Pizza
@@ -57,10 +101,9 @@ public class Product extends EntityBase<Product> implements Serializable {
 	@JoinColumn(name = "id_pizza")
 	private Pizza pizza;
 
-	// bi-directional many-to-one association to Category
-	@ManyToOne
-	@JoinColumn(name = "id_category")
-	private Category category;
+	@Column(name = "id_category")
+    @Convert(converter = TypeConverter.class)
+	private Type type;
 
 	// bi-directional many-to-one association to Comment
 	@ManyToOne
@@ -81,11 +124,10 @@ public class Product extends EntityBase<Product> implements Serializable {
 		this.idProduct = idProduct;
 	}
 	
-	
-	
 	public Product(int idProduct, String description, Integer dislike, Integer thelike,
 			@Length(min = 2, max = 50) @NotBlank String name, String photo,
-			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 4, fraction = 2) float price, Pizza pizza, Category category) {
+			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 4, fraction = 2) float price, Pizza pizza, 
+			Type type) {
 		this();
 		this.idProduct = idProduct;
 		this.description = description;
@@ -95,7 +137,7 @@ public class Product extends EntityBase<Product> implements Serializable {
 		this.photo = photo;
 		this.price = price;
 		this.pizza = pizza;
-		this.category = category;
+		this.type = type;
 	}
 
 	public int getIdProduct() {
@@ -184,12 +226,12 @@ public class Product extends EntityBase<Product> implements Serializable {
 		this.pizza = pizza;
 	}
 
-	public Category getCategory() {
-		return this.category;
+	public Type getType() {
+		return this.type;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 	public Comment getComment() {
@@ -226,7 +268,7 @@ public class Product extends EntityBase<Product> implements Serializable {
 	public String toString() {
 		return "Product [idProduct=" + idProduct + ", description=" + description + ", dislike=" + dislike + ", thelike="
 				+ thelike + ", name=" + name + ", photo=" + photo + ", price=" + price + ", comments=" + comments
-				+ ", pizza=" + pizza + ", category=" + category + ", comment=" + comment + ", productsPerOrders="
+				+ ", pizza=" + pizza + ", type=" + type + ", comment=" + comment + ", productsPerOrders="
 				+ productsPerOrders + "]";
 	}
 

@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class PizzaShortDTO {
 
-	@JsonProperty("pizza")
-	private String pizzaName;
+	@JsonProperty("idPizza")
+	private int pizzaName;
 
 	@JsonProperty("base")
 	private String ingredientBase;
@@ -21,7 +21,7 @@ public class PizzaShortDTO {
 	
 	public static PizzaShortDTO from(Pizza source) {
 		return new PizzaShortDTO(
-				source.getProducts().get(0).getName(),
+				source.getPizzaId(),
 				source.getIngredientBase().getName(),
 				source.getIngredientSauce().getName()
 				);

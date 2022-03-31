@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.JoinColumn;
 
-import com.capgemini.domains.entities.Category;
 import com.capgemini.domains.entities.Comment;
 import com.capgemini.domains.entities.Product;
 import com.capgemini.domains.entities.User;

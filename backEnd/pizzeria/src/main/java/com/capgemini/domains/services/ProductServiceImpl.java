@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.capgemini.domains.contracts.repositories.ProductRepository;
 import com.capgemini.domains.contracts.services.ProductService;
 import com.capgemini.domains.entities.Product;
+import com.capgemini.domains.entities.Product.Type;
 import com.capgemini.exceptions.DuplicateKeyException;
 import com.capgemini.exceptions.InvalidDataException;
 import com.capgemini.exceptions.NotFoundException;
@@ -93,5 +94,23 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void deleteById(Integer id) {
 		dao.deleteById(id);
+	}
+	
+	@Override
+	public <T> List<T> getPizzas(Class<T> type) {
+	// TODO Auto-generated method stub
+		return dao.findByType(Type.PIZZA, type);
+	}
+
+	@Override
+	public <T> List<T> getEntrantes(Class<T> type) {
+	// TODO Auto-generated method stub
+	return dao.findByType(Type.STARTER, type);
+	}
+
+	@Override
+	public <T> List<T> getBebidas(Class<T> type) {
+	// TODO Auto-generated method stub
+		return dao.findByType(Type.DRINK, type);
 	}
 }

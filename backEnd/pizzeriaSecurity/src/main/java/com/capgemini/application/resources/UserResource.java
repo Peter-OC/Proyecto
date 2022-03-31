@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -36,7 +37,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import org.springframework.http.HttpStatus;
 
@@ -65,44 +65,17 @@ public class UserResource {
 
 	}
 
-	@GetMapping(path = "/{id}")
-	public UserDetailsDTO getOneDetails(@PathVariable String username,
-			@RequestParam(required = false, defaultValue = "details") String mode) throws NotFoundException {
-		return UserDetailsDTO.from(srv.getOne(username));
-	}
-
-	@GetMapping(path = "/{id}", params = "mode=edit")
+	@GetMapping(path = "/{username}")
 	@ApiOperation(value = "Recupera un usuario")
 	@ApiResponses({ @ApiResponse(code = 200, message = "usuario encontrado"),
 			@ApiResponse(code = 404, message = "usuario no encontrado") })
 
-	public UserEditDTO getOneEdit(@ApiParam(value = "Identificador del usuario") @PathVariable String username,
-			@ApiParam(value = "Versión completa o editable", required = false, allowableValues = "details,edit") @RequestParam(required = true) String mode)
+	public UserEditDTO getOneEdit(@ApiParam(value = "Identificador del usuario") @PathVariable String username)
 			throws NotFoundException {
 		return UserEditDTO.from(srv.getOne(username));
 	}
 
-	@PostMapping
-	@Transactional
-	@ApiOperation(value = "Añadir un nuevo usuario")
-	@ApiResponses({ @ApiResponse(code = 201, message = "usuario añadido"),
-			@ApiResponse(code = 400, message = "Error al validar los datos o clave duplicada"),
-			@ApiResponse(code = 404, message = "usuario no encontrado") })
-	public ResponseEntity<Object> create(@Valid @RequestBody UserEditDTO item)
-			throws InvalidDataException, DuplicateKeyException, NotFoundException {
-		var entity = UserEditDTO.from(item);
-		if (entity.isInvalid())
-			throw new InvalidDataException(entity.getErrorsMessage());
-		entity = srv.add(entity);
-		item.update(entity);
-		srv.change(entity);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(entity.getUsername()).toUri();
-		return ResponseEntity.created(location).build();
-
-	}
-
-	@PutMapping("/{id}")
+	@PutMapping("/{username}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@Transactional
 	@ApiOperation(value = "Modificar un usuario existente", notes = "Los identificadores deben coincidir")
@@ -111,14 +84,15 @@ public class UserResource {
 			@ApiResponse(code = 404, message = "usuario no encontrado") })
 	public void update(@ApiParam(value = "Identificador del usuario") @PathVariable String username,
 			@Valid @RequestBody UserEditDTO item) throws InvalidDataException, NotFoundException {
-		if (username != item.getUsername())
-			throw new InvalidDataException("No coinciden los identificadores");
 		var entity = srv.getOne(username);
-		item.update(entity);
+		entity.setAddress(item.getAddress());
+		entity.setFirstName(item.getFirst_name());
+		entity.setLastName(item.getLast_name());
+		entity.setFunction(String.join(",", item.getFunction() ));
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
 		srv.change(entity);
-	}
+	}	
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)

@@ -51,15 +51,15 @@ public class IngredientResource {
 	public List<IngredientDetailsDTO> getAll() {
 		return srv.getAll().stream().map(item -> IngredientDetailsDTO.from(item)).toList();
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-    @GetMapping(params = "page")
-    @ApiOperation(value = "Listado paginable de los ingredientes")
-    public Page<IngredientShortDTO> getAll(@ApiParam(required = false) Pageable page) {
-        var content = srv.getAll(page);
-        return new PageImpl(content.getContent().stream().map(item -> IngredientShortDTO.from(item)).toList(), page,
-                content.getTotalElements());
-    }
+	@GetMapping(params = "page")
+	@ApiOperation(value = "Listado paginable de los ingredientes")
+	public Page<IngredientShortDTO> getAll(@ApiParam(required = false) Pageable page) {
+		var content = srv.getAll(page);
+		return new PageImpl(content.getContent().stream().map(item -> IngredientShortDTO.from(item)).toList(), page,
+				content.getTotalElements());
+	}
 
 	@GetMapping(path = "/{id}")
 	@ApiOperation(value = "Detalles de un ingrediente")
@@ -74,7 +74,8 @@ public class IngredientResource {
 	@ApiResponses({ @ApiResponse(code = 201, message = "Ingrediente añadido"),
 			@ApiResponse(code = 400, message = "Error al validar los datos o clave duplicada"),
 			@ApiResponse(code = 404, message = "Ingrediente no encontrado") })
-	public ResponseEntity<Object> create(@Valid @RequestBody IngredientEditDTO item) throws InvalidDataException, DuplicateKeyException, NotFoundException {
+	public ResponseEntity<Object> create(@Valid @RequestBody IngredientEditDTO item)
+			throws InvalidDataException, DuplicateKeyException, NotFoundException {
 		var entity = IngredientEditDTO.from(item);
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
@@ -94,7 +95,8 @@ public class IngredientResource {
 	@ApiResponses({ @ApiResponse(code = 201, message = "Ingrediente añadido"),
 			@ApiResponse(code = 400, message = "Error al validar los datos o discrepancias en los identificadores"),
 			@ApiResponse(code = 404, message = "Ingrediente no encontrado") })
-	public void update(@ApiParam(value = "Identificador del ingrediente") @PathVariable int id, @Valid @RequestBody IngredientEditDTO item) throws InvalidDataException, NotFoundException {
+	public void update(@ApiParam(value = "Identificador del ingrediente") @PathVariable int id,
+			@Valid @RequestBody IngredientEditDTO item) throws InvalidDataException, NotFoundException {
 		if (id != item.getIngredientId())
 			throw new InvalidDataException("No coinciden los identificadores");
 		var entity = srv.getOne(id);
@@ -112,31 +114,26 @@ public class IngredientResource {
 	public void delete(@ApiParam(value = "Identificador del ingrediente") @PathVariable int id) {
 		srv.deleteById(id);
 	}
-	
-	
+
 	@GetMapping(path = "/salsas")
 	@ApiOperation(value = "Listado Ingredientes por tipo salsa")
 	public List<IngredientDetailsDTO> getSalsas(@RequestParam(required = false, defaultValue = "details") String mode)
-	throws NotFoundException {
-	return srv.getSalsas(IngredientDetailsDTO.class);
+			throws NotFoundException {
+		return srv.getSalsas(IngredientDetailsDTO.class);
 	}
 
 	@GetMapping(path = "/bases")
 	@ApiOperation(value = "Listado Ingredientes por tipo base")
 	public List<IngredientDetailsDTO> getBases(@RequestParam(required = false, defaultValue = "details") String mode)
-	throws NotFoundException {
-	return srv.getBases(IngredientDetailsDTO.class);
+			throws NotFoundException {
+		return srv.getBases(IngredientDetailsDTO.class);
 	}
 
 	@GetMapping(path = "/otros")
 	@ApiOperation(value = "Listado Ingredientes por tipo otros")
 	public List<IngredientDetailsDTO> getOthers(@RequestParam(required = false, defaultValue = "details") String mode)
-	throws NotFoundException {
-	return srv.getOtros(IngredientDetailsDTO.class);
+			throws NotFoundException {
+		return srv.getOtros(IngredientDetailsDTO.class);
 	}
-	
-	
-	
-	
 
 }

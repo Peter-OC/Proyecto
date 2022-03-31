@@ -40,7 +40,7 @@ public class Pizza extends EntityBase<Pizza> implements Serializable {
 	private List<IngredientsPerPizza> ingredientsPerPizzas;
 
 	//bi-directional many-to-one association to Product
-	@OneToMany(mappedBy="pizza")
+	@OneToMany(mappedBy="pizza", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Product> products;
 
 	
