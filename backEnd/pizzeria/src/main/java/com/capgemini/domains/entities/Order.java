@@ -30,9 +30,8 @@ public class Order extends EntityBase<Order> implements Serializable {
 	@Column(name="id_order")
 	private int idOrder;
 
-	@ManyToOne
-	@JoinColumn(name="id_user")
-	private User user;
+	@Column(name="id_user")
+	private String user;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="order_date")
@@ -73,7 +72,7 @@ public class Order extends EntityBase<Order> implements Serializable {
 		this.idOrder = idOrder;
 	}
 
-	public Order(User user, @PastOrPresent @NotNull Date orderDate, @NotBlank @Length(max = 100) String address,
+	public Order(String user, @PastOrPresent @NotNull Date orderDate, @NotBlank @Length(max = 100) String address,
 			@PastOrPresent Date deliveryDate,
 			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 5, fraction = 2) float price,
 			@NotNull String status) {
@@ -86,7 +85,7 @@ public class Order extends EntityBase<Order> implements Serializable {
 		this.status = status;
 	}
 
-	public Order(int idOrder, User user, @PastOrPresent @NotNull Date orderDate,
+	public Order(int idOrder, String user, @PastOrPresent @NotNull Date orderDate,
 			@NotBlank @Length(max = 100) String address, @PastOrPresent @NotNull Date deliveryDate,
 			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 5, fraction = 2) float price,
 			@NotNull String status) {
@@ -148,11 +147,11 @@ public class Order extends EntityBase<Order> implements Serializable {
 		this.status = status;
 	}
 
-	public User getUser() {
+	public String getUser() {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 

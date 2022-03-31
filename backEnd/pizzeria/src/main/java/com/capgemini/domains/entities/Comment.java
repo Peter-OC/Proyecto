@@ -44,10 +44,11 @@ public class Comment extends EntityBase<Comment> implements Serializable {
 	@JoinColumn(name="id_product")
 	private Product product;
 
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="id_user")
-	private User user;
+	@Column(name="id_user")
+	private String user;
+
+	@Column(name="user_name")
+	private String userName;
 
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="comment")
@@ -56,7 +57,7 @@ public class Comment extends EntityBase<Comment> implements Serializable {
 	public Comment() {
 	}
 
-	public Comment(int idComment, @NotNull @PastOrPresent Date date, String text, Product product, User user) {
+	public Comment(int idComment, @NotNull @PastOrPresent Date date, String text, Product product, String user) {
 		super();
 		this.idComment = idComment;
 		this.date = date;
@@ -72,6 +73,15 @@ public class Comment extends EntityBase<Comment> implements Serializable {
 		this.idComment = idComment;
 		this.score = score;
 		this.text = text;
+	}
+	
+
+	public Comment(Integer score, String text, Product product) {
+		super();
+		this.score = score;
+		this.text = text;
+		this.product = product;
+		this.date = new Date();
 	}
 
 	public int getIdComment() {
@@ -114,12 +124,20 @@ public class Comment extends EntityBase<Comment> implements Serializable {
 		this.product = product;
 	}
 
-	public User getUser() {
+	public String getUser() {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public String getUserName() {
+		return this.userName;
+	}
+
+	public void setUserName(String user) {
+		this.userName = user;
 	}
 
 	public List<Product> getProducts() {

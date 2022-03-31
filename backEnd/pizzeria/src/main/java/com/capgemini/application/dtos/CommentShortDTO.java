@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.capgemini.domains.entities.Comment;
 import com.capgemini.domains.entities.Product;
-import com.capgemini.domains.entities.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +23,7 @@ public class CommentShortDTO {
 	private String text;
 
 	@JsonProperty("usuario")
-	private int user;
+	private String user;
 
 
 	
@@ -33,7 +32,7 @@ public class CommentShortDTO {
 				source.getIdComment(),
 				source.getDate(),
 				source.getText(),
-				source.getUser().getIdUser()
+				source.getUser()
 				);
 	}
 }

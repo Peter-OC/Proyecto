@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 				.addFilterAfter(new JWTAuthorizationFilter(SECRET), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
-//				.antMatchers("/demos/**").hasRole("ADMIN")
+				.antMatchers("/comment/**").hasRole("USER")
 				.anyRequest().permitAll();
 	}
 }

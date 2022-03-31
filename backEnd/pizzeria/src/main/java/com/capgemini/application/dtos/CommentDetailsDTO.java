@@ -6,7 +6,6 @@ import javax.persistence.JoinColumn;
 
 import com.capgemini.domains.entities.Comment;
 import com.capgemini.domains.entities.Product;
-import com.capgemini.domains.entities.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -32,7 +31,7 @@ public class CommentDetailsDTO {
 	private String product;
 
 	@JsonProperty("idUsuario")
-	private int user;
+	private String user;
 
 
 	
@@ -43,7 +42,7 @@ public class CommentDetailsDTO {
 				source.getScore(),
 				source.getText(),
 				source.getProduct().getName(),
-				source.getUser().getIdUser()				
+				source.getUser()				
 				);
 	}
 }

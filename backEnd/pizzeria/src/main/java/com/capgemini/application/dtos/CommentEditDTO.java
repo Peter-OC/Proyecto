@@ -6,7 +6,6 @@ import javax.persistence.JoinColumn;
 
 import com.capgemini.domains.entities.Comment;
 import com.capgemini.domains.entities.Product;
-import com.capgemini.domains.entities.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -45,20 +44,19 @@ public class CommentEditDTO {
 				source.getScore(),
 				source.getText(),
 				source.getProduct().getIdProduct(),
-				source.getUser().getFirstName()
+				source.getUser()
 				);
 	}
 	
 	public static Comment from(CommentEditDTO source) {
 		return new Comment(
-				source.getIdComment(),
 				source.getScore(),
-				source.getText()
+				source.getText(),
+				new Product(source.getIdProduct())
 				);
 	}
 	
 	public Comment update(Comment target) {
-		target.setIdComment(idComment);
 		target.setScore(score);
 		target.setText(text);
 		return target;

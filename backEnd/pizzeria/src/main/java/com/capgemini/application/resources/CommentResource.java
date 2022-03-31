@@ -1,5 +1,8 @@
 package com.capgemini.application.resources;
 
+import java.net.URI;
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,20 +13,26 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.capgemini.application.dtos.CommentEditDTO;
 import com.capgemini.application.dtos.CommentDetailsDTO;
 import com.capgemini.application.dtos.CommentShortDTO;
+import com.capgemini.application.proxies.AuthProxy;
 import com.capgemini.domains.contracts.services.CommentService;
+import com.capgemini.exceptions.DuplicateKeyException;
 import com.capgemini.exceptions.InvalidDataException;
 import com.capgemini.exceptions.NotFoundException;
 
@@ -32,7 +41,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/comment")
@@ -40,6 +48,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class CommentResource {
 	@Autowired
 	private CommentService srv;
+
+	@Autowired
+	private AuthProxy proxy;
 
 	@GetMapping
 	@ApiOperation(value = "Listado de los comentarios")
@@ -81,27 +92,29 @@ public class CommentResource {
 	}
 	
 	//no va por lo del getName del Principal usr
-//	@PostMapping
-//	@Transactional
-//	@ApiOperation(value = "Añadir un nuevo cometario")
-//	@ApiResponses({ @ApiResponse(code = 201, message = "Comentario añadido"),
-//			@ApiResponse(code = 400, message = "Error al validar los datos o clave duplicada"),
-//			@ApiResponse(code = 404, message = "Comentario no encontrado") })
-//	public ResponseEntity<Object> createComment(@Valid @RequestBody CommentEditDTO item,  Principal usr)
-//			throws InvalidDataException, DuplicateKeyException, NotFoundException {
-//		
-//		var entity = CommentEditDTO.from(item);
-//		entity.setUser(new User(usr.getName()));
-//		if (entity.isInvalid())
-//			throw new InvalidDataException(entity.getErrorsMessage());
-//		entity = srv.add(entity);
-//		item.update(entity);
-//		srv.change(entity);
-//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//				.buildAndExpand(entity.getIdComment()).toUri();
-//		return ResponseEntity.created(location).build();
-//
-//	}
+	@PostMapping
+	@Transactional
+	@ApiOperation(value = "Añadir un nuevo cometario")
+	@ApiResponses({ @ApiResponse(code = 201, message = "Comentario añadido"),
+			@ApiResponse(code = 400, message = "Error al validar los datos o clave duplicada"),
+			@ApiResponse(code = 404, message = "Comentario no encontrado") })
+	public ResponseEntity<Object> createComment(@Valid @RequestBody CommentEditDTO item,  
+			Principal usr, @RequestHeader String authorization)
+			throws InvalidDataException, DuplicateKeyException, NotFoundException {
+		
+		var entity = CommentEditDTO.from(item);
+		var usrData = proxy.getUserData(authorization);
+		entity.setUser(usr.getName());
+		entity.setUserName(usrData.getFirst_name() + " " + usrData.getLast_name());
+		entity.setDate(new Date());
+		if (entity.isInvalid())
+			throw new InvalidDataException(entity.getErrorsMessage());
+		entity = srv.add(entity);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(entity.getIdComment()).toUri();
+		return ResponseEntity.created(location).build();
+
+	}
 
 	
 	//va bien

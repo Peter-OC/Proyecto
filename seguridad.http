@@ -1,0 +1,17 @@
+GET http://localhost:8091/login?name=armandobronca%40correo.com&password=contrase%C3%B1a
+
+###
+GET http://localhost:8091/profile
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJNaWNyb3NlcnZpY2lvc0pXVCIsInN1YiI6ImtrQGtrIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9FTVBMT1lFRCJdLCJpYXQiOjE2NDg3NDYxOTgsImV4cCI6MTY0ODc0Njc5OH0.bUzt9PwhxE-DCfjPz0MyxAW39peA0AC4JrZ3QTxkhxl3VfqibjjRWKZLbmFJzs-vBNlzvO5PFWxfWHlXc_TysA
+
+###
+
+POST http://localhost:8001/api/comment
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJNaWNyb3NlcnZpY2lvc0pXVCIsInN1YiI6ImFybWFuZG9icm9uY2FAY29ycmVvLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjQ4NzQ2NjkyLCJleHAiOjE2NDg3NDcyOTJ9.ZlK0GhZ-Hrxg90mDNdrNuSYt9-p3Xa6BH9GOLuGJdf0g1wU4HKQ7KdwTsLUSPjxrVGq7Qf4XX-WH0fYKiB4AjQ
+Content-Type: application/json
+
+{
+  "comentario": "armando",
+  "producto": 1,
+  "puntuacion": 10
+}

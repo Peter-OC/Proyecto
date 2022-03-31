@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.capgemini.domains.entities.Order;
-import com.capgemini.domains.entities.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,7 +16,7 @@ public class OrderEditDTO {
 	@JsonProperty("idPedido")
 	private int idOrder;
 	@JsonProperty("idUsuario")
-	private int idUser;
+	private String idUser;
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@JsonProperty("horaPedido")
 	private Date orderDate;
@@ -37,7 +36,7 @@ public class OrderEditDTO {
 	public static OrderEditDTO from(Order source) {
 		return new OrderEditDTO(			
 				source.getIdOrder(),
-				source.getUser().getIdUser(),
+				source.getUser(),
 				source.getOrderDate(),
 				source.getAddress(),
 				source.getDeliveryDate(),
@@ -50,7 +49,7 @@ public class OrderEditDTO {
 	public static Order from(OrderEditDTO source) {
 		return new Order(
 				source.getIdOrder(),
-				new User(source.getIdUser()),
+				source.getIdUser(),
 				source.getOrderDate(),
 				source.getAddress(),
 				source.getOrderDelivery(),
@@ -68,8 +67,8 @@ public class OrderEditDTO {
 	}
 	
 	private void actualizaPropiedadesEntidad(Order target) {
-		if (target.getUser().getIdUser() != idUser)
-			target.setUser(new User(idUser));
+		if (!target.getUser().equals(idUser))
+			target.setUser(idUser);
 		target.setOrderDate(orderDate);
 		target.setAddress(address);
 		target.setDeliveryDate(orderDelivery);

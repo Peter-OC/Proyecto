@@ -26,7 +26,7 @@ public class OrderShortDTO {
 	public static OrderShortDTO from(Order source) {
 		return new OrderShortDTO(
 				source.getIdOrder(),
-				source.getUser().getEmail(),
+				source.getUser(),
 				source.getOrderDate(),
 				source.getAddress()
 				);
