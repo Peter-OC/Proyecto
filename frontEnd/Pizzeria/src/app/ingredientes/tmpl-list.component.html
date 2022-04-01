@@ -22,7 +22,7 @@
   </ng-template>
   <ng-template pTemplate="body">
     <tr *ngFor="let item of VM.Listado">
-      <td>{{ item.nombre }}</td>
+      <td>{{ item.ingrediente }}</td>
       <td>{{ item.tipo }}</td>
       <td>{{ item.precio | currency: "EUR" }}</td>
       <td>
