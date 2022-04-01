@@ -5,7 +5,7 @@ import { IngredientesViewModelService } from './servicios.service';
 @Component({
   selector: 'app-ingredientes',
   templateUrl: './tmpl-anfitrion.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class IngredientesComponent implements OnInit {
   constructor(protected vm: IngredientesViewModelService) {}
@@ -19,7 +19,7 @@ export class IngredientesComponent implements OnInit {
 @Component({
   selector: 'app-ingredientes-list',
   templateUrl: './tmpl-list.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class IngredientesListComponent implements OnInit {
   constructor(protected vm: IngredientesViewModelService) {}
@@ -33,7 +33,7 @@ export class IngredientesListComponent implements OnInit {
 @Component({
   selector: 'app-ingredientes-add',
   templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class IngredientesAddComponent implements OnInit {
   constructor(protected vm: IngredientesViewModelService) {}
@@ -47,7 +47,7 @@ export class IngredientesAddComponent implements OnInit {
 @Component({
   selector: 'app-ingredientes-edit',
   templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class IngredientesEditComponent implements OnInit, OnDestroy {
   private obs$: any;
@@ -76,7 +76,7 @@ export class IngredientesEditComponent implements OnInit, OnDestroy {
 @Component({
   selector: 'app-ingredientes-view',
   templateUrl: './tmpl-view.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class IngredientesViewComponent implements OnInit, OnDestroy {
   private obs$: any;

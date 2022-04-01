@@ -17,6 +17,9 @@ import { PaginatorModule } from 'primeng/paginator';
 import { PedidosModule } from './pedidos';
 import { CommonComponentModule } from './common-component';
 
+import { MenubarModule } from 'primeng/menubar';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +40,8 @@ import { CommonComponentModule } from './common-component';
     PedidosModule,
     MyCoreModule,
     CommonComponentModule,
+    MenubarModule,
+    InputTextModule
   ],
   providers: [LoggerService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

@@ -3,7 +3,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 @Component({
   selector: 'app-show-errors-messages',
   templateUrl: './show-errors-messages.component.html',
-  styleUrls: ['./show-errors-messages.component.css']
+  styleUrls: ['./show-errors-messages.component.scss']
 })
 export class ShowErrorsMessagesComponent implements OnChanges  {
   @Input() errors: any;
