@@ -4,11 +4,13 @@ import { IngredientesAddComponent, IngredientesEditComponent, IngredientesListCo
 import { HomeComponent } from './main';
 import { PedidosAddComponent, PedidosEditComponent, PedidosListComponent, PedidosViewComponent } from './pedidos/componente.component';
 import { PizzacardComponent } from './pizzacard/pizzacard.component';
+import { RegistroComponent } from './registro/registro.component';
+import { LoginComponent, RegisterUserComponent } from './security';
 
 const routes: Routes = [
-  {
-    path: '', component: PizzacardComponent
-  },
+  { path: 'registro', component: RegisterUserComponent },
+  { path: 'sesion', component: LoginComponent },
+
   { path: 'ingredientes', children: [
     { path: '', component: IngredientesListComponent},
     { path: 'add', component: IngredientesAddComponent},

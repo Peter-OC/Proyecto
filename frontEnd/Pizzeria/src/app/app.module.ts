@@ -20,11 +20,15 @@ import { CommonComponentModule } from './common-component';
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { PizzacardModule } from './pizzacard/pizzacard.module';
+import { RegistroComponent } from './registro/registro.component';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    RegistroComponent,
 
   ],
   imports: [
