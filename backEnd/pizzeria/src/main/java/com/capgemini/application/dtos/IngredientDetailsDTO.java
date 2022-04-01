@@ -16,7 +16,7 @@ public class IngredientDetailsDTO {
 	@JsonProperty("id")
 	private int ingredientId;
 	
-	@JsonProperty("nombre")
+	@JsonProperty("ingrediente")
 	private String name;
 	
 	@JsonProperty("tipo")

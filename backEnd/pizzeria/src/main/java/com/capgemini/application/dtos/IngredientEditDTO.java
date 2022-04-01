@@ -11,7 +11,7 @@ import lombok.Data;
 public class IngredientEditDTO {
 
 
-	@JsonProperty("idIngrediente")
+	@JsonProperty("id")
 	private int ingredientId;
 	
 	@JsonProperty("ingrediente")
