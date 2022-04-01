@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { PedidosViewModelService } from './servicios.service';
+import { IngredientesViewModelService } from './servicios.service';
 
 @Component({
-  selector: 'app-pedidos',
+  selector: 'app-ingredientes',
   templateUrl: './tmpl-anfitrion.component.html',
   styleUrls: ['./componente.component.scss'],
 })
-export class PedidosComponent implements OnInit {
-  constructor(protected vm: PedidosViewModelService) {}
-  public get VM(): PedidosViewModelService {
+export class ProductosComponent implements OnInit {
+  constructor(protected vm: IngredientesViewModelService) {}
+  public get VM(): IngredientesViewModelService {
     return this.vm;
   }
   ngOnInit(): void {
@@ -17,13 +17,13 @@ export class PedidosComponent implements OnInit {
   }
 }
 @Component({
-  selector: 'app-pedidos-list',
+  selector: 'app-ingredientes-list',
   templateUrl: './tmpl-list.component.html',
   styleUrls: ['./componente.component.scss'],
 })
-export class PedidosListComponent implements OnInit {
-  constructor(protected vm: PedidosViewModelService) {}
-  public get VM(): PedidosViewModelService {
+export class IngredientesListComponent implements OnInit {
+  constructor(protected vm: IngredientesViewModelService) {}
+  public get VM(): IngredientesViewModelService {
     return this.vm;
   }
   ngOnInit(): void {
@@ -31,13 +31,13 @@ export class PedidosListComponent implements OnInit {
   }
 }
 @Component({
-  selector: 'app-pedidos-add',
+  selector: 'app-ingredientes-add',
   templateUrl: './tmpl-form.component.html',
   styleUrls: ['./componente.component.scss'],
 })
-export class PedidosAddComponent implements OnInit {
-  constructor(protected vm: PedidosViewModelService) {}
-  public get VM(): PedidosViewModelService {
+export class IngredientesAddComponent implements OnInit {
+  constructor(protected vm: IngredientesViewModelService) {}
+  public get VM(): IngredientesViewModelService {
     return this.vm;
   }
   ngOnInit(): void {
@@ -45,18 +45,18 @@ export class PedidosAddComponent implements OnInit {
   }
 }
 @Component({
-  selector: 'app-pedidos-edit',
+  selector: 'app-ingredientes-edit',
   templateUrl: './tmpl-form.component.html',
   styleUrls: ['./componente.component.scss'],
 })
-export class PedidosEditComponent implements OnInit, OnDestroy {
+export class IngredientesEditComponent implements OnInit, OnDestroy {
   private obs$: any;
   constructor(
-    protected vm: PedidosViewModelService,
+    protected vm: IngredientesViewModelService,
     protected route: ActivatedRoute,
     protected router: Router
   ) {}
-  public get VM(): PedidosViewModelService {
+  public get VM(): IngredientesViewModelService {
     return this.vm;
   }
   ngOnInit(): void {
@@ -74,18 +74,18 @@ export class PedidosEditComponent implements OnInit, OnDestroy {
   }
 }
 @Component({
-  selector: 'app-pedidos-view',
+  selector: 'app-ingredientes-view',
   templateUrl: './tmpl-view.component.html',
   styleUrls: ['./componente.component.scss'],
 })
-export class PedidosViewComponent implements OnInit, OnDestroy {
+export class IngredientesViewComponent implements OnInit, OnDestroy {
   private obs$: any;
   constructor(
-    protected vm: PedidosViewModelService,
+    protected vm: IngredientesViewModelService,
     protected route: ActivatedRoute,
     protected router: Router
   ) {}
-  public get VM(): PedidosViewModelService {
+  public get VM(): IngredientesViewModelService {
     return this.vm;
   }
   ngOnInit(): void {
@@ -103,10 +103,10 @@ export class PedidosViewComponent implements OnInit, OnDestroy {
   }
 }
 
-export const PEDIDOS_COMPONENTES = [
-  PedidosComponent,
-  PedidosListComponent,
-  PedidosAddComponent,
-  PedidosEditComponent,
-  PedidosViewComponent,
+export const INGREDIENTES_COMPONENTES = [
+  ProductosComponent,
+  IngredientesListComponent,
+  IngredientesAddComponent,
+  IngredientesEditComponent,
+  IngredientesViewComponent,
 ];
