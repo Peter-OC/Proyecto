@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IngredientesModule } from './ingredientes';
 import { RouterModule, Routes } from '@angular/router';
-import { IngredientesComponent } from './ingredientes/componente.component';
+import { IngredientesAddComponent, IngredientesComponent, IngredientesEditComponent, IngredientesViewComponent } from './ingredientes/componente.component';
 import { UsuariosModule } from './usuarios';
 import { ProductosModule } from './productos';
 import { ProductosComponent } from './productos/componente.component';
@@ -16,9 +16,13 @@ const routes: Routes = [
     path: 'ususarios', component: UsuariosComponent
   },
   {
-    path: 'ingredientes', component: IngredientesComponent
-  },
-
+    path: 'ingredientes', children: [
+      { path: '', component: IngredientesComponent },
+      { path: 'add', component: IngredientesAddComponent },
+      { path: ':id/edit', component: IngredientesEditComponent },
+      { path: ':id', component: IngredientesViewComponent },
+    ]
+  }
 ]
 
 @NgModule({
