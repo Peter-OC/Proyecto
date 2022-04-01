@@ -15,7 +15,7 @@ public class ProfileDTO {
 	@JsonProperty("apellido")
 	private String last_name;
 	
-	@JsonProperty("direcion")
+	@JsonProperty("direccion")
 	private String address;
 
 	

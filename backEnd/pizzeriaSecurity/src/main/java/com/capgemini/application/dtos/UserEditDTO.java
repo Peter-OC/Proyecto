@@ -17,7 +17,7 @@ public class UserEditDTO {
 	@JsonProperty("apellido")
 	private String last_name;
 	
-	@JsonProperty("direcion")
+	@JsonProperty("direccion")
 	private String address;
 	
 	@JsonProperty("rol")

@@ -5,15 +5,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { IngredientesAddComponent, IngredientesComponent, IngredientesEditComponent, IngredientesViewComponent } from './ingredientes/componente.component';
 import { UsuariosModule } from './usuarios';
 import { ProductosModule } from './productos';
-import { ProductosComponent } from './productos/componente.component';
-import { UsuariosComponent } from './usuarios/componente.component';
+import { ProductosAddComponent, ProductosComponent, ProductosEditComponent, ProductosViewComponent } from './productos/componente.component';
+import { UsuariosComponent, UsuariosEditComponent, UsuariosViewComponent } from './usuarios/componente.component';
 
 const routes: Routes = [
   {
-    path: 'productos', component: ProductosComponent
+    path: 'productos', children: [
+      { path: '', component: ProductosComponent },
+      { path: 'add', component: ProductosAddComponent },
+      { path: ':id/edit', component: ProductosEditComponent },
+      { path: ':id', component: ProductosViewComponent },
+    ]
   },
   {
-    path: 'ususarios', component: UsuariosComponent
+    path: 'usuarios', children: [
+      { path: '', component: UsuariosComponent },
+      { path: ':id/edit', component: UsuariosEditComponent },
+      { path: ':id', component: UsuariosViewComponent },
+    ]
   },
   {
     path: 'ingredientes', children: [

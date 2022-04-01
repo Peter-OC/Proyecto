@@ -1,99 +1,45 @@
-<h1>Ingrediente</h1>
+<h1>Usuarios</h1>
 <form #miForm="ngForm">
-
-<!--
-  <div class="p-grid p-fluid">
-    <div class="p-field p-col-12 p-md-3">
-        <label for="stacked">Stacked</label>
-        <p-inputNumber [(ngModel)]="VM.Elemento.id" [showButtons]="true" inputId="stacked" mode="currency" currency="USD">
-        </p-inputNumber>
-    </div>
-  </div> -->
-
-
   <div class="form-row">
-    <!-- <p-inputNumber  [(ngModel)]="VM.Elemento.id" mode="currency" currency="EUR" locale="de-DE"></p-inputNumber> -->
     <div class="form-group col-md-2">
-      <label class="form-label" for="tipo">Tipo:</label>
+      <label class="form-label" for="tipo">Rol:</label>
       <select
         class="form-control form-select"
-        name="tipo"
-        id="tipo"
-        [(ngModel)]="VM.Elemento.tipo"
-        #tipo="ngModel"
+        name="rol"
+        id="rol"
+        [(ngModel)]="VM.Elemento.rol"
+        #rol="ngModel"
         required
       >
-        <option value="base">base de la pizza</option>
-        <option value="sauce">salsa de la pizza</option>
-        <option value="other">ingredientes superficiales</option>
+        <option value="ROLE_ADMIN">Administrador</option>
+        <option value="ROLE_USER">Usuario</option>
+        <option value="ROLE_EMPLOYED">Empleado</option>
       </select>
     </div>
     <div class="form-group col-md-4">
-      <label class="form-label" for="nombre">Nombre:</label>
+      <label class="form-label" for="nombre">Username:</label>
       <input
         class="form-control"
         [class.is-invalid]="nombre.invalid"
         type="text"
         name="nombre"
         id="nombre"
-        [(ngModel)]="VM.Elemento.ingrediente"
+        [(ngModel)]="VM.Elemento.username"
         #nombre="ngModel"
-        required
-        maxlength="25"
+        maxlength="250"
       />
-      <div class="invalid-feedback" [hidden]="!nombre.hasError('required')">
-        Es obligatorio
-      </div>
       <div
         class="invalid-feedback"
         [hidden]="
           !nombre.hasError('maxlength')
         "
       >
-        Debe tener como máximo 25 letras.
+        Debe tener como máximo 250 letras.
       </div>
     </div>
   </div>
-  <div class="form-group row">
-    <div class="form-group col-md-12">
-      <label class="form-label" for="precio">Precio:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="precio.invalid"
-        type="text"
-        name="precio"
-        id="precio"
-        [(ngModel)]="VM.Elemento.precio"
-        #precio="ngModel"
-        pattern="^(-?[1-9]+\d*([.]\d+)?)$|^(-?0[.]\d*[1-9]+)$|^0$|^0.0$"
-        required
-      />
-      <output class="error" [hidden]="!precio.hasError('pattern')">
-        Formato inválido
-      </output>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="form-group col-md-12">
-      <label class="form-label" for="foto">Foto:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="foto.invalid"
-        type="text"
-        name="foto"
-        id="foto"
-        [(ngModel)]="VM.Elemento.foto"
-        #foto="ngModel"
-        maxlength="200"
-      />
-      <div class="invalid-feedback" [hidden]="!foto.hasError('maxlength')">
-        Debe tener menos 200 caracteres.
-      </div>
-      <div class="invalid-feedback" [hidden]="!foto.hasError('type')">
-        {{ foto.hasError("type") }}
-      </div>
-    </div>
-  </div>
+
+
   <div class="form-group">
     <input
       type="button"
@@ -114,8 +60,8 @@
 
 <!-- {
   "foto": "string",
-  "idIngrediente": 0,
-  "ingrediente": "string",
+  "idUsuario": 0,
+  "usuario": "string",
   "precio": 0,
   "tipo": "base"
 } -->
