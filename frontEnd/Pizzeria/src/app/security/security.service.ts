@@ -127,9 +127,10 @@ export class Role {
   role: string = '';
 }
 export class User {
-  idUsuario: string = '';
-  password: string = '';
+  username: string = '';
+  contraseña: string = '';
   nombre: string = '';
+  direccion: string = '';
   roles: Array<Role> = [];
 
 }

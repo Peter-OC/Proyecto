@@ -8,7 +8,7 @@ import { LoggerService } from 'src/lib/my-core';
 @Component({
   selector: 'app-register-user',
   templateUrl: './register-user.component.html',
-  styleUrls: ['./register-user.component.css']
+  styleUrls: ['./register-user.component.scss']
 })
 export class RegisterUserComponent implements OnInit {
   public miForm: FormGroup = new FormGroup({});
@@ -17,8 +17,8 @@ export class RegisterUserComponent implements OnInit {
   constructor(private dao: RegisterUserDAO, private notify: NotificationService,
     private out: LoggerService, private router: Router, private login: LoginService) { }
 
-  passwordMatchValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => control?.get('passwordValue')?.value === control?.get('passwordConfirm')?.value
+  contraseñaMatchValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => control?.get('contraseñaValue')?.value === control?.get('contraseñaConfirm')?.value
       ? null : { 'mismatch': 'Son distintos' };
   }
 
@@ -28,12 +28,13 @@ export class RegisterUserComponent implements OnInit {
     //   new FormGroup({ role: new FormControl(r.role , Validators.required) })
     // ));
     this.miForm = new FormGroup({
-      idUsuario: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.email]),
+      username: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.email]),
       nombre: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
-      password: new FormGroup({
-        passwordValue: new FormControl('', [Validators.required, Validators.minLength(2)]),
-        passwordConfirm: new FormControl('', Validators.minLength(2)),
-      }, this.passwordMatchValidator()),
+      direccion: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+      contraseña: new FormGroup({
+        contraseñaValue: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        contraseñaConfirm: new FormControl('', Validators.minLength(2)),
+      }, this.contraseñaMatchValidator()),
       roles: new FormArray([])
     });
     // for (const name in this.miForm.controls) {
@@ -125,14 +126,15 @@ export class RegisterUserComponent implements OnInit {
   send(): void {
     const data = this.miForm.value;
     this.model = ({
-      idUsuario: data.idUsuario,
-      password: data.password.passwordValue,
+      username: data.username,
+      contraseña: data.contraseña.contraseñaValue,
       nombre: data.nombre,
+      direccion: data.direccion,
       roles: data.roles
     } as User);
     this.dao.add(this.model).subscribe(
       rslt => {
-        this.login.login(data.idUsuario, data.password.passwordValue).subscribe(
+        this.login.login(data.idUsuario, data.contraseña.contraseñaValue).subscribe(
           datos => {
             if (datos) {
               this.notify.add('Usuario registrado', NotificationType.log);
