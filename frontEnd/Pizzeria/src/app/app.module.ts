@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LoggerService } from 'src/lib/my-core';
+import { LoggerService, MyCoreModule } from 'src/lib/my-core';
 import {FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,6 +15,7 @@ import {ButtonModule} from 'primeng/button';
 import {RatingModule} from 'primeng/rating';
 import { PaginatorModule } from 'primeng/paginator';
 import { PedidosModule } from './pedidos';
+import { CommonComponentModule } from './common-component';
 
 
 @NgModule({
@@ -34,6 +35,8 @@ import { PedidosModule } from './pedidos';
     FormsModule,
     TableModule,
     PedidosModule,
+    MyCoreModule,
+    CommonComponentModule,
   ],
   providers: [LoggerService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
