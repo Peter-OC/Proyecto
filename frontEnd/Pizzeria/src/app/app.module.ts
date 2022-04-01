@@ -16,6 +16,9 @@ import {RatingModule} from 'primeng/rating';
 import { PaginatorModule } from 'primeng/paginator';
 import { PedidosModule } from './pedidos';
 
+import { MenubarModule } from 'primeng/menubar';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { PedidosModule } from './pedidos';
     FormsModule,
     TableModule,
     PedidosModule,
+    MenubarModule,
+    InputTextModule
   ],
   providers: [LoggerService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
