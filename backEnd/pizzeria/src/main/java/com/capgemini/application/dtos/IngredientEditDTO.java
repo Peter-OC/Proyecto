@@ -54,7 +54,6 @@ public class IngredientEditDTO {
 	}
 
 	private void actualizaPropiedadesEntidad(Ingredient target) {
-		target.setIdIngredient(ingredientId);
 		target.setName(name);
 		target.setType(type);
 		target.setPrice(price);

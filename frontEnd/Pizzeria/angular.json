@@ -27,7 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
              "node_modules/primeicons/primeicons.css",
              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
              "node_modules/primeng/resources/primeng.min.css"
@@ -97,7 +97,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -128,7 +128,7 @@
               "projects/app/src/assets"
             ],
             "styles": [
-              "projects/app/src/styles.css"
+              "projects/app/src/styles.scss"
             ],
             "scripts": []
           },
@@ -195,12 +195,19 @@
               "projects/app/src/assets"
             ],
             "styles": [
-              "projects/app/src/styles.css"
+              "projects/app/src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss",
+      "stylext": "scss"
+
     }
   },
   "defaultProject": "Pizzeria"

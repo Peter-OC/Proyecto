@@ -3,8 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { IngredientesAddComponent, IngredientesEditComponent, IngredientesListComponent, IngredientesViewComponent } from './ingredientes/componente.component';
 import { HomeComponent } from './main';
 import { PedidosAddComponent, PedidosEditComponent, PedidosListComponent, PedidosViewComponent } from './pedidos/componente.component';
+import { PizzacardComponent } from './pizzacard/pizzacard.component';
 
 const routes: Routes = [
+  {
+    path: '', component: PizzacardComponent
+  },
   { path: 'ingredientes', children: [
     { path: '', component: IngredientesListComponent},
     { path: 'add', component: IngredientesAddComponent},
