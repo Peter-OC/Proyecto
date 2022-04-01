@@ -18,7 +18,6 @@ import { CommonComponentModule } from './common-component';
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { PizzacardModule } from './pizzacard/pizzacard.module';
-import { RegistroComponent } from './registro/registro.component';
 
 
 import {DataViewModule} from 'primeng/dataview';
@@ -28,7 +27,6 @@ import { PizzasComponent } from './pizzas/pizzas.component';
 @NgModule({
   declarations: [
     AppComponent,
-    RegistroComponent,
     PizzasComponent,
 
   ],

@@ -3,12 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { IngredientesAddComponent, IngredientesEditComponent, IngredientesListComponent, IngredientesViewComponent } from './manager/ingredientes/componente.component';
 import { HomeComponent } from './main';
 import { PizzacardComponent } from './pizzacard/pizzacard.component';
-import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent, RegisterUserComponent } from './security';
 
 const routes: Routes = [
   { path: 'registro', component: RegisterUserComponent },
-  { path: 'sesion', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: '', component: PizzacardComponent
   },
