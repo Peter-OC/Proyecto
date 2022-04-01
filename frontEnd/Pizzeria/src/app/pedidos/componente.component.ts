@@ -5,7 +5,7 @@ import { PedidosViewModelService } from './servicios.service';
 @Component({
   selector: 'app-pedidos',
   templateUrl: './tmpl-anfitrion.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class PedidosComponent implements OnInit {
   constructor(protected vm: PedidosViewModelService) {}
@@ -19,7 +19,7 @@ export class PedidosComponent implements OnInit {
 @Component({
   selector: 'app-pedidos-list',
   templateUrl: './tmpl-list.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class PedidosListComponent implements OnInit {
   constructor(protected vm: PedidosViewModelService) {}
@@ -33,7 +33,7 @@ export class PedidosListComponent implements OnInit {
 @Component({
   selector: 'app-pedidos-add',
   templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class PedidosAddComponent implements OnInit {
   constructor(protected vm: PedidosViewModelService) {}
@@ -47,7 +47,7 @@ export class PedidosAddComponent implements OnInit {
 @Component({
   selector: 'app-pedidos-edit',
   templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class PedidosEditComponent implements OnInit, OnDestroy {
   private obs$: any;
@@ -76,7 +76,7 @@ export class PedidosEditComponent implements OnInit, OnDestroy {
 @Component({
   selector: 'app-pedidos-view',
   templateUrl: './tmpl-view.component.html',
-  styleUrls: ['./componente.component.css'],
+  styleUrls: ['./componente.component.scss'],
 })
 export class PedidosViewComponent implements OnInit, OnDestroy {
   private obs$: any;
