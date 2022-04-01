@@ -7,14 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IngredientesModule } from './ingredientes';
 
 
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {RatingModule} from 'primeng/rating';
 import { PaginatorModule } from 'primeng/paginator';
-import { PedidosModule } from './pedidos';
 import { CommonComponentModule } from './common-component';
 
 import { MenubarModule } from 'primeng/menubar';
@@ -35,19 +33,16 @@ import { PizzasComponent } from './pizzas/pizzas.component';
     BrowserAnimationsModule,
     PaginatorModule,
     AppRoutingModule,
-    IngredientesModule,
     HttpClientModule,
     ButtonModule,
     RatingModule,
     FormsModule,
     TableModule,
-    PedidosModule,
     MyCoreModule,
     CommonComponentModule,
     MenubarModule,
     InputTextModule,
     PizzacardModule,
-    DataViewModule,
   ],
   providers: [LoggerService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

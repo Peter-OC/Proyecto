@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpContextToken } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { NotificationService } from '../common-services/notification.service';
+import { NotificationService } from '../../common-services/notification.service';
 import { LoggerService } from 'src/lib/my-core/services/logger.service';
 export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 @Injectable({
   providedIn: 'root',
 })
-export class PedidosViewModelService {
+export class IngredientesViewModelService {
   protected modo: ModoCRUD = 'list';
   protected listado: Array<any> = [];
   protected elemento: any = {};
@@ -17,7 +17,7 @@ export class PedidosViewModelService {
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
-    protected dao: PedidosDAOService
+    protected dao: IngredientesDAOService
   ) {}
   public get Modo(): ModoCRUD {
     return this.modo;
@@ -129,9 +129,9 @@ export abstract class RESTDAOService<T, K> {
   }
 }
 @Injectable({ providedIn: 'root' })
-export class PedidosDAOService extends RESTDAOService<any, any> {
+export class IngredientesDAOService extends RESTDAOService<any, any> {
   constructor(http: HttpClient) {
-    super(http, 'pedidos', {
+    super(http, 'ingredientes', {
       context: new HttpContext().set(AUTH_REQUIRED, true),
     });
   }
