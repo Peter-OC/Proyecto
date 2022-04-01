@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { Table, TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
 import {ToolbarModule} from 'primeng/toolbar';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [INGREDIENTES_COMPONENTES],
@@ -22,7 +23,8 @@ import {ToolbarModule} from 'primeng/toolbar';
     TableModule,
     RatingModule,
     FormsModule,
-    ToolbarModule
+    ToolbarModule,
+    InputNumberModule
   ],
   exports: [INGREDIENTES_COMPONENTES],
 })
