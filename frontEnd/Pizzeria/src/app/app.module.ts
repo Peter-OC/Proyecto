@@ -20,11 +20,14 @@ import { CommonComponentModule } from './common-component';
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { PizzacardModule } from './pizzacard/pizzacard.module';
+import {DataViewModule} from 'primeng/dataview';
+import { PizzasComponent } from './pizzas/pizzas.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    PizzasComponent,
 
   ],
   imports: [
@@ -43,7 +46,8 @@ import { PizzacardModule } from './pizzacard/pizzacard.module';
     CommonComponentModule,
     MenubarModule,
     InputTextModule,
-    PizzacardModule
+    PizzacardModule,
+    DataViewModule,
   ],
   providers: [LoggerService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
