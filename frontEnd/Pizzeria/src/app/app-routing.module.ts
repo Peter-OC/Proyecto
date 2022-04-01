@@ -8,19 +8,7 @@ const routes: Routes = [
   {
     path: '', component: PizzacardComponent
   },
-  { path: 'ingredientes', children: [
-    { path: '', component: IngredientesListComponent},
-    { path: 'add', component: IngredientesAddComponent},
-    { path: ':id/edit', component: IngredientesEditComponent},
-   { path: ':id', component: IngredientesViewComponent},
-  ]},
 
-  { path: 'pedidos', children: [
-    { path: '', component: PedidosListComponent},
-    { path: 'add', component: PedidosAddComponent},
-    { path: ':id/edit', component: PedidosEditComponent},
-    { path: ':id', component: PedidosViewComponent},
-  ]},
 
   {
     path: 'manager', loadChildren: () => import('./manager/manager.module').then(mod => mod.ManagerModule)
