@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IngredientesAddComponent, IngredientesEditComponent, IngredientesListComponent, IngredientesViewComponent } from './manager/ingredientes/componente.component';
 import { HomeComponent } from './main';
-import { PedidosAddComponent, PedidosEditComponent, PedidosListComponent, PedidosViewComponent } from './pedidos/componente.component';
 import { PizzacardComponent } from './pizzacard/pizzacard.component';
 
 const routes: Routes = [

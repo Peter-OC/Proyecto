@@ -13,7 +13,6 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {RatingModule} from 'primeng/rating';
 import { PaginatorModule } from 'primeng/paginator';
-import { PedidosModule } from './pedidos';
 import { CommonComponentModule } from './common-component';
 
 import { MenubarModule } from 'primeng/menubar';
@@ -36,12 +35,11 @@ import { PizzacardModule } from './pizzacard/pizzacard.module';
     RatingModule,
     FormsModule,
     TableModule,
-    PedidosModule,
     MyCoreModule,
     CommonComponentModule,
     MenubarModule,
     InputTextModule,
-    PizzacardModule
+    PizzacardModule,
   ],
   providers: [LoggerService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
