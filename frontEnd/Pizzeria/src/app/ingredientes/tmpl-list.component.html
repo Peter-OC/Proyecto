@@ -20,15 +20,15 @@
       <th></th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body">
-    <tr *ngFor="let item of VM.Listado">
+  <ng-template pTemplate="body" let-item>
+    <tr>
       <td>{{ item.ingrediente }}</td>
       <td>{{ item.tipo }}</td>
       <td>{{ item.precio | currency: "EUR" }}</td>
       <td>
         <img
-          [src]="'../../assets/' + item.foto"
-          [alt]="item.nombre"
+          [src]="'assets/' + item.foto"
+          [alt]="item.ingrediente"
           width="100"
           class="shadow-4"
         />
