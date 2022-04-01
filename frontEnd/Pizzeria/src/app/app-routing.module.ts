@@ -15,6 +15,20 @@ const routes: Routes = [
    { path: ':id', component: IngredientesViewComponent},
   ]},
 
+  { path: 'pedidos', children: [
+    { path: '', component: PedidosListComponent},
+    { path: 'add', component: PedidosAddComponent},
+    { path: ':id/edit', component: PedidosEditComponent},
+    { path: ':id', component: PedidosViewComponent},
+  ]},
+
+  {
+    path: 'admin', loadChildren: () => import('./manager/manager.module').then(mod => mod.ManagerModule)
+  },
+  {
+    path: 'empleado', loadChildren: () => import('./empleados/empleados.module').then(mod => mod.EmpleadosModule)
+  },
+
 ];
 
 @NgModule({

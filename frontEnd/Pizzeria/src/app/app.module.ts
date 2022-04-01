@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IngredientesModule } from './ingredientes';
 
 
 import {TableModule} from 'primeng/table';
@@ -31,7 +30,6 @@ import { PizzacardModule } from './pizzacard/pizzacard.module';
     BrowserAnimationsModule,
     PaginatorModule,
     AppRoutingModule,
-    IngredientesModule,
     HttpClientModule,
     ButtonModule,
     RatingModule,
