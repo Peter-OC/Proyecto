@@ -18,6 +18,7 @@ import { PedidosModule } from './pedidos';
 
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
+import { PizzacardModule } from './pizzacard/pizzacard.module';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { InputTextModule } from 'primeng/inputtext';
     TableModule,
     PedidosModule,
     MenubarModule,
-    InputTextModule
+    InputTextModule,
+    PizzacardModule
   ],
   providers: [LoggerService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
