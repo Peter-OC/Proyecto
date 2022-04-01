@@ -128,7 +128,7 @@
               "projects/app/src/assets"
             ],
             "styles": [
-              "projects/app/src/styles.css"
+              "projects/app/src/styles.scss"
             ],
             "scripts": []
           },
@@ -195,7 +195,7 @@
               "projects/app/src/assets"
             ],
             "styles": [
-              "projects/app/src/styles.css"
+              "projects/app/src/styles.scss"
             ],
             "scripts": []
           }
@@ -205,7 +205,9 @@
   },
   "schematics": {
     "@schematics/angular:component": {
-      "style": "scss"
+      "style": "scss",
+      "stylext": "scss"
+
     }
   },
   "defaultProject": "Pizzeria"
