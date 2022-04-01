@@ -21,12 +21,15 @@ import { PizzacardModule } from './pizzacard/pizzacard.module';
 import { RegistroComponent } from './registro/registro.component';
 
 
+import {DataViewModule} from 'primeng/dataview';
+import { PizzasComponent } from './pizzas/pizzas.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistroComponent,
+    PizzasComponent,
 
   ],
   imports: [
