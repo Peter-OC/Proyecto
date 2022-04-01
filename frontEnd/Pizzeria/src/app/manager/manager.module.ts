@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IngredientesModule } from '../ingredientes';
-import { ProductosModule } from '../productos/productos.module';
-import { UsuariosModule } from '../usuarios/usuarios.module';
+import { IngredientesModule } from './ingredientes';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductosComponent } from '../productos/productos/productos.component';
-import { UsuariosComponent } from '../usuarios/usuarios/usuarios.component';
-import { IngredientesComponent } from '../ingredientes/componente.component';
+import { IngredientesComponent } from './ingredientes/componente.component';
+import { UsuariosModule } from './usuarios';
+import { ProductosModule } from './productos';
+import { ProductosComponent } from './productos/componente.component';
+import { UsuariosComponent } from './usuarios/componente.component';
 
 const routes: Routes = [
   {
@@ -27,8 +27,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     IngredientesModule,
-    ProductosModule,
-    UsuariosModule
+    UsuariosModule,
+    ProductosModule
+
 
   ]
 })

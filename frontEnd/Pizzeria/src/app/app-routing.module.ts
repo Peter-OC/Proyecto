@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IngredientesAddComponent, IngredientesEditComponent, IngredientesListComponent, IngredientesViewComponent } from './ingredientes/componente.component';
+import { IngredientesAddComponent, IngredientesEditComponent, IngredientesListComponent, IngredientesViewComponent } from './manager/ingredientes/componente.component';
 import { HomeComponent } from './main';
 import { PedidosAddComponent, PedidosEditComponent, PedidosListComponent, PedidosViewComponent } from './pedidos/componente.component';
 import { PizzacardComponent } from './pizzacard/pizzacard.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
   ]},
 
   {
-    path: 'admin', loadChildren: () => import('./manager/manager.module').then(mod => mod.ManagerModule)
+    path: 'manager', loadChildren: () => import('./manager/manager.module').then(mod => mod.ManagerModule)
   },
   {
     path: 'empleado', loadChildren: () => import('./empleados/empleados.module').then(mod => mod.EmpleadosModule)
