@@ -28,8 +28,13 @@ export class AppComponent {
       },
       {
         label: 'Registro',
-        icon: 'pi pi-fw pi-user',
+        icon: 'pi pi-fw pi-sign-in',
         routerLink: '/registro',
+      },
+      {
+        label: 'Carrito',
+        icon: 'pi pi-fw pi-shopping-cart',
+        routerLink: '/carrito',
       },
     ];
   }
