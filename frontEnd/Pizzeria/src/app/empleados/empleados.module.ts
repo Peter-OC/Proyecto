@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CocinaComponent, CocinaListComponent, COCINA_COMPONENTES } from './cocina/cocina.component';
+import { CocinaComponent, CocinaEditComponent, CocinaListComponent, COCINA_COMPONENTES } from './cocina/cocina.component';
 import { RepartidorComponent } from './repartidor/repartidor.component';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -17,8 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'cocina', children: [
-      { path: '', component: CocinaListComponent }
-    ]
+      { path: '', component: CocinaListComponent },
+      { path: ':id/edit', component: CocinaEditComponent },    ]
   },
 ]
 

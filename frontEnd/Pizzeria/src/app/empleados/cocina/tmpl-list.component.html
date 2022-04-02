@@ -1,31 +1,28 @@
 <p-table [value]="VM.Listado">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
-      Pedidos
-      <p-button
-        icon="pi pi-plus"
-        class="p-button-success p-mr-2"
-        routerLink="add"
-        (click)="VM.add()"
-      ></p-button>
+      En espera
     </div>
   </ng-template>
 
   <ng-template pTemplate="header">
     <tr>
       <th>Identificador del pedido</th>
-      <th>Identificador del cliente</th>
       <th>Hora del pedido</th>
-      <th>Dirección</th>
+      <th>Productos</th>
+      <th>Estado</th>
       <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr>
       <td>{{ item.idPedido }}</td>
-      <td>{{ item.idCliente }}</td>
-      <td>{{ item.horaPedido}}</td>
-      <td>{{ item.direccion}}</td>
+      <td>{{ item.horaPedido }}</td>
+      <ul *ngFor="let product of item.productosDelPedido">
+        <li>Nombre: {{product.nombreProducto}}</li>
+        <li>cantidad: {{product.cantidadProducto}}</li>
+      </ul>
+      <td>{{ item.estado}}</td>
       <td>
         <button
           pButton
@@ -46,7 +43,63 @@
   </ng-template>
   <ng-template pTemplate="summary">
     <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM.Listado ? VM.Listado.length : 0 }} pedidos.
+      En total hay {{ VM.Listado ? VM.Listado.length : 0 }} pedidos esperando.
+    </div>
+  </ng-template>
+</p-table>
+
+
+<br><br><br>
+
+
+
+
+<p-table [value]="VM2.Listado">
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      En elaboración
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Identificador del pedido</th>
+      <th>Hora del pedido</th>
+      <th>Productos</th>
+      <th>Estado</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td>{{ item.idPedido }}</td>
+      <td>{{ item.horaPedido }}</td>
+      <ul *ngFor="let product of item.productosDelPedido">
+        <li>Nombre: {{product.nombreProducto}}</li>
+        <li>cantidad: {{product.cantidadProducto}}</li>
+      </ul>
+      <td>{{ item.estado}}</td>
+      <td>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          class="p-button-rounded p-button-success mr-2"
+          [routerLink]="[item.idPedido, 'edit']"
+        ></button>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-trash"
+          class="p-button-rounded p-button-warning"
+          (click)="VM2.delete(item.idPedido)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      En total hay {{ VM2.Listado ? VM2.Listado.length : 0 }} pedidos elaborandose.
     </div>
   </ng-template>
 </p-table>

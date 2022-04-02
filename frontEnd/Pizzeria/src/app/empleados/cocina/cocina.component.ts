@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { PedidosViewModelService } from '../servicios.service';
+import { PedidosInProcessViewModelService, PedidosViewModelService } from '../servicios.service';
 
 @Component({
   selector: 'app-cocina',
@@ -8,12 +8,16 @@ import { PedidosViewModelService } from '../servicios.service';
   styleUrls: ['./cocina.component.scss'],
 })
 export class CocinaComponent implements OnInit {
-  constructor(protected vm: PedidosViewModelService) {}
+  constructor(protected vm: PedidosViewModelService, protected vm2: PedidosInProcessViewModelService) {}
   public get VM(): PedidosViewModelService {
     return this.vm;
   }
+  public get VM2(): PedidosInProcessViewModelService {
+    return this.vm2;
+  }
   ngOnInit(): void {
     this.vm.list();
+    this.vm2.list();
   }
 }
 
@@ -23,12 +27,16 @@ export class CocinaComponent implements OnInit {
   styleUrls: ['./cocina.component.scss'],
 })
 export class CocinaListComponent implements OnInit {
-  constructor(protected vm: PedidosViewModelService) {}
+  constructor(protected vm: PedidosViewModelService, protected vm2: PedidosInProcessViewModelService) {}
   public get VM(): PedidosViewModelService {
     return this.vm;
   }
+  public get VM2(): PedidosInProcessViewModelService {
+    return this.vm2;
+  }
   ngOnInit(): void {
     this.vm.list();
+    this.vm2.list();
   }
 }
 
@@ -38,12 +46,16 @@ export class CocinaListComponent implements OnInit {
   styleUrls: ['./cocina.component.scss'],
 })
 export class CocinaAddComponent implements OnInit {
-  constructor(protected vm: PedidosViewModelService) {}
+  constructor(protected vm: PedidosViewModelService, protected vm2: PedidosInProcessViewModelService) {}
   public get VM(): PedidosViewModelService {
     return this.vm;
   }
+  public get VM2(): PedidosInProcessViewModelService {
+    return this.vm2;
+  }
   ngOnInit(): void {
     this.vm.add();
+    this.vm2.add();
   }
 }
 
@@ -56,17 +68,22 @@ export class CocinaEditComponent implements OnInit, OnDestroy {
   private obs$: any;
   constructor(
     protected vm: PedidosViewModelService,
+    protected vm2: PedidosInProcessViewModelService,
     protected route: ActivatedRoute,
     protected router: Router
   ) {}
   public get VM(): PedidosViewModelService {
     return this.vm;
   }
+  public get VM2(): PedidosInProcessViewModelService {
+    return this.vm2;
+  }
   ngOnInit(): void {
     this.obs$ = this.route.paramMap.subscribe((params: ParamMap) => {
       const id = parseInt(params?.get('id') ?? '');
       if (id) {
         this.vm.edit(id);
+        this.vm2.edit(id);
       } else {
         this.router.navigate(['/404.html']);
       }
@@ -86,17 +103,24 @@ export class CocinaViewComponent implements OnInit, OnDestroy {
   private obs$: any;
   constructor(
     protected vm: PedidosViewModelService,
+    protected vm2: PedidosInProcessViewModelService,
     protected route: ActivatedRoute,
     protected router: Router
   ) {}
   public get VM(): PedidosViewModelService {
     return this.vm;
   }
+
+  public get VM2(): PedidosInProcessViewModelService {
+    return this.vm2;
+  }
+
   ngOnInit(): void {
     this.obs$ = this.route.paramMap.subscribe((params: ParamMap) => {
       const id = parseInt(params?.get('id') ?? '');
       if (id) {
         this.vm.view(id);
+        this.vm2.view(id);
       } else {
         this.router.navigate(['/404.html']);
       }
