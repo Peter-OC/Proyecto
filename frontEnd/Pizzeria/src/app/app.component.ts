@@ -13,29 +13,28 @@ export class AppComponent {
     this.items = [
       {
         label: 'Pizzas',
-        icon: 'pi pi-fw pi-file',
         items: [
           {
             label: 'Categoria 1',
-            icon: 'pi pi-fw pi-file',
           },
           {
             label: 'Categoria 2',
-            icon: 'pi pi-fw pi-file',
           },
           {
             label: 'Categoria 3',
-            icon: 'pi pi-fw pi-file',
           },
         ],
       },
       {
         label: 'Entrantes',
-        icon: 'pi pi-fw pi-pencil',
+        routerLink: '/login',
       },
       {
         label: 'Bebidas',
-        icon: 'pi pi-fw pi-user',
+      },
+      {
+        label: 'Login',
+        routerLink: '/login',
       },
     ];
   }
