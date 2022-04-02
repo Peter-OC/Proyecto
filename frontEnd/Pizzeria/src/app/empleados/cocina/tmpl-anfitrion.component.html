@@ -1,0 +1,6 @@
+<ng-container [ngSwitch]="VM.Modo" >
+  <app-cocina-add *ngSwitchCase="'add'"></app-cocina-add>
+  <app-cocina-edit *ngSwitchCase="'edit'"></app-cocina-edit>
+  <app-cocina-view *ngSwitchCase="'view'"></app-cocina-view>
+  <app-cocina-list *ngSwitchDefault></app-cocina-list>
+ </ng-container>

@@ -130,8 +130,9 @@ export class User {
   username: string = '';
   contraseña: string = '';
   nombre: string = '';
+  apellido: string = '';
   direccion: string = '';
-  roles: Array<Role> = [];
+  //roles: Array<Role> = [];
 
 }
 
