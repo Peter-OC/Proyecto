@@ -14,16 +14,18 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Nombre</th>
-      <th>Tipo</th>
+      <th>Descripción</th>
       <th>Precio</th>
       <th>Foto</th>
+      <th>Likes</th>
+      <th>Dislikes</th>
       <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr>
       <td>{{ item.nombre }}</td>
-      <td>{{ item.tipo }}</td>
+      <td>{{ item.descripcion }}</td>
       <td>{{ item.precio | currency: "EUR" }}</td>
       <td>
         <img
@@ -33,6 +35,9 @@
           class="shadow-4"
         />
       </td>
+      <td>{{ item.me_gusta }}</td>
+      <td>{{ item.no_me_gusta }}</td>
+
       <td>
         <button
           pButton

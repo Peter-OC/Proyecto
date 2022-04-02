@@ -1,4 +1,4 @@
-<h1>Ingrediente</h1>
+<h1>Producto</h1>
 <form #miForm="ngForm">
 
 <!--
@@ -10,24 +10,24 @@
     </div>
   </div> -->
 
-
   <div class="form-row">
-    <!-- <p-inputNumber  [(ngModel)]="VM.Elemento.id" mode="currency" currency="EUR" locale="de-DE"></p-inputNumber> -->
+    <ng-container *ngIf="VM.Modo==='add'">
     <div class="form-group col-md-2">
       <label class="form-label" for="tipo">Tipo:</label>
       <select
         class="form-control form-select"
         name="tipo"
         id="tipo"
-        [(ngModel)]="VM.Elemento.tipo"
+        [(ngModel)]="VM.Elemento.categoria"
         #tipo="ngModel"
         required
       >
-        <option value="1">Bebida</option>
-        <option value="2">Entrante</option>
+        <option value="1">Entrante</option>
+        <option value="2">Bebida</option>
         <option value="3">Pizza</option>
       </select>
     </div>
+  </ng-container>
     <div class="form-group col-md-4">
       <label class="form-label" for="nombre">Nombre:</label>
       <input
@@ -36,10 +36,10 @@
         type="text"
         name="nombre"
         id="nombre"
-        [(ngModel)]="VM.Elemento.ingrediente"
+        [(ngModel)]="VM.Elemento.nombre"
         #nombre="ngModel"
         required
-        maxlength="25"
+        maxlength="50"
       />
       <div class="invalid-feedback" [hidden]="!nombre.hasError('required')">
         Es obligatorio
@@ -50,9 +50,23 @@
           !nombre.hasError('maxlength')
         "
       >
-        Debe tener como máximo 25 letras.
+        Debe tener como máximo 50 letras.
       </div>
     </div>
+
+    <div class="form-group col-md-4">
+      <label class="form-label" for="descripcion">Descripción:</label>
+      <input
+        class="form-control"
+        [class.is-invalid]="descripcion.invalid"
+        type="text"
+        name="descripcion"
+        id="descripcion"
+        [(ngModel)]="VM.Elemento.descripcion"
+        #descripcion="ngModel"
+      />
+    </div>
+
   </div>
   <div class="form-group row">
     <div class="form-group col-md-12">

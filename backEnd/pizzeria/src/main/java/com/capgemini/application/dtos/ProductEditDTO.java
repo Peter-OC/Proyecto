@@ -12,18 +12,12 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class ProductEditDTO {
-
+	
 	@JsonProperty("id")
-	private int idProduct;
+	private int id;
 	
 	@JsonProperty("descripcion")
 	private String description;
-	
-	@JsonProperty("no_me_gusta")
-	private Integer dislike;
-
-	@JsonProperty("me_gusta")
-	private Integer thelike;
 
 	@JsonProperty("nombre")
 	private String name;
@@ -38,39 +32,26 @@ public class ProductEditDTO {
 	@JsonProperty("pizza")
 	private PizzaEditDTO pizza;
 	
-	@JsonProperty("categoria")
-	private int category;
-	
-	@JsonProperty("lista_comentarios")
-	private List<CommentShortDTO> comments;
 
 	
 	public static ProductEditDTO from(Product source) {
 		return new ProductEditDTO(
 				source.getIdProduct(),
 				source.getDescription(),
-				source.getDislike(),
-				source.getLike(),
 				source.getName(),
 				source.getPhoto(),				
 				source.getPrice(),
-				source.getType() == Type.PIZZA ? PizzaEditDTO.from(source.getPizza()) : null,
-				source.getType().getValue(),
-				source.getComments().stream().map(item -> CommentShortDTO.from(item)).toList()
+				source.getType() == Type.PIZZA ? PizzaEditDTO.from(source.getPizza()) : null
 				);
 	}
 	
 	public static  Product from(ProductEditDTO source) {
 		return new Product(
-				source.getIdProduct(),
 				source.getDescription(),
-				source.getDislike(),
-				source.getThelike(),
 				source.getName(),
 				source.getPhoto(),				
-				source.getPrice(),
-				null,
-				Product.Type.getEnum(source.getCategory())
+				source.getPrice(), 
+				null
 				);
 	}
 	
@@ -81,11 +62,8 @@ public class ProductEditDTO {
 	
     private void actualizaPropiedadesEntidad(Product target) {
 		target.setDescription(description);
-		target.setDislike(dislike);
-		target.setLike(thelike);
 		target.setName(name);
 		target.setPhoto(photo);
 		target.setPrice(price);
-		target.setType(Product.Type.getEnum(category));
     }
 }
