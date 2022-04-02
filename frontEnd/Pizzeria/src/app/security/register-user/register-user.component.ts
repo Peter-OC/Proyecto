@@ -30,6 +30,7 @@ export class RegisterUserComponent implements OnInit {
     this.miForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.email]),
       nombre: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+      apellido: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
       direccion: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
       contraseña: new FormGroup({
         contraseñaValue: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -129,8 +130,9 @@ export class RegisterUserComponent implements OnInit {
       username: data.username,
       contraseña: data.contraseña.contraseñaValue,
       nombre: data.nombre,
+      apellido: data.apellido,
       direccion: data.direccion,
-      roles: data.roles
+      //roles: data.roles
     } as User);
     this.dao.add(this.model).subscribe(
       rslt => {
