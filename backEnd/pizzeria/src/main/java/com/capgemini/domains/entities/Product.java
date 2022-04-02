@@ -74,10 +74,8 @@ public class Product extends EntityBase<Product> implements Serializable {
 	@Lob
 	private String description;
 
-	@Positive
 	private Integer dislike;
 	
-	@Positive
 	private Integer thelike;
 
 	@Length(min = 2, max = 50)
@@ -124,20 +122,15 @@ public class Product extends EntityBase<Product> implements Serializable {
 		this.idProduct = idProduct;
 	}
 	
-	public Product(int idProduct, String description, Integer dislike, Integer thelike,
+	public Product(String description,
 			@Length(min = 2, max = 50) @NotBlank String name, String photo,
-			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 4, fraction = 2) float price, Pizza pizza, 
-			Type type) {
+			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 4, fraction = 2) float price, Pizza pizza) {
 		this();
-		this.idProduct = idProduct;
 		this.description = description;
-		this.dislike = dislike;
-		this.thelike = thelike;
 		this.name = name;
 		this.photo = photo;
 		this.price = price;
 		this.pizza = pizza;
-		this.type = type;
 	}
 
 	public int getIdProduct() {
