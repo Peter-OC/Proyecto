@@ -17,14 +17,14 @@
       </select>
     </div>
     <div class="form-group col-md-4">
-      <label class="form-label" for="nombre">Username:</label>
+      <label class="form-label" for="nombre">Nombre:</label>
       <input
         class="form-control"
         [class.is-invalid]="nombre.invalid"
         type="text"
         name="nombre"
         id="nombre"
-        [(ngModel)]="VM.Elemento.username"
+        [(ngModel)]="VM.Elemento.nombre"
         #nombre="ngModel"
         maxlength="250"
       />

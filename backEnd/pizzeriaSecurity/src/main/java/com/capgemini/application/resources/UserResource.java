@@ -94,7 +94,7 @@ public class UserResource {
 		srv.change(entity);
 	}	
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{username}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiOperation(value = "Borrar usuario existente")
 	@ApiResponses({ @ApiResponse(code = 204, message = "usuario borrado"),

@@ -125,6 +125,7 @@ export abstract class RESTDAOService<T, K> {
     return this.http.put<T>(this.baseUrl + '/' + id, item, this.option);
   }
   remove(id: K): Observable<T> {
+
     return this.http.delete<T>(this.baseUrl + '/' + id, this.option);
   }
 }
