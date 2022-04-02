@@ -6,11 +6,12 @@ import { PizzacardComponent } from './pizzacard/pizzacard.component';
 import { LoginComponent, RegisterUserComponent } from './security';
 
 const routes: Routes = [
-  { path: 'registro', component: RegisterUserComponent },
-  { path: 'login', component: LoginComponent },
   {
     path: '', component: PizzacardComponent
   },
+
+  { path: 'registro', component: RegisterUserComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: 'manager', loadChildren: () => import('./manager/manager.module').then(mod => mod.ManagerModule)
   },
