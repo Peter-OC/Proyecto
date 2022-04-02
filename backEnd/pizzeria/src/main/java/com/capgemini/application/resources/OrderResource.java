@@ -67,45 +67,45 @@ public class OrderResource {
 	
 	@GetMapping(path = "/ordered")
 	@ApiOperation(value = "Listado Pedidos por estado ordered")
-	public List<OrderDetailsDTO> getOrdereds(@RequestParam(required=false, defaultValue = "details")String mode)
+	public List<OrderShortDTO> getOrdereds(@RequestParam(required=false, defaultValue = "details")String mode)
 	throws NotFoundException {
-		return srv.getOrdered(OrderDetailsDTO.class);
+		return srv.getOrdered(OrderShortDTO.class);
 	}
 	
 	@GetMapping(path = "/inProcess")
 	@ApiOperation(value = "Listado Pedidos por estado en proceso")
-	public List<OrderDetailsDTO> getInProcess(@RequestParam(required=false, defaultValue = "details")String mode)
+	public List<OrderShortDTO> getInProcess(@RequestParam(required=false, defaultValue = "details")String mode)
 	throws NotFoundException {
-		return srv.getInProcess(OrderDetailsDTO.class);
+		return srv.getInProcess(OrderShortDTO.class);
 	}
 	
 	
 	@GetMapping(path = "/readies")
 	@ApiOperation(value = "Listado Pedidos por estado listo")
-	public List<OrderDetailsDTO> getOneReadies(@RequestParam(required=false, defaultValue = "details")String mode)
+	public List<OrderShortDTO> getOneReadies(@RequestParam(required=false, defaultValue = "details")String mode)
 	throws NotFoundException {
-		return srv.getReady(OrderDetailsDTO.class);
+		return srv.getReady(OrderShortDTO.class);
 	}
 	
 	@GetMapping(path = "/sents")
 	@ApiOperation(value = "Listado Pedidos por estado enviado")
-	public List<OrderDetailsDTO> getOneSents(@RequestParam(required=false, defaultValue = "details") String mode)
+	public List<OrderShortDTO> getOneSents(@RequestParam(required=false, defaultValue = "details") String mode)
 	throws NotFoundException {
-		return srv.getSent(OrderDetailsDTO.class);
+		return srv.getSent(OrderShortDTO.class);
 	}
 	
 	@GetMapping(path = "/receiveds")
 	@ApiOperation(value = "Listado Pedidos por estado recibido")
-	public List<OrderDetailsDTO> getOneReceiveds(@RequestParam(required = false, defaultValue = "details") String mode)
+	public List<OrderShortDTO> getOneReceiveds(@RequestParam(required = false, defaultValue = "details") String mode)
 	throws NotFoundException {
-		return srv.getReceived(OrderDetailsDTO.class);
+		return srv.getReceived(OrderShortDTO.class);
 	}
 	
 	@GetMapping(path = "/canceleds")
 	@ApiOperation(value = "Listado Pedidos por estado cancelado")
-	public List<OrderDetailsDTO> getOneDetails(@RequestParam(required = false, defaultValue = "details") String mode)
+	public List<OrderShortDTO> getOneDetails(@RequestParam(required = false, defaultValue = "details") String mode)
 	throws NotFoundException {
-		return srv.getCanceled(OrderDetailsDTO.class);
+		return srv.getCanceled(OrderShortDTO.class);
 	}
 	
 	
