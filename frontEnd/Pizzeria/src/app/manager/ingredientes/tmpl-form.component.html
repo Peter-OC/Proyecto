@@ -65,7 +65,7 @@
         id="precio"
         [(ngModel)]="VM.Elemento.precio"
         #precio="ngModel"
-        pattern="^(-?[1-9]+\d*([.]\d+)?)$|^(-?0[.]\d*[1-9]+)$|^0$|^0.0$"
+        pattern="^([1-9]+\d*([.]\d+)?)$|^(0[.]\d*[1-9]+)$|^0$|^0.0$"
         required
       />
       <output class="error" [hidden]="!precio.hasError('pattern')">

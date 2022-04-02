@@ -23,7 +23,7 @@ public class UserDetailsDTO {
 	@JsonProperty("direccion")
 	private String address;
 
-	@JsonProperty("contraseña")
+	@JsonProperty("passsword")
 	private String password;
 	
 	@JsonProperty("rol")

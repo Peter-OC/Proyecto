@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MyCoreModule } from 'src/lib/my-core';
 import { CommonServicesModule } from '../../common-services';
-import { INGREDIENTES_COMPONENTES } from './componente.component';
+import { PRODUCTOS_COMPONENTES } from './componente.component';
 import { ButtonModule } from 'primeng/button';
 import { Table, TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
@@ -12,7 +12,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {InputNumberModule} from 'primeng/inputnumber';
 
 @NgModule({
-  declarations: [INGREDIENTES_COMPONENTES],
+  declarations: [PRODUCTOS_COMPONENTES],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,6 +26,6 @@ import {InputNumberModule} from 'primeng/inputnumber';
     ToolbarModule,
     InputNumberModule
   ],
-  exports: [INGREDIENTES_COMPONENTES],
+  exports: [PRODUCTOS_COMPONENTES],
 })
 export class ProductosModule {}

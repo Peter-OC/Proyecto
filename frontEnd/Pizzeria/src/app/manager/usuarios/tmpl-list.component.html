@@ -1,59 +1,48 @@
 <p-table [value]="VM.Listado">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
-      Ingredientes
-      <p-button
-        icon="pi pi-plus"
-        class="p-button-success p-mr-2"
-        routerLink="add"
-        (click)="VM.add()"
-      ></p-button>
+      Usuarios
     </div>
   </ng-template>
 
   <ng-template pTemplate="header">
     <tr>
+      <th>Username</th>
       <th>Nombre</th>
-      <th>Tipo</th>
-      <th>Precio</th>
-      <th>Foto</th>
+      <th>Apellido</th>
+      <th>Dirección</th>
+      <th>Rol</th>
       <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr>
-      <td>{{ item.ingrediente }}</td>
-      <td>{{ item.tipo }}</td>
-      <td>{{ item.precio | currency: "EUR" }}</td>
-      <td>
-        <img
-          [src]="'assets/' + item.foto"
-          [alt]="item.ingrediente"
-          width="100"
-          class="shadow-4"
-        />
-      </td>
+      <td>{{ item.username }}</td>
+      <td>{{ item.nombre }}</td>
+      <td>{{ item.apellido }}</td>
+      <td>{{ item.direccion }}</td>
+      <td>{{ item.rol }}</td>
       <td>
         <button
           pButton
           pRipple
           icon="pi pi-pencil"
           class="p-button-rounded p-button-success mr-2"
-          [routerLink]="[item.id, 'edit']"
+          [routerLink]="[item.username, 'edit']"
         ></button>
         <button
           pButton
           pRipple
           icon="pi pi-trash"
           class="p-button-rounded p-button-warning"
-          (click)="VM.delete(item.id)"
+          (click)="VM.delete(item.username)"
         ></button>
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary">
     <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM.Listado ? VM.Listado.length : 0 }} ingredientes.
+      En total hay {{ VM.Listado ? VM.Listado.length : 0 }} usuarios.
     </div>
   </ng-template>
 </p-table>

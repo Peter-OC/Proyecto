@@ -4,6 +4,7 @@ import { IngredientesAddComponent, IngredientesEditComponent, IngredientesListCo
 import { HomeComponent } from './main';
 import { PizzacardComponent } from './pizzacard/pizzacard.component';
 import { LoginComponent, RegisterUserComponent } from './security';
+import { CocinaComponent, CocinaListComponent } from './empleados/cocina/cocina.component';
 
 const routes: Routes = [
   {

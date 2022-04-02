@@ -1,24 +1,36 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpContext, HttpContextToken } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpContext,
+  HttpContextToken,
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { NotificationService } from '../../common-services/notification.service';
-import { LoggerService } from 'src/lib/my-core/services/logger.service';
-export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
+import { NotificationService } from '../common-services';
+import { LoggerService } from 'src/lib/my-core';
+import { Router } from '@angular/router';
+
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
+export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
+
+
 @Injectable({
   providedIn: 'root',
 })
-export class ProductosViewModelService {
+export class PedidosViewModelService {
+  protected listURL = '/cocina';
   protected modo: ModoCRUD = 'list';
   protected listado: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
+
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
-    protected dao: ProductosDAOService
+    protected dao: PedidosDAOService,
+    protected router: Router
   ) {}
+
   public get Modo(): ModoCRUD {
     return this.modo;
   }
@@ -28,6 +40,7 @@ export class ProductosViewModelService {
   public get Elemento(): any {
     return this.elemento;
   }
+
   public list(): void {
     this.dao.query().subscribe({
       next: (data) => {
@@ -37,10 +50,12 @@ export class ProductosViewModelService {
       error: (err) => this.notify.add(err.message),
     });
   }
+
   public add(): void {
     this.elemento = {};
     this.modo = 'add';
   }
+
   public edit(key: any): void {
     this.dao.get(key).subscribe({
       next: (data) => {
@@ -51,6 +66,7 @@ export class ProductosViewModelService {
       error: (err) => this.notify.add(err.message),
     });
   }
+
   public view(key: any): void {
     this.dao.get(key).subscribe({
       next: (data) => {
@@ -60,8 +76,13 @@ export class ProductosViewModelService {
       error: (err) => this.notify.add(err.message),
     });
   }
+
   public delete(key: any): void {
-    if (!window.confirm('¿Seguro?')) {
+    if (
+      !window.confirm(
+        'Estás a punto de borrar un pedido. Esta operación no tendrá vuelta atrás.'
+      )
+    ) {
       return;
     }
     this.dao.remove(key).subscribe({
@@ -69,33 +90,33 @@ export class ProductosViewModelService {
       error: (err) => this.notify.add(err.message),
     });
   }
+
   clear() {
     this.elemento = {};
     this.idOriginal = null;
     this.listado = [];
   }
+
   public cancel(): void {
     this.elemento = {};
     this.idOriginal = null;
-    this.list();
+    // this.list();
+    this.router.navigateByUrl(this.listURL);
   }
+
   public send(): void {
     switch (this.modo) {
       case 'add':
-        this.dao
-          .add(this.elemento)
-          .subscribe({
-            next: (data) => this.cancel(),
-            error: (err) => this.notify.add(err.message),
-          });
+        this.dao.add(this.elemento).subscribe({
+          next: (data) => this.cancel(),
+          error: (err) => this.notify.add(err.message),
+        });
         break;
       case 'edit':
-        this.dao
-          .change(this.idOriginal, this.elemento)
-          .subscribe({
-            next: (data) => this.cancel(),
-            error: (err) => this.notify.add(err.message),
-          });
+        this.dao.change(this.idOriginal, this.elemento).subscribe({
+          next: (data) => this.cancel(),
+          error: (err) => this.notify.add(err.message),
+        });
         break;
       case 'view':
         this.cancel();
@@ -103,6 +124,7 @@ export class ProductosViewModelService {
     }
   }
 }
+
 export abstract class RESTDAOService<T, K> {
   protected baseUrl = environment.apiURL;
   constructor(
@@ -128,11 +150,14 @@ export abstract class RESTDAOService<T, K> {
     return this.http.delete<T>(this.baseUrl + '/' + id, this.option);
   }
 }
+
 @Injectable({ providedIn: 'root' })
-export class ProductosDAOService extends RESTDAOService<any, any> {
+export class PedidosDAOService extends RESTDAOService<any, any> {
   constructor(http: HttpClient) {
-    super(http, 'productos', {
+    super(http, 'order', {
       context: new HttpContext().set(AUTH_REQUIRED, true),
     });
   }
 }
+
+

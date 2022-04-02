@@ -1,7 +1,7 @@
 <p-table [value]="VM.Listado">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
-      Productos
+      Pedidos
       <p-button
         icon="pi pi-plus"
         class="p-button-success p-mr-2"
@@ -13,47 +13,40 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <th>Nombre</th>
-      <th>Tipo</th>
-      <th>Precio</th>
-      <th>Foto</th>
+      <th>Identificador del pedido</th>
+      <th>Identificador del cliente</th>
+      <th>Hora del pedido</th>
+      <th>Dirección</th>
       <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr>
-      <td>{{ item.nombre }}</td>
-      <td>{{ item.tipo }}</td>
-      <td>{{ item.precio | currency: "EUR" }}</td>
-      <td>
-        <img
-          [src]="'assets/' + item.foto"
-          [alt]="item.producto"
-          width="100"
-          class="shadow-4"
-        />
-      </td>
+      <td>{{ item.idPedido }}</td>
+      <td>{{ item.idCliente }}</td>
+      <td>{{ item.horaPedido}}</td>
+      <td>{{ item.direccion}}</td>
       <td>
         <button
           pButton
           pRipple
           icon="pi pi-pencil"
           class="p-button-rounded p-button-success mr-2"
-          [routerLink]="[item.id, 'edit']"
+          [routerLink]="[item.idPedido, 'edit']"
         ></button>
         <button
           pButton
           pRipple
           icon="pi pi-trash"
           class="p-button-rounded p-button-warning"
-          (click)="VM.delete(item.id)"
+          (click)="VM.delete(item.idPedido)"
         ></button>
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary">
     <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM.Listado ? VM.Listado.length : 0 }} productos.
+      En total hay {{ VM.Listado ? VM.Listado.length : 0 }} pedidos.
     </div>
   </ng-template>
 </p-table>

@@ -45,7 +45,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/productos")
 @Api(value = "/Product", description = "Mantenimiento de productos", produces = "application/json, application/xml", consumes = "application/json, application/xml")
 public class ProductResource {
 	@Autowired
