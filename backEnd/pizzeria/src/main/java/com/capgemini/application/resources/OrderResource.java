@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.HttpStatus;
 
+import com.capgemini.application.dtos.OrderChangeStatusDTO;
 import com.capgemini.application.dtos.OrderDetailsDTO;
 import com.capgemini.application.dtos.OrderEditDTO;
 import com.capgemini.application.dtos.OrderShortDTO;
@@ -145,7 +146,7 @@ public class OrderResource {
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@Transactional
 	@ApiOperation(value = "Modificar un pedido existente", notes = "Los identificadores deben coincidir")
-	@ApiResponses({ @ApiResponse(code = 201, message = "Pedido añadido"),
+	@ApiResponses({ @ApiResponse(code = 201, message = "Pedido actualizado"),
 			@ApiResponse(code = 400, message = "Error al validar los datos o discrepancias en los identificadores"),
 			@ApiResponse(code = 404, message = "Pedio no encontrado") })
 	public void update(@ApiParam(value = "Identificador del pedido") @PathVariable int id,
@@ -158,7 +159,25 @@ public class OrderResource {
 			throw new InvalidDataException(entity.getErrorsMessage());
 		srv.change(entity);
 	}
-
+	
+	@PutMapping("/change/{id}")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	@Transactional
+	@ApiOperation(value = "Modificar el estado de un pedido", notes = "Los identificadores deben coincidir")
+	@ApiResponses({ @ApiResponse(code = 201, message = "Estado del pedido actualizado"),
+			@ApiResponse(code = 400, message = "Error al validar los datos o discrepancias en los identificadores"),
+			@ApiResponse(code = 404, message = "Pedio no encontrado") })
+	public void change(@ApiParam(value = "Identificador del pedido") @PathVariable int id,
+			@Valid @RequestBody OrderChangeStatusDTO item) throws InvalidDataException, NotFoundException {
+		if (id != item.getIdOrder())
+			throw new InvalidDataException("No coinciden los identificadores");
+		var entity = srv.getOne(id);
+		item.update(entity);
+		if (entity.isInvalid())
+			throw new InvalidDataException(entity.getErrorsMessage());
+		srv.change(entity);
+	}
+	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiOperation(value = "Borrar un pedido existente")

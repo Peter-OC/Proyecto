@@ -34,6 +34,7 @@ export class CocinaListComponent implements OnInit {
   public get VM2(): PedidosInProcessViewModelService {
     return this.vm2;
   }
+
   ngOnInit(): void {
     this.vm.list();
     this.vm2.list();

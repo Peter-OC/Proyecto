@@ -19,15 +19,15 @@
       <td>{{ item.idPedido }}</td>
       <td>{{ item.horaPedido }}</td>
       <ul *ngFor="let product of item.productosDelPedido">
-        <li>Nombre: {{product.nombreProducto}}</li>
-        <li>cantidad: {{product.cantidadProducto}}</li>
+        <li>Producto: {{product.nombreProducto}}</li>
+        <li>Cantidad: {{product.cantidadProducto}}</li>
       </ul>
       <td>{{ item.estado}}</td>
       <td>
         <button
           pButton
           pRipple
-          icon="pi pi-pencil"
+          icon="pi pi-check"
           class="p-button-rounded p-button-success mr-2"
           [routerLink]="[item.idPedido, 'edit']"
         ></button>
@@ -75,15 +75,15 @@
       <td>{{ item.idPedido }}</td>
       <td>{{ item.horaPedido }}</td>
       <ul *ngFor="let product of item.productosDelPedido">
-        <li>Nombre: {{product.nombreProducto}}</li>
-        <li>cantidad: {{product.cantidadProducto}}</li>
+        <li>Producto: {{product.nombreProducto}}</li>
+        <li>Cantidad: {{product.cantidadProducto}}</li>
       </ul>
       <td>{{ item.estado}}</td>
       <td>
         <button
           pButton
           pRipple
-          icon="pi pi-pencil"
+          icon="pi pi-check"
           class="p-button-rounded p-button-success mr-2"
           [routerLink]="[item.idPedido, 'edit']"
         ></button>
@@ -99,7 +99,7 @@
   </ng-template>
   <ng-template pTemplate="summary">
     <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM2.Listado ? VM2.Listado.length : 0 }} pedidos elaborandose.
+      En total hay {{ VM2.Listado ? VM2.Listado.length : 0 }} pedidos elaborándose.
     </div>
   </ng-template>
 </p-table>
