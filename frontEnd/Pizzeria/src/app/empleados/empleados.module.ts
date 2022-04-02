@@ -9,6 +9,7 @@ import { TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
 import {ToolbarModule} from 'primeng/toolbar';
 import {InputNumberModule} from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
     RatingModule,
     ToolbarModule,
     InputNumberModule,
+    FormsModule
 
   ],
 

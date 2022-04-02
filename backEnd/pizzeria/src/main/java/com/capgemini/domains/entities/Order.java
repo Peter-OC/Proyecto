@@ -71,6 +71,12 @@ public class Order extends EntityBase<Order> implements Serializable {
 		this();
 		this.idOrder = idOrder;
 	}
+	
+	public Order(int idOrder, String address) {
+		this();
+		this.idOrder = idOrder;
+		this.address = address;
+	}
 
 	public Order(String user, @PastOrPresent @NotNull Date orderDate, @NotBlank @Length(max = 100) String address,
 			@PastOrPresent Date deliveryDate,
