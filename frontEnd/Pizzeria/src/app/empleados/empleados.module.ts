@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CocinaComponent, CocinaEditComponent, CocinaListComponent, COCINA_COMPONENTES } from './cocina/cocina.component';
-import { RepartidorComponent } from './repartidor/repartidor.component';
+import { RepartidorComponent, RepartidorEditComponent, RepartidorListComponent, REPARTIDOR_COMPONENTES } from './repartidor/repartidor.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
@@ -14,7 +14,10 @@ import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
-    path: 'repartidor', component: RepartidorComponent
+    path: 'repartidor', children: [
+      { path: '', component: RepartidorListComponent },
+      { path: ':id/edit', component: RepartidorEditComponent },
+    ]
   },
   {
     path: 'cocina', children: [
@@ -24,7 +27,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [COCINA_COMPONENTES, RepartidorComponent, ],
+  declarations: [COCINA_COMPONENTES, REPARTIDOR_COMPONENTES, ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -37,6 +40,6 @@ const routes: Routes = [
 
   ],
 
-  exports: [COCINA_COMPONENTES, ]
+  exports: [COCINA_COMPONENTES, REPARTIDOR_COMPONENTES,]
 })
 export class EmpleadosModule { }
