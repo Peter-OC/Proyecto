@@ -1,0 +1,6 @@
+<ng-container [ngSwitch]="VM.Modo" >
+  <app-catalogo-add *ngSwitchCase="'add'"></app-catalogo-add>
+  <app-catalogo-edit *ngSwitchCase="'edit'"></app-catalogo-edit>
+  <app-catalogo-view *ngSwitchCase="'view'"></app-catalogo-view>
+  <app-catalogo-list *ngSwitchDefault></app-catalogo-list>
+ </ng-container>

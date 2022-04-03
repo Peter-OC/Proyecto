@@ -4,12 +4,13 @@ import { IngredientesAddComponent, IngredientesEditComponent, IngredientesListCo
 import { HomeComponent } from './main';
 import { PizzacardComponent } from './pizzacard/pizzacard.component';
 import { LoginComponent, RegisterUserComponent } from './security';
+import { CatalogoListComponent } from './Usuarios/catalogo/componente.component';
 
 const routes: Routes = [
   { path: 'registro', component: RegisterUserComponent },
   { path: 'login', component: LoginComponent },
   {
-    path: '', component: PizzacardComponent
+    path: 'productos', component: CatalogoListComponent
   },
   {
     path: 'manager', loadChildren: () => import('./manager/manager.module').then(mod => mod.ManagerModule)

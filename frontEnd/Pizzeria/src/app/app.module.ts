@@ -21,13 +21,18 @@ import { PizzacardModule } from './pizzacard/pizzacard.module';
 
 
 import {DataViewModule} from 'primeng/dataview';
-import { PizzasComponent } from './pizzas/pizzas.component';
+// import { ProductDetailsComponent } from './product-details/product-details.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { CatalogoModule } from './Usuarios/catalogo';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PizzasComponent,
+    // ProductsComponent,
+    // ProductDetailsComponent,
+    // CarritoComponent,
+    // // PizzasComponent,
 
   ],
   imports: [
@@ -44,7 +49,7 @@ import { PizzasComponent } from './pizzas/pizzas.component';
     CommonComponentModule,
     MenubarModule,
     InputTextModule,
-    PizzacardModule,
+    CatalogoModule,
   ],
   providers: [LoggerService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
