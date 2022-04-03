@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   apiURL: "/api/",
-  securityApiURL: "http://localhost:8091/",
-  securityApiURLVERO: "http://localhost:8091/api/"
+  securityURL: "http://localhost:8091/",
+  securityApiURL: "http://localhost:8091/api/"
 };

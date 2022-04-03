@@ -87,6 +87,7 @@ public class UserResource {
 		var entity = srv.getOne(username);
 		entity.setFirstName(item.getFirst_name());
 		entity.setLastName(item.getLast_name());
+		entity.setLastName(item.getAddress());
 		entity.setFunction(String.join(",", item.getFunction() ));
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
