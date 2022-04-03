@@ -12,7 +12,8 @@ export class AppComponent {
   ngOnInit() {
     this.items = [
       {
-        label: 'Pizzas',
+        label: 'Productos',
+        routerLink: '/productos',
       },
       {
         label: 'Entrantes',

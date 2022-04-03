@@ -1,10 +1,40 @@
-<p-card>
-  <ng-template pTemplate="header" *ngFor="let item of VM.Listado" >
-      {{item.precio}}
-  </ng-template>
-  Body Content
-  <ng-template pTemplate="footer">
-      Footer content here
-  </ng-template>
-</p-card>
+<div class="row" *ngFor="let item of VM.Listado">
+  <p-card>
+    <ng-template pTemplate="header">
+      {{ item.nombre }}
+    </ng-template>
+    Foto producto
+    <ng-template pTemplate="footer">
+      {{ item.precio }}
+    </ng-template>
+  </p-card>
+</div>
 
+<!-- <div class="row" *ngFor="let item of VM.Listado">
+  <div class="col-sm-6 col-lg-4">
+    <div class="box">
+      <ng-template>
+        Foto producto
+      </ng-template>
+      <div class="detail-box">
+        <span class="rating">
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star-half-o" aria-hidden="true"></i>
+        </span>
+        <ng-template pTemplate="header">
+          {{ item.nombre }}
+        </ng-template>
+        <div class="price_box">
+          <h6 class="price_heading">
+            <ng-template pTemplate="footer">
+              {{ item.precio }}
+            </ng-template>
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
