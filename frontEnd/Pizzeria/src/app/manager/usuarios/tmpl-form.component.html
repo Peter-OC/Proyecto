@@ -1,7 +1,7 @@
 <h1>Usuarios</h1>
 <form #miForm="ngForm">
   <div class="form-row">
-    <div class="form-group col-md-2">
+    <!-- <div class="form-group col-md-2">
       <label class="form-label" for="tipo">Rol:</label>
       <select
         class="form-control form-select"
@@ -15,7 +15,30 @@
         <option value="ROLE_USER">Usuario</option>
         <option value="ROLE_EMPLOYED">Empleado</option>
       </select>
+    </div> -->
+    <div class="form-group col-md-4">
+      <label class="form-label" for="rol">Rol:</label>
+      <input
+        class="form-control"
+        [class.is-invalid]="rol.invalid"
+        name="rol"
+        id="rol"
+        [(ngModel)]="VM.Elemento.rol"
+        #rol="ngModel"
+        required
+        maxlength="25"
+      />
+      <div
+        class="invalid-feedback"
+        [hidden]="
+          !rol.hasError('maxlength')
+        "
+      >
+        Debe tener como máximo 100 letras.
+      </div>
     </div>
+
+
     <div class="form-group col-md-4">
       <label class="form-label" for="nombre">Nombre:</label>
       <input
@@ -26,7 +49,7 @@
         id="nombre"
         [(ngModel)]="VM.Elemento.nombre"
         #nombre="ngModel"
-        maxlength="250"
+        maxlength="25"
       />
       <div
         class="invalid-feedback"
@@ -34,9 +57,33 @@
           !nombre.hasError('maxlength')
         "
       >
-        Debe tener como máximo 250 letras.
+        Debe tener como máximo 25 letras.
       </div>
     </div>
+
+    <div class="form-group col-md-4">
+      <label class="form-label" for="apellido">Apellido:</label>
+      <input
+        class="form-control"
+        [class.is-invalid]="apellido.invalid"
+        type="text"
+        name="apellido"
+        id="apellido"
+        [(ngModel)]="VM.Elemento.apellido"
+        #apellido="ngModel"
+        maxlength="25"
+      />
+      <div
+        class="invalid-feedback"
+        [hidden]="
+          !apellido.hasError('maxlength')
+        "
+      >
+        Debe tener como máximo 25 letras.
+      </div>
+    </div>
+
+
   </div>
 
 

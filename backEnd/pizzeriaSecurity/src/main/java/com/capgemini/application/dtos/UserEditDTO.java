@@ -17,8 +17,6 @@ public class UserEditDTO {
 	@JsonProperty("apellido")
 	private String last_name;
 	
-	@JsonProperty("direccion")
-	private String address;
 	
 	@JsonProperty("rol")
 	private String[] function;
@@ -27,7 +25,6 @@ public class UserEditDTO {
 		return new UserEditDTO(
 				source.getFirstName(),
 				source.getLastName(),
-				source.getAddress(),
 				source.getFunction().split(",")
 				);
 	}

@@ -82,7 +82,6 @@ public class User extends EntityBase<User> implements Serializable {
 			@NotBlank String password) {
 		this();
 		this.username = username;
-		this.address = address;
 		this.firstName = firstName;
 		this.function = function;
 		this.lastName = lastName;

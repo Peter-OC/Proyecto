@@ -85,7 +85,6 @@ public class UserResource {
 	public void update(@ApiParam(value = "Identificador del usuario") @PathVariable String username,
 			@Valid @RequestBody UserEditDTO item) throws InvalidDataException, NotFoundException {
 		var entity = srv.getOne(username);
-		entity.setAddress(item.getAddress());
 		entity.setFirstName(item.getFirst_name());
 		entity.setLastName(item.getLast_name());
 		entity.setFunction(String.join(",", item.getFunction() ));

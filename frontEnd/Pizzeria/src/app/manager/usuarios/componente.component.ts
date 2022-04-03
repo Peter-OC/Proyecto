@@ -61,7 +61,9 @@ export class UsuariosEditComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.obs$ = this.route.paramMap.subscribe((params: ParamMap) => {
-      const id = parseInt(params?.get('id') ?? '');
+      const id = params?.get('id') ?? '';
+      console.log(id);
+
       if (id) {
         this.vm.edit(id);
       } else {
@@ -90,7 +92,7 @@ export class UsuariosViewComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.obs$ = this.route.paramMap.subscribe((params: ParamMap) => {
-      const id = parseInt(params?.get('id') ?? '');
+      const id = params?.get('id') ?? '';
       if (id) {
         this.vm.view(id);
       } else {
