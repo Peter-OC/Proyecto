@@ -7,11 +7,12 @@ import { LoginComponent, RegisterUserComponent } from './security';
 import { CatalogoListComponent } from './Usuarios/catalogo/componente.component';
 
 const routes: Routes = [
-  { path: 'registro', component: RegisterUserComponent },
-  { path: 'login', component: LoginComponent },
   {
     path: 'productos', component: CatalogoListComponent
   },
+
+  { path: 'registro', component: RegisterUserComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: 'manager', loadChildren: () => import('./manager/manager.module').then(mod => mod.ManagerModule)
   },

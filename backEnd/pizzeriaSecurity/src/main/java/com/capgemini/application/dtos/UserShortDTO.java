@@ -13,7 +13,7 @@ public class UserShortDTO {
 	@JsonProperty("username")
 	private String username;
 
-	@JsonProperty("contraseña")
+	@JsonProperty("password")
 	private String password;
 	
 	public static UserShortDTO from(User source) {

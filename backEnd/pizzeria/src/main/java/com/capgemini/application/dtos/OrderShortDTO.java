@@ -1,6 +1,7 @@
 package com.capgemini.application.dtos;
 
 import java.util.Date;
+import java.util.List;
 
 import com.capgemini.domains.entities.Order;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,20 +16,21 @@ public class OrderShortDTO {
 
 	@JsonProperty("idPedido")
 	private int idOrder;
-	@JsonProperty("idCliente")
-	private String idCustomer;
+	@JsonProperty("estado")
+	private String estado;
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@JsonProperty("horaPedido")
 	private Date orderDate;
-	@JsonProperty("direccion")
-	private String address;
+	@JsonProperty("productosDelPedido")
+	private List<ProductsPerOrderDTO> productos;
+	
 	
 	public static OrderShortDTO from(Order source) {
 		return new OrderShortDTO(
 				source.getIdOrder(),
-				source.getUser(),
+				source.getStatus(),
 				source.getOrderDate(),
-				source.getAddress()
+				source.getProductsPerOrders().stream().map(item -> ProductsPerOrderDTO.from(item)).toList()
 				);
 	}
 }

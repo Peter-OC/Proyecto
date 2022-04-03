@@ -20,10 +20,10 @@ public class UserDetailsDTO {
 	@JsonProperty("apellido")
 	private String last_name;
 	
-	@JsonProperty("direcion")
+	@JsonProperty("direccion")
 	private String address;
 
-	@JsonProperty("contraseña")
+	@JsonProperty("passsword")
 	private String password;
 	
 	@JsonProperty("rol")

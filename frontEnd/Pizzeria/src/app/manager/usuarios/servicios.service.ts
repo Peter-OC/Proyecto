@@ -9,7 +9,7 @@ export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 @Injectable({
   providedIn: 'root',
 })
-export class IngredientesViewModelService {
+export class UsuariosViewModelService {
   protected modo: ModoCRUD = 'list';
   protected listado: Array<any> = [];
   protected elemento: any = {};
@@ -17,7 +17,7 @@ export class IngredientesViewModelService {
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
-    protected dao: IngredientesDAOService
+    protected dao: UsuariosDAOService
   ) {}
   public get Modo(): ModoCRUD {
     return this.modo;
@@ -104,7 +104,7 @@ export class IngredientesViewModelService {
   }
 }
 export abstract class RESTDAOService<T, K> {
-  protected baseUrl = environment.apiURL;
+  protected baseUrl = environment.securityApiURL;
   constructor(
     protected http: HttpClient,
     entidad: string,
@@ -125,13 +125,14 @@ export abstract class RESTDAOService<T, K> {
     return this.http.put<T>(this.baseUrl + '/' + id, item, this.option);
   }
   remove(id: K): Observable<T> {
+
     return this.http.delete<T>(this.baseUrl + '/' + id, this.option);
   }
 }
 @Injectable({ providedIn: 'root' })
-export class IngredientesDAOService extends RESTDAOService<any, any> {
+export class UsuariosDAOService extends RESTDAOService<any, any> {
   constructor(http: HttpClient) {
-    super(http, 'ingredientes', {
+    super(http, 'usuarios', {
       context: new HttpContext().set(AUTH_REQUIRED, true),
     });
   }

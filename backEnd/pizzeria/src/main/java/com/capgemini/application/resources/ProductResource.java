@@ -55,14 +55,14 @@ public class ProductResource {
 
 	@GetMapping
 	@ApiOperation(value = "Listado de los productos")
-	public List<ProductShortDTO> getAll() {
-		return srv.getAll().stream().map(Product -> ProductShortDTO.from(Product)).toList();
+	public List<ProductDetailsDTO> getAll() {
+		return srv.getAll().stream().map(Product -> ProductDetailsDTO.from(Product)).toList();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping(params = "page")
 	@ApiOperation(value = "Listado paginable de los productos")
-	public Page<ProductShortDTO> getAll(@ApiParam(required = false) Pageable page) {
+	public Page<ProductDetailsDTO> getAll(@ApiParam(required = false) Pageable page) {
 		var content = srv.getAll(page);
 		return new PageImpl(content.getContent().stream().map(item -> ProductShortDTO.from(item)).toList(), page,
 				content.getTotalElements());
@@ -125,7 +125,7 @@ public class ProductResource {
 			@ApiResponse(code = 404, message = "Producto no encontrado") })
 	public void update(@ApiParam(value = "Identificador del producto") @PathVariable int id,
 			@Valid @RequestBody ProductEditDTO item) throws InvalidDataException, NotFoundException {
-		if (id != item.getIdProduct())
+		if (id != item.getId())
 			throw new InvalidDataException("No coinciden los identificadores");
 		var entity = srv.getOne(id);
 		item.update(entity);

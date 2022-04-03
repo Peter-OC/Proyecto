@@ -41,7 +41,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/usuarios")
 @Api(value = "/User", description = "Mantenimiento de usuarios", produces = "application/json, application/xml", consumes = "application/json, application/xml")
 public class UserResource {
 	@Autowired
@@ -51,14 +51,14 @@ public class UserResource {
 
 	@GetMapping
 	@ApiOperation(value = "Listado de usuarios")
-	public List<UserShortDTO> getAll() {
-		return srv.getAll().stream().map(User -> UserShortDTO.from(User)).toList();
+	public List<UserDetailsDTO> getAll() {
+		return srv.getAll().stream().map(User -> UserDetailsDTO.from(User)).toList();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping(params = "page")
 	@ApiOperation(value = "Listado paginable de usuarios")
-	public Page<UserShortDTO> getAll(@ApiParam(required = false) Pageable page) {
+	public Page<UserDetailsDTO> getAll(@ApiParam(required = false) Pageable page) {
 		var content = srv.getAll(page);
 		return new PageImpl(content.getContent().stream().map(item -> UserShortDTO.from(item)).toList(), page,
 				content.getTotalElements());
@@ -94,7 +94,7 @@ public class UserResource {
 		srv.change(entity);
 	}	
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{username}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiOperation(value = "Borrar usuario existente")
 	@ApiResponses({ @ApiResponse(code = 204, message = "usuario borrado"),
