@@ -1,64 +1,67 @@
-<div class="main-container">
-<form [formGroup]="miForm" [class.is-invalid]="miForm.invalid">
-  <div class="form-group">
-    <label>Correo: </label>
-    <input class="form-control" [class.is-invalid]="miForm?.get('username')?.invalid" type="text"
-      formControlName="username">
-    <span class="invalid-feedback">{{getErrorMessage('username')}}</span>
-  </div>
-  <div class="form-group">
-    <label>Nombre: </label>
-    <input class="form-control" [class.is-invalid]="miForm?.get('nombre')?.invalid" type="text"
-      formControlName="nombre">
-    <span class="invalid-feedback">{{getErrorMessage('nombre')}}</span>
-  </div>
-  <div class="form-group">
-    <label>Apellidos: </label>
-    <input class="form-control" [class.is-invalid]="miForm?.get('apellido')?.invalid" type="text"
-      formControlName="apellido">
-    <span class="invalid-feedback">{{getErrorMessage('apellido')}}</span>
-  </div>
-  <div class="form-group">
-    <label>Direccion: </label>
-    <input class="form-control" [class.is-invalid]="miForm?.get('direccion')?.invalid" type="text"
-      formControlName="direccion">
-    <span class="invalid-feedback">{{getErrorMessage('direccion')}}</span>
-  </div>
-  <div formGroupName="contraseña">
+<h1 class="border">Registro</h1>
+<div class="main-container border">
+  <form [formGroup]="miForm" [class.is-invalid]="miForm.invalid" class="border">
     <div class="form-group">
-      <label>Contraseña: </label>
-      <input class="form-control" [class.is-invalid]="miForm?.get('contraseñaValue')?.invalid" type="password"
-        formControlName="contraseñaValue">
-      <span class="invalid-feedback">{{getErrorMessage('contraseñaValue')}}</span>
+      <label>Correo: </label>
+      <input class="form-control" [class.is-invalid]="miForm?.get('username')?.invalid" type="text"
+        formControlName="username">
+      <span class="invalid-feedback">{{getErrorMessage('username')}}</span>
     </div>
     <div class="form-group">
-      <label>Confirmar contraseña: </label>
-      <input class="form-control" [class.is-invalid]="miForm?.get('contraseña')?.invalid" type="password"
-        formControlName="contraseñaConfirm">
-      <span class="invalid-feedback">No coincide la confirmación</span>
+      <label>Nombre: </label>
+      <input class="form-control" [class.is-invalid]="miForm?.get('nombre')?.invalid" type="text"
+        formControlName="nombre">
+      <span class="invalid-feedback">{{getErrorMessage('nombre')}}</span>
     </div>
+    <div class="form-group">
+      <label>Apellidos: </label>
+      <input class="form-control" [class.is-invalid]="miForm?.get('apellido')?.invalid" type="text"
+        formControlName="apellido">
+      <span class="invalid-feedback">{{getErrorMessage('apellido')}}</span>
+    </div>
+    <div class="form-group">
+      <label>Direccion: </label>
+      <input class="form-control" [class.is-invalid]="miForm?.get('direccion')?.invalid" type="text"
+        formControlName="direccion">
+      <span class="invalid-feedback">{{getErrorMessage('direccion')}}</span>
+    </div>
+    <div formGroupName="contraseña">
+      <div class="form-group">
+        <label>Contraseña: </label>
+        <input class="form-control" [class.is-invalid]="miForm?.get('contraseñaValue')?.invalid" type="password"
+          formControlName="contraseñaValue">
+        <span class="invalid-feedback">{{getErrorMessage('contraseñaValue')}}</span>
+      </div>
+      <div class="form-group">
+        <label>Confirmar contraseña: </label>
+        <input class="form-control" [class.is-invalid]="miForm?.get('contraseña')?.invalid" type="password"
+          formControlName="contraseñaConfirm">
+        <span class="invalid-feedback">No coincide la confirmación</span>
+      </div>
 
-  </div>
-  <div formArrayName="roles">
-    <h4>Roles
-      <button class="btn btn-info btn-sm" (click)="addRole()">Add Role</button>
-    </h4>
+    </div>
+    <!--
+    <div formArrayName="roles">
+      <h4>Roles
+        <button class="btn btn-info btn-sm" (click)="addRole()">Add Role</button>
+      </h4>
 
-    <ul *ngFor="let row of $any(miForm.get('roles')).controls; let i=index" [formGroupName]="i">
-      <li>Rol #{{i + 1}}:
-        <div class="form-group">
-          <select class="form-control" formControlName="role">
-            <option>Usuarios</option>
-            <option>Administradores</option>
-          </select>{{row?.get('role')?.errors | json}}
-          <button type="button" class="close" aria-label="Close" (click)="deleteRole(i)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <button class="btn btn-outline-primary" (click)="send()" [disabled]="miForm.invalid">Send</button>
-</form>
+      <ul *ngFor="let row of $any(miForm.get('roles')).controls; let i=index" [formGroupName]="i">
+        <li>Rol #{{i + 1}}:
+          <div class="form-group">
+            <select class="form-control" formControlName="role">
+              <option>Usuarios</option>
+              <option>Administradores</option>
+            </select>{{row?.get('role')?.errors | json}}
+            <button type="button" class="close" aria-label="Close" (click)="deleteRole(i)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    -->
+    <button class="sendBtn" (click)="send()" [disabled]="miForm.invalid">Send</button>
+  </form>
 </div>
-{{ miForm.value | json }}
+<!--{{ miForm.value | json }}-->
