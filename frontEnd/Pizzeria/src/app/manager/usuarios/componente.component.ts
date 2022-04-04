@@ -8,6 +8,7 @@ import { UsuariosViewModelService } from './servicios.service';
   styleUrls: ['./componente.component.scss'],
 })
 export class UsuariosComponent implements OnInit {
+  productDialog: boolean;
   constructor(protected vm: UsuariosViewModelService) {}
   public get VM(): UsuariosViewModelService {
     return this.vm;

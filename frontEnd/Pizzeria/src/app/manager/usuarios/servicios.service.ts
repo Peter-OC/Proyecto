@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from '../../common-services/notification.service';
 import { LoggerService } from 'src/lib/my-core/services/logger.service';
+import { DataSource } from '@angular/cdk/collections';
 export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 @Injectable({
@@ -14,6 +15,7 @@ export class UsuariosViewModelService {
   protected listado: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
+
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
@@ -28,6 +30,7 @@ export class UsuariosViewModelService {
   public get Elemento(): any {
     return this.elemento;
   }
+
   public list(): void {
     this.dao.query().subscribe({
       next: (data) => {
@@ -132,8 +135,10 @@ export abstract class RESTDAOService<T, K> {
 @Injectable({ providedIn: 'root' })
 export class UsuariosDAOService extends RESTDAOService<any, any> {
   constructor(http: HttpClient) {
-    super(http, 'usuarios', {
+    super(http, 'usuarios' , {
       context: new HttpContext().set(AUTH_REQUIRED, true),
     });
   }
 }
+
+
