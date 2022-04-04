@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         next: data => {
           if (data) {
             this.cambiaTexto();
+            this.setUser(this.txtUsuario);
           } else {
             this.notify.add('Usuario o contraseña invalida.');
           }
@@ -43,5 +44,9 @@ export class LoginComponent implements OnInit {
 
   private cambiaTexto() {
     this.txtButon = this.loginSrv.isAutenticated ? 'Log Out' : 'Log In';
+  }
+
+  setUser(user: string) {
+    localStorage.setItem("datos", JSON.stringify(user));
   }
 }

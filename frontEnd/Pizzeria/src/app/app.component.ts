@@ -45,6 +45,11 @@ export class AppComponent {
         routerLink: '/registro',
       },
       {
+        label: 'Perfil',
+        icon: 'pi pi-fw pi-user',
+        routerLink: '/perfil',
+      },
+      {
         label: 'Carrito',
         icon: 'pi pi-fw pi-shopping-cart',
         routerLink: '/carrito',

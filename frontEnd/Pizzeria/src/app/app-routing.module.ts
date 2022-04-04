@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent, RegisterUserComponent } from './security';
 import { CatalogoListComponent } from './Usuarios/catalogo/componente.component';
+import { DatosUsuariosEditComponent } from './datos-usuario/componente.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,8 @@ const routes: Routes = [
   {
     path: 'empleado', loadChildren: () => import('./empleados/empleados.module').then(mod => mod.EmpleadosModule)
   },
+  { path: 'perfil', component: DatosUsuariosEditComponent },
+
 
 ];
 
