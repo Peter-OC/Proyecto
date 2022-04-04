@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment';
 import { NotificationService } from '../common-services';
 import { LoggerService } from 'src/lib/my-core';
 import { Router } from '@angular/router';
-
-export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
-export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
+import { AUTH_REQUIRED } from '../security';
+import { RESTDAOService } from '../base-code/RESTDAOService';
+import { ModoCRUD } from '../base-code/tipos';
 
 
 @Injectable({
@@ -19,75 +19,71 @@ export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
 })
 export class PedidosViewModelService {
   protected listURL = '/cocina';
-  protected modo: ModoCRUD = 'list';
-  protected listado: Array<any> = [];
+  protected modo: 'cocina' | 'repartidor' = 'cocina';
+  protected listadoOrdered: Array<any> = [];
+  protected listadoInProcess: Array<any> = [];
+  protected listadoReadies: Array<any> = [];
+  protected listadoSents: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
 
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
-    protected dao: PedidosDAOService,
+    protected dao: PedidosEmpleadoDAOService,
     protected router: Router
   ) {}
 
-  public get Modo(): ModoCRUD {
+  public get Modo(): 'cocina' | 'repartidor' {
     return this.modo;
   }
-  public get Listado(): Array<any> {
-    return this.listado;
+  public get ListadoOrdered(): Array<any> {
+    return this.listadoOrdered;
+  }
+  public get ListadoInProcess(): Array<any> {
+    return this.listadoInProcess;
+  }
+  public get ListadoReadies(): Array<any> {
+    return this.listadoReadies;
+  }
+  public get ListadoSents(): Array<any> {
+    return this.listadoSents;
   }
 
   public get Elemento(): any {
     return this.elemento;
   }
 
-  public list(): void {
-    this.dao.query().subscribe({
+  public listCocina(): void {
+    this.dao.getOrdered().subscribe({
       next: (data) => {
-        this.listado = data;
-        this.modo = 'list';
+        this.listadoOrdered = data;
+        this.modo = 'cocina';
+      },
+      error: (err) => this.notify.add(err.message),
+    });
+    this.dao.getInProcess().subscribe({
+      next: (data) => {
+        this.listadoInProcess = data;
+        this.modo = 'cocina';
       },
       error: (err) => this.notify.add(err.message),
     });
   }
 
-  public add(): void {
-    this.elemento = {};
-    this.modo = 'add';
-  }
-
-  public edit(key: any): void {
-    this.dao.get(key).subscribe({
+  public listRepartidor(): void {
+    this.dao.getReadies().subscribe({
       next: (data) => {
-        this.elemento = data;
-        this.idOriginal = key;
-        this.modo = 'edit';
+        this.listadoReadies = data;
+        this.modo = 'repartidor';
       },
       error: (err) => this.notify.add(err.message),
     });
-  }
-
-  public view(key: any): void {
-    this.dao.get(key).subscribe({
+    this.dao.getSents().subscribe({
       next: (data) => {
-        this.elemento = data;
-        this.modo = 'view';
+        this.listadoSents = data;
+        this.modo = 'repartidor';
       },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public delete(key: any): void {
-    if (
-      !window.confirm(
-        'Estás a punto de borrar un pedido. Esta operación no tendrá vuelta atrás.'
-      )
-    ) {
-      return;
-    }
-    this.dao.remove(key).subscribe({
-      next: (data) => this.list(),
       error: (err) => this.notify.add(err.message),
     });
   }
@@ -95,7 +91,10 @@ export class PedidosViewModelService {
   clear() {
     this.elemento = {};
     this.idOriginal = null;
-    this.listado = [];
+    this.listadoOrdered = [];
+    this.listadoInProcess = [];
+    this.listadoReadies = [];
+    this.listadoSents = [];
   }
 
   public cancel(): void {
@@ -105,431 +104,37 @@ export class PedidosViewModelService {
     this.router.navigateByUrl(this.listURL);
   }
 
-  public send(): void {
-    switch (this.modo) {
-      case 'add':
-        this.dao.add(this.elemento).subscribe({
-          next: (data) => this.cancel(),
-          error: (err) => this.notify.add(err.message),
-        });
-        break;
-      case 'edit':
-        this.dao.change(this.idOriginal, this.elemento).subscribe({
-          next: (data) => this.cancel(),
-          error: (err) => this.notify.add(err.message),
-        });
-        break;
-      case 'view':
-        this.cancel();
-        break;
-    }
+  public send(id: number): void {
+      this.dao.change(this.idOriginal).subscribe({
+        next: (data) => this.cancel(),
+        error: (err) => this.notify.add(err.message),
+       });
   }
-}
 
-export abstract class RESTDAOService<T, K> {
-  protected baseUrl = environment.apiURL;
-  constructor(
-    protected http: HttpClient,
-    entidad: string,
-    protected option = {}
-  ) {
-    this.baseUrl += entidad;
-  }
-  query(): Observable<Array<T>> {
-    return this.http.get<Array<T>>(this.baseUrl, this.option);
-  }
-  get(id: K): Observable<T> {
-    return this.http.get<T>(this.baseUrl + '/' + id, this.option);
-  }
-  add(item: T): Observable<T> {
-    return this.http.post<T>(this.baseUrl, item, this.option);
-  }
-  change(id: K, item: T): Observable<T> {
-    return this.http.put<T>(this.baseUrl + '/' + id, item, this.option);
-  }
-  remove(id: K): Observable<T> {
-    return this.http.delete<T>(this.baseUrl + '/' + id, this.option);
-  }
 }
 
 @Injectable({ providedIn: 'root' })
-export class PedidosDAOService extends RESTDAOService<any, any> {
+export class PedidosEmpleadoDAOService extends RESTDAOService<any, any> {
   constructor(http: HttpClient) {
-    super(http, 'order/ordered', {
+    super(http, 'order/', {
       context: new HttpContext().set(AUTH_REQUIRED, true),
     });
   }
-}
-
-@Injectable({ providedIn: 'root' })
-export class PedidosInProcessDAOService extends RESTDAOService<any, any> {
-  constructor(http: HttpClient) {
-    super(http, 'order/inProcess', {
-      context: new HttpContext().set(AUTH_REQUIRED, true),
-    });
+  public getOrdered() : Observable<Array<any>>{
+    return this.http.get<Array<any>>(this.baseUrl + 'ordered', this.option);
   }
-}
-
-@Injectable({ providedIn: 'root' })
-export class PedidosReadyDAOService extends RESTDAOService<any, any> {
-  constructor(http: HttpClient) {
-    super(http, 'order/readies', {
-      context: new HttpContext().set(AUTH_REQUIRED, true),
-    });
+  public getInProcess() : Observable<Array<any>>{
+    return this.http.get<Array<any>>(this.baseUrl + 'inProcess', this.option);
   }
-}
-
-@Injectable({ providedIn: 'root' })
-export class PedidosSentDAOService extends RESTDAOService<any, any> {
-  constructor(http: HttpClient) {
-    super(http, 'order/sents', {
-      context: new HttpContext().set(AUTH_REQUIRED, true),
-    });
+  public getReadies() : Observable<Array<any>>{
+    return this.http.get<Array<any>>(this.baseUrl + 'readies', this.option);
   }
-}
-
-@Injectable({
-  providedIn: 'root',
-})
-export class PedidosInProcessViewModelService {
-  protected listURL = '/cocina';
-  protected modo: ModoCRUD = 'list';
-  protected listado: Array<any> = [];
-  protected elemento: any = {};
-  protected idOriginal: any = null;
-
-  constructor(
-    protected notify: NotificationService,
-    protected out: LoggerService,
-    protected dao: PedidosInProcessDAOService,
-    protected router: Router
-  ) {}
-
-  public get Modo(): ModoCRUD {
-    return this.modo;
-  }
-  public get Listado(): Array<any> {
-    return this.listado;
+  public getSents() : Observable<Array<any>>{
+    return this.http.get<Array<any>>(this.baseUrl + 'sents', this.option);
   }
 
-  public get Elemento(): any {
-    return this.elemento;
+  public override change(id: any) : Observable<any> {
+      return this.http.put(this.baseUrl + 'change/' + id, null, this.option)
   }
 
-  public list(): void {
-    this.dao.query().subscribe({
-      next: (data) => {
-        this.listado = data;
-        this.modo = 'list';
-      },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public add(): void {
-    this.elemento = {};
-    this.modo = 'add';
-  }
-
-  public edit(key: any): void {
-    this.dao.get(key).subscribe({
-      next: (data) => {
-        this.elemento = data;
-        this.idOriginal = key;
-        this.modo = 'edit';
-      },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public view(key: any): void {
-    this.dao.get(key).subscribe({
-      next: (data) => {
-        this.elemento = data;
-        this.modo = 'view';
-      },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public delete(key: any): void {
-    if (
-      !window.confirm(
-        'Estás a punto de borrar un pedido. Esta operación no tendrá vuelta atrás.'
-      )
-    ) {
-      return;
-    }
-    this.dao.remove(key).subscribe({
-      next: (data) => this.list(),
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  clear() {
-    this.elemento = {};
-    this.idOriginal = null;
-    this.listado = [];
-  }
-
-  public cancel(): void {
-    this.elemento = {};
-    this.idOriginal = null;
-    // this.list();
-    this.router.navigateByUrl(this.listURL);
-  }
-
-  public send(): void {
-    switch (this.modo) {
-      case 'add':
-        this.dao.add(this.elemento).subscribe({
-          next: (data) => this.cancel(),
-          error: (err) => this.notify.add(err.message),
-        });
-        break;
-      case 'edit':
-        this.dao.change(this.idOriginal, this.elemento).subscribe({
-          next: (data) => this.cancel(),
-          error: (err) => this.notify.add(err.message),
-        });
-        break;
-      case 'view':
-        this.cancel();
-        break;
-    }
-  }
-}
-
-
-
-
-@Injectable({
-  providedIn: 'root',
-})
-export class PedidosReadyViewModelService {
-  protected listURL = '/cocina';
-  protected modo: ModoCRUD = 'list';
-  protected listado: Array<any> = [];
-  protected elemento: any = {};
-  protected idOriginal: any = null;
-
-  constructor(
-    protected notify: NotificationService,
-    protected out: LoggerService,
-    protected dao: PedidosReadyDAOService,
-    protected router: Router
-  ) {}
-
-  public get Modo(): ModoCRUD {
-    return this.modo;
-  }
-  public get Listado(): Array<any> {
-    return this.listado;
-  }
-
-  public get Elemento(): any {
-    return this.elemento;
-  }
-
-  public list(): void {
-    this.dao.query().subscribe({
-      next: (data) => {
-        this.listado = data;
-        this.modo = 'list';
-      },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public add(): void {
-    this.elemento = {};
-    this.modo = 'add';
-  }
-
-  public edit(key: any): void {
-    this.dao.get(key).subscribe({
-      next: (data) => {
-        this.elemento = data;
-        this.idOriginal = key;
-        this.modo = 'edit';
-      },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public view(key: any): void {
-    this.dao.get(key).subscribe({
-      next: (data) => {
-        this.elemento = data;
-        this.modo = 'view';
-      },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public delete(key: any): void {
-    if (
-      !window.confirm(
-        'Estás a punto de borrar un pedido. Esta operación no tendrá vuelta atrás.'
-      )
-    ) {
-      return;
-    }
-    this.dao.remove(key).subscribe({
-      next: (data) => this.list(),
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  clear() {
-    this.elemento = {};
-    this.idOriginal = null;
-    this.listado = [];
-  }
-
-  public cancel(): void {
-    this.elemento = {};
-    this.idOriginal = null;
-    // this.list();
-    this.router.navigateByUrl(this.listURL);
-  }
-
-  public send(): void {
-    switch (this.modo) {
-      case 'add':
-        this.dao.add(this.elemento).subscribe({
-          next: (data) => this.cancel(),
-          error: (err) => this.notify.add(err.message),
-        });
-        break;
-      case 'edit':
-        this.dao.change(this.idOriginal, this.elemento).subscribe({
-          next: (data) => this.cancel(),
-          error: (err) => this.notify.add(err.message),
-        });
-        break;
-      case 'view':
-        this.cancel();
-        break;
-    }
-  }
-}
-
-
-
-
-
-
-
-
-@Injectable({
-  providedIn: 'root',
-})
-export class PedidosSentViewModelService {
-  protected listURL = '/cocina';
-  protected modo: ModoCRUD = 'list';
-  protected listado: Array<any> = [];
-  protected elemento: any = {};
-  protected idOriginal: any = null;
-
-  constructor(
-    protected notify: NotificationService,
-    protected out: LoggerService,
-    protected dao: PedidosSentDAOService,
-    protected router: Router
-  ) {}
-
-  public get Modo(): ModoCRUD {
-    return this.modo;
-  }
-  public get Listado(): Array<any> {
-    return this.listado;
-  }
-
-  public get Elemento(): any {
-    return this.elemento;
-  }
-
-  public list(): void {
-    this.dao.query().subscribe({
-      next: (data) => {
-        this.listado = data;
-        this.modo = 'list';
-      },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public add(): void {
-    this.elemento = {};
-    this.modo = 'add';
-  }
-
-  public edit(key: any): void {
-    this.dao.get(key).subscribe({
-      next: (data) => {
-        this.elemento = data;
-        this.idOriginal = key;
-        this.modo = 'edit';
-      },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public view(key: any): void {
-    this.dao.get(key).subscribe({
-      next: (data) => {
-        this.elemento = data;
-        this.modo = 'view';
-      },
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  public delete(key: any): void {
-    if (
-      !window.confirm(
-        'Estás a punto de borrar un pedido. Esta operación no tendrá vuelta atrás.'
-      )
-    ) {
-      return;
-    }
-    this.dao.remove(key).subscribe({
-      next: (data) => this.list(),
-      error: (err) => this.notify.add(err.message),
-    });
-  }
-
-  clear() {
-    this.elemento = {};
-    this.idOriginal = null;
-    this.listado = [];
-  }
-
-  public cancel(): void {
-    this.elemento = {};
-    this.idOriginal = null;
-    // this.list();
-    this.router.navigateByUrl(this.listURL);
-  }
-
-  public send(): void {
-    switch (this.modo) {
-      case 'add':
-        this.dao.add(this.elemento).subscribe({
-          next: (data) => this.cancel(),
-          error: (err) => this.notify.add(err.message),
-        });
-        break;
-      case 'edit':
-        this.dao.change(this.idOriginal, this.elemento).subscribe({
-          next: (data) => this.cancel(),
-          error: (err) => this.notify.add(err.message),
-        });
-        break;
-      case 'view':
-        this.cancel();
-        break;
-    }
-  }
 }

@@ -1,6 +1,7 @@
 package com.capgemini.application.resources;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -28,6 +29,7 @@ import com.capgemini.application.dtos.OrderDetailsDTO;
 import com.capgemini.application.dtos.OrderEditDTO;
 import com.capgemini.application.dtos.OrderShortDTO;
 import com.capgemini.domains.contracts.services.OrderService;
+import com.capgemini.domains.entities.Order;
 import com.capgemini.exceptions.DuplicateKeyException;
 import com.capgemini.exceptions.InvalidDataException;
 import com.capgemini.exceptions.NotFoundException;
@@ -77,7 +79,7 @@ public class OrderResource {
 	@ApiOperation(value = "Listado Pedidos por estado en proceso")
 	public List<OrderShortDTO> getInProcess(@RequestParam(required=false, defaultValue = "details")String mode)
 	throws NotFoundException {
-		return srv.getInProcess(OrderShortDTO.class);
+		return srv.getInProcess(Order.class).stream().map(OrderShortDTO::from).toList();
 	}
 	
 	
@@ -167,14 +169,23 @@ public class OrderResource {
 	@ApiResponses({ @ApiResponse(code = 201, message = "Estado del pedido actualizado"),
 			@ApiResponse(code = 400, message = "Error al validar los datos o discrepancias en los identificadores"),
 			@ApiResponse(code = 404, message = "Pedio no encontrado") })
-	public void change(@ApiParam(value = "Identificador del pedido") @PathVariable int id,
-			@Valid @RequestBody OrderChangeStatusDTO item) throws InvalidDataException, NotFoundException {
-		if (id != item.getIdOrder())
-			throw new InvalidDataException("No coinciden los identificadores");
+	public void change(@ApiParam(value = "Identificador del pedido") @PathVariable int id) throws InvalidDataException, NotFoundException {
 		var entity = srv.getOne(id);
-		item.update(entity);
-		if (entity.isInvalid())
-			throw new InvalidDataException(entity.getErrorsMessage());
+		switch(entity.getStatus()) {
+		case "ordered": 
+			entity.setStatus("in_process");
+			break;
+		case "in_process": 
+			entity.setStatus("ready");
+			break;
+		case "ready": 
+			entity.setStatus("sent");
+			break;
+		case "sent": 
+			entity.setStatus("received");
+			entity.setDeliveryDate(new Date());
+			break;
+		}
 		srv.change(entity);
 	}
 	
@@ -183,8 +194,14 @@ public class OrderResource {
 	@ApiOperation(value = "Borrar un pedido existente")
 	@ApiResponses({ @ApiResponse(code = 204, message = "Pedido borrado"),
 			@ApiResponse(code = 404, message = "Pedido no encontrado") })
-	public void delete(@ApiParam(value = "Identificador del pedido") @PathVariable int id) {
-		srv.deleteById(id);
+	public void delete(@ApiParam(value = "Identificador del pedido") @PathVariable int id) throws NotFoundException, InvalidDataException{
+		var entity = srv.getOne(id);
+		if (entity.getStatus().equals("ordered")) {
+			entity.setStatus("canceled");
+			srv.change(entity);
+		} else {
+			throw new InvalidDataException("No se puede cancelar el pedido");
+		}
 	}
 
 }
