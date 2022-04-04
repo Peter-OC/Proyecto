@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpContext, HttpContextToken } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpContext,
+  HttpContextToken,
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoggerService } from 'src/lib/my-core/services/logger.service';
@@ -16,7 +20,6 @@ export class DatosUsuariosViewModelService {
   protected elemento: any = {};
   protected idOriginal: any = null;
   private id: any = localStorage.getItem('datos');
-
 
   constructor(
     protected notify: NotificationService,
@@ -44,6 +47,10 @@ export class DatosUsuariosViewModelService {
     });
   }
 
+  public changePass(): void{
+    this.elemento = {oldPassword: '', newPassword: ''};
+    this.modo = 'add';
+  }
 
   clear() {
     this.elemento = {};
@@ -56,17 +63,20 @@ export class DatosUsuariosViewModelService {
   }
   public send(): void {
     switch (this.modo) {
-
       case 'edit':
-        this.dao
-          .change(this.elemento)
-          .subscribe({
-            next: (data) => this.cancel(),
-            error: (err) => this.notify.add(err.message),
-          });
+        this.dao.change(this.elemento).subscribe({
+          next: (data) => this.cancel(),
+          error: (err) => this.notify.add(err.message),
+        });
         break;
       case 'view':
         this.cancel();
+        break;
+      case 'add': //este va a ser el change password
+        this.dao.changePass(this.elemento).subscribe({
+          next: (data) => this.cancel(),
+          error: (err) => this.notify.add(err.message),
+        });
         break;
     }
   }
@@ -76,18 +86,22 @@ export class DatosUsuariosViewModelService {
 export class DatosDAOService {
   private id = localStorage.getItem('name');
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
-   get(): Observable<any> {
+  get(): Observable<any> {
     return this.http.get<any>(environment.securityURL + 'profile', {
       context: new HttpContext().set(AUTH_REQUIRED, true),
     });
   }
-   change(item: any): Observable<any> {
+  change(item: any): Observable<any> {
     return this.http.put<any>(environment.securityURL + 'profile', item, {
       context: new HttpContext().set(AUTH_REQUIRED, true),
     });
   }
-}
 
+  changePass(item: any): Observable<any> {
+    return this.http.put<any>(environment.securityURL + 'password', item, {
+      context: new HttpContext().set(AUTH_REQUIRED, true),
+    });
+  }
+}
