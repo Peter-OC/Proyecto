@@ -1,33 +1,6 @@
-<!-- <div class="contenedor">
-  <div>
-    <p-card class="cardProducto" *ngFor="let item of VM.Listado" styleClass="p-card-shadow">
-      <ng-template pTemplate="header">
-        <img
-          [src]="'assets/' + item.foto"
-          [alt]="item.nombre"
-          width="100"
-          class="shadow-4"
-        />
-      </ng-template>
-      <ng-template pTemplate="body">
-        <div class = "nomProducto">
-          {{ item.nombre }}
-        </div>
-      </ng-template>
-      <ng-template pTemplate="footer">
-        {{ item.precio + "€" }}
-        <p-button
-          icon="pi pi-shopping-cart"
-          [style]="{ 'margin-left': '.5em' }"
-        ></p-button>
-      </ng-template>
-    </p-card>
-  </div>
-</div> -->
-
 <div class="cardList">
-<div
-  *ngFor="let item of VM.Listado" styleClass="p-card-shadow"
+
+  <div *ngFor="let item of VM.Listado" styleClass="p-card-shadow"
   gdAreas="header header | side side | footer carrito"
   gdGap="16px"
   gdRows="auto auto auto"
@@ -62,3 +35,5 @@
   </div>
 </div>
 </div>
+
+

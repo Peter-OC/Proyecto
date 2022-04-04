@@ -1,5 +1,7 @@
 package com.capgemini.application.dtos;
 
+import javax.validation.constraints.Pattern;
+
 import org.springframework.beans.factory.parsing.SourceExtractor;
 
 import com.capgemini.domains.entities.User;
@@ -24,6 +26,7 @@ public class UserCreateDTO {
 	private String address;
 
 	@JsonProperty("contraseña")
+	//@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8,}$")
 	private String password;
 	
 	public static UserCreateDTO from(User source) {
