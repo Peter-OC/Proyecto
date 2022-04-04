@@ -33,7 +33,7 @@ export class RegisterUserComponent implements OnInit {
       apellido: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
       direccion: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
       contraseña: new FormGroup({
-        contraseñaValue: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        contraseñaValue: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/)]),
         contraseñaConfirm: new FormControl('', Validators.minLength(2)),
       }, this.contraseñaMatchValidator()),
       roles: new FormArray([])
@@ -49,6 +49,7 @@ export class RegisterUserComponent implements OnInit {
     // }
   }
   public getErrorMessage(name: string): string {
+    if(this.miForm.pristine) return '';
     let cntr = this.miForm.get(name)
     let msg = '';
     if (cntr)
