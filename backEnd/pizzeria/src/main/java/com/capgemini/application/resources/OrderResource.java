@@ -183,7 +183,7 @@ public class OrderResource {
 			break;
 		case "sent": 
 			entity.setStatus("received");
-			entity.setDeliveryDate(new Date());
+		entity.setDeliveryDate(new Date());
 			break;
 		}
 		srv.change(entity);
