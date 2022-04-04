@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent
   },
-  { path: 'productos', component: CatalogoListComponent},
+  { path: 'pizzas', component: CatalogoListComponent},
   // { path: 'productos', loadChildren: () => import('./Usuarios/catalogo/componente.component').then(mod => mod.CatalogoListComponent)},
 
   { path: 'registro', component: RegisterUserComponent },
