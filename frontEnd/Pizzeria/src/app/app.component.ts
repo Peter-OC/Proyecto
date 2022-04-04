@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from './security';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,10 @@ import { MenuItem } from 'primeng/api';
 export class AppComponent {
   title = 'Pizzeria';
   items: MenuItem[];
+
+  constructor(private loginSrv: AuthService) {
+
+  }
   ngOnInit() {
     this.items = [
       {
@@ -38,6 +43,7 @@ export class AppComponent {
         label: 'Login',
         icon: 'pi pi-fw pi-user',
         routerLink: '/login',
+        visible: !this.loginSrv.isAutenticated
       },
       {
         label: 'Registro',
@@ -53,6 +59,7 @@ export class AppComponent {
         label: 'Carrito',
         icon: 'pi pi-fw pi-shopping-cart',
         routerLink: '/carrito',
+        visible: this.loginSrv.isAutenticated
       },
     ];
   }

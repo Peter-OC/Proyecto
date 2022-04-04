@@ -28,7 +28,7 @@
     <div formGroupName="contraseña">
       <div class="form-group">
         <label>Contraseña: </label>
-        <input class="form-control" [class.is-invalid]="miForm?.get('contraseñaValue')?.invalid" type="password"
+        <input class="form-control" [class.is-invalid]="miForm?.get('contraseña')?.invalid" type="password"
           formControlName="contraseñaValue">
         <span class="invalid-feedback">{{getErrorMessage('contraseñaValue')}}</span>
       </div>
@@ -36,7 +36,7 @@
         <label>Confirmar contraseña: </label>
         <input class="form-control" [class.is-invalid]="miForm?.get('contraseña')?.invalid" type="password"
           formControlName="contraseñaConfirm">
-        <span class="invalid-feedback">No coincide la confirmación</span>
+        <span class="invalid-feedback" [hidden]="miForm.pristine">No coincide la confirmación</span>
       </div>
 
     </div>
