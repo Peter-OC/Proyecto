@@ -24,11 +24,13 @@ import {DataViewModule} from 'primeng/dataview';
 // import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CatalogoModule } from './Usuarios/catalogo';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     // ProductsComponent,
     // ProductDetailsComponent,
     // CarritoComponent,
@@ -52,6 +54,7 @@ import { CatalogoModule } from './Usuarios/catalogo';
     CatalogoModule,
   ],
   providers: [LoggerService],
-  bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
