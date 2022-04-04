@@ -64,7 +64,7 @@ public class ProductResource {
 	@ApiOperation(value = "Listado paginable de los productos")
 	public Page<ProductDetailsDTO> getAll(@ApiParam(required = false) Pageable page) {
 		var content = srv.getAll(page);
-		return new PageImpl(content.getContent().stream().map(item -> ProductShortDTO.from(item)).toList(), page,
+		return new PageImpl(content.getContent().stream().map(item -> ProductDetailsDTO.from(item)).toList(), page,
 				content.getTotalElements());
 
 	}

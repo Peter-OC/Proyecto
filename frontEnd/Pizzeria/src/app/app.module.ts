@@ -26,11 +26,13 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { CatalogoModule } from './Usuarios/catalogo';
 import { DatosModule } from './datos-usuario';
 import { AuthInterceptor } from './security';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     // ProductsComponent,
     // ProductDetailsComponent,
     // CarritoComponent,

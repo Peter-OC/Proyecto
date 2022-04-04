@@ -1,40 +1,64 @@
-<div class="row" *ngFor="let item of VM.Listado">
-  <p-card>
-    <ng-template pTemplate="header">
-      {{ item.nombre }}
-    </ng-template>
-    Foto producto
-    <ng-template pTemplate="footer">
-      {{ item.precio }}
-    </ng-template>
-  </p-card>
-</div>
-
-<!-- <div class="row" *ngFor="let item of VM.Listado">
-  <div class="col-sm-6 col-lg-4">
-    <div class="box">
-      <ng-template>
-        Foto producto
+<!-- <div class="contenedor">
+  <div>
+    <p-card class="cardProducto" *ngFor="let item of VM.Listado" styleClass="p-card-shadow">
+      <ng-template pTemplate="header">
+        <img
+          [src]="'assets/' + item.foto"
+          [alt]="item.nombre"
+          width="100"
+          class="shadow-4"
+        />
       </ng-template>
-      <div class="detail-box">
-        <span class="rating">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star-half-o" aria-hidden="true"></i>
-        </span>
-        <ng-template pTemplate="header">
+      <ng-template pTemplate="body">
+        <div class = "nomProducto">
           {{ item.nombre }}
-        </ng-template>
-        <div class="price_box">
-          <h6 class="price_heading">
-            <ng-template pTemplate="footer">
-              {{ item.precio }}
-            </ng-template>
-          </h6>
         </div>
-      </div>
-    </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        {{ item.precio + "€" }}
+        <p-button
+          icon="pi pi-shopping-cart"
+          [style]="{ 'margin-left': '.5em' }"
+        ></p-button>
+      </ng-template>
+    </p-card>
   </div>
 </div> -->
+
+<div class="cardList">
+<div
+  *ngFor="let item of VM.Listado" styleClass="p-card-shadow"
+  gdAreas="header header | side side | footer carrito"
+  gdGap="16px"
+  gdRows="auto auto auto"
+  gdAreas.lt-md="header  | side | footer | carrito"
+  gdRows.lt-md="auto auto auto auto"
+  >
+  <div class="cardProduct">
+    <div [style.grid-area]="'header'" class = "fotocar">
+      <img
+            [src]="'assets/' + item.foto"
+            [alt]="item.nombre"
+            width="100"
+          />
+    </div>
+    <div [style.grid-area]="'side'" class = "texcar">
+      <div class = "nomProducto">
+        {{ item.nombre }}
+      </div>
+    </div>
+    <div [style.grid-area]="'footer'" class = "butoncarrito">
+      <div class = "precioProducto" [style]="{ 'margin-top': '.5em'}">
+      {{ item.precio + "€" }}
+      </div>
+    </div>
+    <div [style.grid-area]="'carrito'">
+      <p-button class ="carritoProducto"
+            icon="pi pi-shopping-cart"
+            [style]="{ 'margin-left': '.5em'}"
+            [style]="{'background-color': 'orange'}"
+      ></p-button>
+    </div>
+  </div>
+</div>
+</div>

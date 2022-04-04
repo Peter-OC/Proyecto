@@ -12,15 +12,27 @@ export class AppComponent {
   ngOnInit() {
     this.items = [
       {
+        label: 'Home',
+        icon: 'pi pi-fw pi-home',
+        routerLink: '/',
+      },
+      {
         label: 'Productos',
         routerLink: '/productos',
-      },
-      {
-        label: 'Entrantes',
-        routerLink: '/login',
-      },
-      {
-        label: 'Bebidas',
+        items: [
+          {
+            label: 'Pizzas',
+            routerLink: '/pizzas',
+          },
+          {
+            label: 'Entrantes',
+            routerLink: '/Entrantes',
+          },
+          {
+            label: 'Bebidas',
+            routerLink: '/Bebidas',
+          },
+        ],
       },
       {
         label: 'Login',
