@@ -6,6 +6,7 @@ import { CommonServicesModule } from 'src/app/common-services';
 import { MyCoreModule } from 'src/lib/my-core';
 import { CATALOGO_COMPONENTES } from './componente.component';
 import {CardModule} from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -15,7 +16,7 @@ import {CardModule} from 'primeng/card';
   ],
   imports: [
     CommonModule, FormsModule, RouterModule.forChild([]),
-    MyCoreModule, CommonServicesModule, CardModule,
+    MyCoreModule, CommonServicesModule, CardModule, ButtonModule,
 
   ],
   exports: [

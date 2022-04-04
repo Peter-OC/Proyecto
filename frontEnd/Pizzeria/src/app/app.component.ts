@@ -17,16 +17,27 @@ export class AppComponent {
   ngOnInit() {
     this.items = [
       {
+        label: 'Home',
+        icon: 'pi pi-fw pi-home',
+        routerLink: '/home',
+      },
+      {
         label: 'Productos',
         routerLink: '/productos',
-      },
-      {
-        label: 'Entrantes',
-        routerLink: '/entrantes',
-        visible: this.loginSrv.isInRoles('ROLE_ADMIN', 'ROLE_EMPLOYED')
-      },
-      {
-        label: 'Bebidas',
+        items: [
+          {
+            label: 'Pizzas',
+            routerLink: '/pizzas',
+          },
+          {
+            label: 'Entrantes',
+            routerLink: '/Entrantes',
+          },
+          {
+            label: 'Bebidas',
+            routerLink: '/Bebidas',
+          },
+        ],
       },
       {
         label: 'Login',

@@ -1,0 +1,78 @@
+.contenedor{
+  display: flex;
+}
+
+.contenedor > div {
+  width: 30%;
+}
+
+.nomProducto{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 17pt;
+}
+.precioProducto{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+  font-size: 15pt;
+}
+
+// <style>
+  .cardList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: flex-start;
+
+    width: 100%;
+  }
+  /* Column Gap */
+  .cardList > * {
+    box-sizing: border-box;
+  }
+  .cardList > *:not(:last-child) {
+    margin-right: 32px;
+  }
+.cardProduct{
+  display: grid;
+    grid-template-areas: "header header" "side content" "footer carrito";
+    grid-template-rows: auto auto auto;
+    grid-row-gap: 16px;
+    grid-column-gap: 16px;
+
+  margin:10px;
+  padding: 5px;
+  border-radius: 10px;
+
+  background-color: rgb(235, 228, 219);
+  flex: 0 1 calc(33.3% - 32px);
+}
+
+@media screen and (max-width: 959px) {
+  /* Column Gap */
+  .cardList > *:not(:last-child) {
+    margin-right: 32px;
+  }
+  /* Item sizing */
+  .cardProduct {
+    flex: 0 1 calc(50% - 32px);
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .cardList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .cardList > *:not(:last-child) {
+    margin-right: unset;
+    margin-bottom: 32px;
+  }
+}
+
+.fotocar{
+  justify-self:center;
+}
+
