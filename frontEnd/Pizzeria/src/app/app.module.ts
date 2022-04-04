@@ -28,7 +28,6 @@ import { DatosModule } from './datos-usuario';
 import { AuthInterceptor } from './security';
 import { HomeComponent } from './home/home.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,8 +35,7 @@ import { HomeComponent } from './home/home.component';
     // ProductsComponent,
     // ProductDetailsComponent,
     // CarritoComponent,
-    // // PizzasComponent,
-
+    // // PizzasComponent,s
   ],
   imports: [
     BrowserModule,
@@ -54,7 +52,7 @@ import { HomeComponent } from './home/home.component';
     MenubarModule,
     InputTextModule,
     CatalogoModule,
-    DatosModule
+    DatosModule,
   ],
   providers: [LoggerService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
