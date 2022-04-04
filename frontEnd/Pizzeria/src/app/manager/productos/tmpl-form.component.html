@@ -29,8 +29,61 @@
     </div>
   </ng-container>
 
+   <ng-container *ngIf="VM.Elemento.tipo ==='3'" >
+    <div class="form-group col-md-4">
+      <label class="form-label" for="base">Base:</label>
+      <input
+        class="form-control"
+        [class.is-invalid]="base.invalid"
+        type="text"
+        name="base"
+        id="base"
+        [(ngModel)]="VM.Elemento.base"
+        #base="ngModel"
+        required
+        maxlength="10"
+      />
+      <div class="invalid-feedback" [hidden]="!base.hasError('required')">
+        Es obligatorio
+      </div>
+      <div
+        class="invalid-feedback"
+        [hidden]="
+          !nombre.hasError('maxlength')
+        "
+      >
+        Debe tener como máximo 10 letras.
+      </div>
+    </div>
 
-  <!-- <ng-container *ngIf="VM.Elemento.categoria ==='3'" >HOLA</ng-container> -->
+    <div class="form-group col-md-4">
+      <label class="form-label" for="salsa">Salsa:</label>
+      <input
+        class="form-control"
+        [class.is-invalid]="salsa.invalid"
+        type="text"
+        name="salsa"
+        id="salsa"
+        [(ngModel)]="VM.Elemento.salsa"
+        #salsa="ngModel"
+        required
+        maxlength="10"
+      />
+      <div class="invalid-feedback" [hidden]="!salsa.hasError('required')">
+        Es obligatorio
+      </div>
+      <div
+        class="invalid-feedback"
+        [hidden]="
+          !nombre.hasError('maxlength')
+        "
+      >
+        Debe tener como máximo 10 letras.
+      </div>
+    </div>
+
+
+   </ng-container>
 
     <div class="form-group col-md-4">
       <label class="form-label" for="nombre">Nombre:</label>

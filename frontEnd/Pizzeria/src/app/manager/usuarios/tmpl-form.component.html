@@ -16,6 +16,27 @@
         <option value="ROLE_EMPLOYED">Empleado</option>
       </select>
     </div> -->
+
+    <label class="form-label" for="rol">Roles:</label>
+    <p-button
+    icon="pi pi-plus"
+    class="p-button-success p-mr-2" (click)="VM.addRol('roles','')"></p-button>
+
+    <!-- <input type="button" value="+" (click)="VM.addRol('roles','')"> -->
+    <ul>
+      <li *ngFor="let item of VM.Elemento.rol; let indice=index">
+        <input class="form-control"
+        name="rol"
+        id="rol"
+        #rol="ngModel"
+        required
+        maxlength="25" [(ngModel)]="VM.Elemento.rol[indice]" name="rol{{indice}}">
+        <input type="button" value="x" (click)="VM.delRol('roles', indice)">
+      </li>
+    </ul>
+
+
+
     <div class="form-group col-md-4">
       <label class="form-label" for="rol">Rol:</label>
       <input

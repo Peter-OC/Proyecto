@@ -105,6 +105,14 @@ export class UsuariosViewModelService {
         break;
     }
   }
+
+  addRol(prop: any, item: any) {
+    if(!this.elemento[prop]) this.elemento[prop] = []
+    this.elemento[prop].push(item)
+  }
+  delRol(prop: any, index: any) {
+    this.elemento[prop].splice(index, 1)
+  }
 }
 export abstract class RESTDAOService<T, K> {
   protected baseUrl = environment.securityApiURL;
