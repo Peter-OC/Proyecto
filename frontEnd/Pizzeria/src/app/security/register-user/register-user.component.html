@@ -1,6 +1,6 @@
-<h1 class="border">Registro</h1>
-<div class="main-container border">
-  <form [formGroup]="miForm" [class.is-invalid]="miForm.invalid" class="border">
+<h1>Registro</h1>
+<div class="main-container">
+  <form [formGroup]="miForm" [class.is-invalid]="miForm.invalid">
     <div class="form-group">
       <label>Correo: </label>
       <input class="form-control" [class.is-invalid]="miForm?.get('username')?.invalid" type="text"
