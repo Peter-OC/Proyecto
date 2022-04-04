@@ -140,7 +140,7 @@ export class RegisterUserComponent implements OnInit {
           datos => {
             if (datos) {
               this.notify.add('Usuario registrado', NotificationType.log);
-              this.router.navigateByUrl('/');
+              this.router.navigateByUrl('/productos');
             } else {
               this.notify.add('Error en el registro.');
             }

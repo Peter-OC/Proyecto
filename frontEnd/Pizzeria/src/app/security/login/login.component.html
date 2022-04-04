@@ -1,18 +1,30 @@
-<ng-container *ngIf="!loginSrv.isAutenticated">
-  <form #logForm="ngForm" class="form-inline my-2 my-lg-0">
-    <div class="input-group" role="group" aria-label="Login Form">
-      <input class="form-control-sm" [size]="8" type="text" [(ngModel)]="txtUsuario" required minlength="4" placeholder="Usuario"
-        [ngModelOptions]="{standalone: true}">
-      <input class="form-control-sm" [size]="8" type="password" [(ngModel)]="txtPassword" required minlength="4" placeholder="Contraseña"
-        [ngModelOptions]="{standalone: true}">
-      <div class="input-group-append">
-        <input class="btn btn-outline-success btn-sm" type="button" [disabled]="logForm.invalid" value="Enviar" (click)="logInOut()">
-        <input class="btn btn-outline-success btn-sm" type="button" value="Registrar" (click)="registrar()">
-      </div>
+<h1>Inicio sesión</h1>
+  <ng-container *ngIf="!loginSrv.isAutenticated">
+    <div class="main-container">
+      <form #logForm="ngForm">
+
+        <div role="group" aria-label="Login Form">
+          <div class="form-group">
+            <label>Correo: </label>
+            <input class="form-control" type="text" [(ngModel)]="txtUsuario" required minlength="4" placeholder="Usuario" [ngModelOptions]="{standalone: true}">
+          </div>
+          <label>Contraseña: </label>
+          <input class="form-control" type="password" [(ngModel)]="txtPassword" required minlength="4" placeholder="Contraseña" [ngModelOptions]="{standalone: true}">
+
+          <div class="input-group-append">
+            <input class="sendBtn" type="button" [disabled]="logForm.invalid" value="Enviar" (click)="logInOut()">
+            <input class="sendBtn" type="button" value="Registrar" (click)="registrar()">
+          </div>
+
+        </div>
+      </form>
+
     </div>
-  </form>
-</ng-container>
-<small *ngIf="loginSrv.isAutenticated">
-  Hola {{loginSrv.Name}}
-  <input class="btn btn-outline-success btn-sm" type="button" value="Desconectar" (click)="logInOut()">
-</small>
+
+  </ng-container>
+
+  <small *ngIf="loginSrv.isAutenticated">
+    Hola {{loginSrv.Name}}
+    <input class="btn btn-outline-success btn-sm" type="button" value="Desconectar" (click)="logInOut()">
+
+  </small>
