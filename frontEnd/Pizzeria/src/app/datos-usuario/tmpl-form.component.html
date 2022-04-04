@@ -46,6 +46,29 @@
       </div>
     </div>
 
+    <div class="form-group col-md-4">
+      <label class="form-label" for="apellido">Dirección:</label>
+      <input
+        class="form-control"
+        [class.is-invalid]="direccion.invalid"
+        type="text"
+        name="direccion"
+        id="direccion"
+        [(ngModel)]="VM.Elemento.direccion"
+        #direccion="ngModel"
+        maxlength="50"
+      />
+      <div
+        class="invalid-feedback"
+        [hidden]="
+          !direccion.hasError('maxlength')
+        "
+      >
+        Debe tener como máximo 50 letras.
+      </div>
+    </div>
+
+
 
   </div>
 
@@ -67,28 +90,4 @@
   </div>
 </form>
 
-<!-- <div class="main-container"></div>
-<form [formGroup]="miForm" [class.is-invalid]="miForm.invalid">
-  <ul *ngFor="let row of $any(miForm.get('roles')).controls; let i=index" [formGroupName]="i">
-    <li>Rol #{{i + 1}}:
-      <div class="form-group">
-        <select class="form-control" formControlName="role">
-          <option>Usuarios</option>
-          <option>Administradores</option>
-        </select>{{row?.get('role')?.errors | json}}
-        <button type="button" class="close" aria-label="Close" (click)="deleteRole(i)">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </li>
-  </ul>
-</form>
-</div> -->
 
-<!-- {
-  "foto": "string",
-  "idUsuario": 0,
-  "usuario": "string",
-  "precio": 0,
-  "tipo": "base"
-} -->

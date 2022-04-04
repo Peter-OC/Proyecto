@@ -1,4 +1,4 @@
-<h1>Usuarios</h1>
+<h1>Editar usuario</h1>
 <form #miForm="ngForm">
   <div class="form-row">
     <!-- <div class="form-group col-md-2">
@@ -60,48 +60,9 @@
     </div>
 
     <div class="form-group col-md-4">
-      <label class="form-label" for="nombre">Nombre:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="nombre.invalid"
-        type="text"
-        name="nombre"
-        id="nombre"
-        [(ngModel)]="VM.Elemento.nombre"
-        #nombre="ngModel"
-        maxlength="25"
-      />
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !nombre.hasError('maxlength')
-        "
-      >
-        Debe tener como máximo 25 letras.
-      </div>
+      <label class="form-label" for="nombre">Usuario:  {{VM.Elemento.nombre}} {{VM.Elemento.apellido}}</label>
     </div>
 
-    <div class="form-group col-md-4">
-      <label class="form-label" for="apellido">Apellido:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="apellido.invalid"
-        type="text"
-        name="apellido"
-        id="apellido"
-        [(ngModel)]="VM.Elemento.apellido"
-        #apellido="ngModel"
-        maxlength="25"
-      />
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !apellido.hasError('maxlength')
-        "
-      >
-        Debe tener como máximo 25 letras.
-      </div>
-    </div>
 
 
   </div>
@@ -124,28 +85,4 @@
   </div>
 </form>
 
-<!-- <div class="main-container"></div>
-<form [formGroup]="miForm" [class.is-invalid]="miForm.invalid">
-  <ul *ngFor="let row of $any(miForm.get('roles')).controls; let i=index" [formGroupName]="i">
-    <li>Rol #{{i + 1}}:
-      <div class="form-group">
-        <select class="form-control" formControlName="role">
-          <option>Usuarios</option>
-          <option>Administradores</option>
-        </select>{{row?.get('role')?.errors | json}}
-        <button type="button" class="close" aria-label="Close" (click)="deleteRole(i)">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </li>
-  </ul>
-</form>
-</div> -->
 
-<!-- {
-  "foto": "string",
-  "idUsuario": 0,
-  "usuario": "string",
-  "precio": 0,
-  "tipo": "base"
-} -->
