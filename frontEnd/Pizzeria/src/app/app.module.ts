@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoggerService, MyCoreModule } from 'src/lib/my-core';
@@ -24,6 +24,8 @@ import {DataViewModule} from 'primeng/dataview';
 // import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CatalogoModule } from './Usuarios/catalogo';
+import { DatosModule } from './datos-usuario';
+import { AuthInterceptor } from './security';
 import { HomeComponent } from './home/home.component';
 
 
@@ -52,9 +54,9 @@ import { HomeComponent } from './home/home.component';
     MenubarModule,
     InputTextModule,
     CatalogoModule,
+    DatosModule
   ],
-  providers: [LoggerService],
-  bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  providers: [LoggerService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },],
+  bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

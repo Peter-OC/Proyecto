@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { IngredientesAddComponent, IngredientesEditComponent, IngredientesListComponent, IngredientesViewComponent } from './manager/ingredientes/componente.component';
-import { PizzacardComponent } from './pizzacard/pizzacard.component';
 import { LoginComponent, RegisterUserComponent } from './security';
 import { CatalogoListComponent } from './Usuarios/catalogo/componente.component';
+import { DatosUsuariosEditComponent } from './datos-usuario/componente.component';
 
 const routes: Routes = [
   {
     path: '', component: HomeComponent
   },
-  {
-    path: 'productos', component: CatalogoListComponent
-  },
+  { path: 'productos', component: CatalogoListComponent},
+  // { path: 'productos', loadChildren: () => import('./Usuarios/catalogo/componente.component').then(mod => mod.CatalogoListComponent)},
 
   { path: 'registro', component: RegisterUserComponent },
   { path: 'login', component: LoginComponent },
@@ -22,6 +20,8 @@ const routes: Routes = [
   {
     path: 'empleado', loadChildren: () => import('./empleados/empleados.module').then(mod => mod.EmpleadosModule)
   },
+  { path: 'perfil', component: DatosUsuariosEditComponent },
+
 
 ];
 

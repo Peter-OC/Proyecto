@@ -1,8 +1,8 @@
-<p-table [value]="VM.Listado">
+<p-table [value]="VM.ListadoReadies">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
       <ul>
-        <li>Listos para repartir</li>
+        <li>En espera</li>
       </ul>
     </div>
   </ng-template>
@@ -31,21 +31,14 @@
           pRipple
           icon="pi pi-check"
           class="p-button-rounded p-button-success mr-2"
-          [routerLink]="[item.idPedido, 'edit']"
-        ></button>
-        <button
-          pButton
-          pRipple
-          icon="pi pi-trash"
-          class="p-button-rounded p-button-warning"
-          (click)="VM.delete(item.idPedido)"
-        ></button>
+          (click) = "VM.send(item.idPedido)"
+        >Recogido</button>
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary">
     <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM.Listado ? VM.Listado.length : 0 }} pedidos listos para repartir.
+      En total hay {{ VM.ListadoReadies ? VM.ListadoReadies.length : 0 }} pedidos esperando.
     </div>
   </ng-template>
 </p-table>
@@ -56,7 +49,7 @@
 
 
 
-<p-table [value]="VM2.Listado">
+<p-table [value]="VM.ListadoSents">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
       <ul>
@@ -89,21 +82,14 @@
           pRipple
           icon="pi pi-check"
           class="p-button-rounded p-button-success mr-2"
-          [routerLink]="[item.idPedido, 'edit']"
-        ></button>
-        <button
-          pButton
-          pRipple
-          icon="pi pi-trash"
-          class="p-button-rounded p-button-warning"
-          (click)="VM2.delete(item.idPedido)"
-        ></button>
+          (click) = "VM.send(item.idPedido)"
+        > Entregado</button>
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary">
     <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM2.Listado ? VM2.Listado.length : 0 }} pedidos en reparto.
+      En total hay {{ VM.ListadoSents ? VM.ListadoSents.length : 0 }} pedidos elaborándose.
     </div>
   </ng-template>
 </p-table>

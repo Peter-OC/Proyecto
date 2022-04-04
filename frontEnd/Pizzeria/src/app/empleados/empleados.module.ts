@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CocinaComponent, CocinaEditComponent, CocinaListComponent, COCINA_COMPONENTES } from './cocina/cocina.component';
-import { RepartidorComponent, RepartidorEditComponent, RepartidorListComponent, REPARTIDOR_COMPONENTES } from './repartidor/repartidor.component';
+import {  CocinaComponent, COCINA_COMPONENTES } from './cocina/cocina.component';
+import { RepartidorComponent, REPARTIDOR_COMPONENTES } from './repartidor/repartidor.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
@@ -15,14 +15,13 @@ import { FormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: 'repartidor', children: [
-      { path: '', component: RepartidorListComponent },
-      { path: ':id/edit', component: RepartidorEditComponent },
+      { path: '', component: RepartidorComponent },
     ]
   },
   {
     path: 'cocina', children: [
-      { path: '', component: CocinaListComponent },
-      { path: ':id/edit', component: CocinaEditComponent },    ]
+      { path: '', component: CocinaComponent },
+      ]
   },
 ]
 

@@ -19,7 +19,7 @@ export class AppComponent {
       {
         label: 'Home',
         icon: 'pi pi-fw pi-home',
-        routerLink: '/home',
+        routerLink: '/',
       },
       {
         label: 'Productos',
@@ -49,6 +49,11 @@ export class AppComponent {
         label: 'Registro',
         icon: 'pi pi-fw pi-sign-in',
         routerLink: '/registro',
+      },
+      {
+        label: 'Perfil',
+        icon: 'pi pi-fw pi-user',
+        routerLink: '/perfil',
       },
       {
         label: 'Carrito',

@@ -32,6 +32,9 @@ public class ProductEditDTO {
 	@JsonProperty("pizza")
 	private PizzaEditDTO pizza;
 	
+	@JsonProperty("tipo")
+	private int tipo;
+	
 
 	
 	public static ProductEditDTO from(Product source) {
@@ -41,7 +44,8 @@ public class ProductEditDTO {
 				source.getName(),
 				source.getPhoto(),				
 				source.getPrice(),
-				source.getType() == Type.PIZZA ? PizzaEditDTO.from(source.getPizza()) : null
+				source.getType() == Type.PIZZA ? PizzaEditDTO.from(source.getPizza()) : null,
+				source.getType().getValue()		
 				);
 	}
 	
@@ -51,7 +55,7 @@ public class ProductEditDTO {
 				source.getName(),
 				source.getPhoto(),				
 				source.getPrice(), 
-				null
+				Product.Type.getEnum(source.getTipo())
 				);
 	}
 	
