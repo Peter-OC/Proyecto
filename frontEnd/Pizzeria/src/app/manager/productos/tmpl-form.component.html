@@ -36,6 +36,23 @@
             {{ item.ingrediente }}
           </option>
         </select>
+        <input
+          class="form-control"
+          [class.is-invalid]="base.invalid"
+          type="text"
+          name="base"
+          id="base"
+          [(ngModel)]="VM.Elemento.base"
+          #base="ngModel"
+          required
+          maxlength="10"
+        />
+        <div class="invalid-feedback" [hidden]="!base.hasError('required')">
+          Es obligatorio
+        </div>
+        <div class="invalid-feedback" [hidden]="!base.hasError('maxlength')">
+          Debe tener como máximo 10 letras.
+        </div>
       </div>
 
       <div class="form-group col-md-1">
@@ -46,9 +63,25 @@
           </option>
         </select>
       </div>
-
-
       <div class="form-group col-md-4">
+        <label class="form-label" for="salsa">Salsa:</label>
+        <input
+          class="form-control"
+          [class.is-invalid]="salsa.invalid"
+          type="text"
+          name="salsa"
+          id="salsa"
+          [(ngModel)]="VM.Elemento.salsa"
+          #salsa="ngModel"
+          required
+          maxlength="10"
+        />
+        <div class="invalid-feedback" [hidden]="!salsa.hasError('required')">
+          Es obligatorio
+        </div>
+        <div class="invalid-feedback" [hidden]="!salsa.hasError('maxlength')">
+          Debe tener como máximo 10 letras.
+        </div>
         <label class="form-label" for="rol">Ingredientes:</label>
         <p-button
           icon="pi pi-plus"
