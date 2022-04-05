@@ -2,7 +2,6 @@
   <ng-container *ngIf="!loginSrv.isAutenticated">
     <div class="main-container">
       <form #logForm="ngForm">
-
         <div role="group" aria-label="Login Form">
           <div class="form-group">
             <label>Correo: </label>
@@ -10,22 +9,16 @@
           </div>
           <label>Contraseña: </label>
           <input class="form-control" type="password" [(ngModel)]="txtPassword" required minlength="4" placeholder="Contraseña" [ngModelOptions]="{standalone: true}" (keydown.enter)="logInOut()" >
-
           <div class="input-group-append">
             <input class="sendBtn" type="button" [disabled]="logForm.invalid" value="Enviar"  (click)="logInOut()">
           </div>
-
         </div>
       </form>
-
     </div>
-
   </ng-container>
-
   <div class="main-container">
     <div class="form-group" *ngIf="loginSrv.isAutenticated">
       <p>Hola {{loginSrv.Name}}</p>
       <input class="cancelBtn" type="button" value="Desconectar" (click)="logInOut()">
-
     </div>
   </div>

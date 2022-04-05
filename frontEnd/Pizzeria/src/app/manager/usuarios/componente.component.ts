@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { UsuariosViewModelService } from './servicios.service';
 
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-usuarios',
   templateUrl: './tmpl-anfitrion.component.html',
@@ -23,13 +24,22 @@ export class UsuariosComponent implements OnInit {
   styleUrls: ['./componente.component.scss'],
 })
 export class UsuariosListComponent implements OnInit {
-  constructor(protected vm: UsuariosViewModelService) {}
+  constructor(protected vm: UsuariosViewModelService,private messageService: MessageService, private primengConfig: PrimeNGConfig, private myService: UsuariosViewModelService,) {}
   public get VM(): UsuariosViewModelService {
     return this.vm;
   }
   ngOnInit(): void {
     this.vm.list();
   }
+  onConfirm() {
+    this.myService.si();
+    this.messageService.clear('c');
+}
+
+onReject() {
+    this.messageService.clear('c');
+}
+
 }
 @Component({
   selector: 'app-usuarios-add',
