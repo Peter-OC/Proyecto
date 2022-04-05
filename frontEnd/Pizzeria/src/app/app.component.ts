@@ -23,21 +23,8 @@ export class AppComponent {
   init() {
     (this.items = [
           {
-            label: 'Productos',
-            items: [
-              {
-                label: 'Pizzas',
-                routerLink: '/pizzas',
-              },
-              {
-                label: 'Entrantes',
-                routerLink: '/Entrantes',
-              },
-              {
-                label: 'Bebidas',
-                routerLink: '/Bebidas',
-              },
-            ],
+            label: 'Carta',
+            routerLink: '/pizzas',
           },
           {
             label: 'Login',
