@@ -1,5 +1,6 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { ProductosComponent } from '../manager/productos/componente.component';
 import { AUTH_REQUIRED } from '../security';
@@ -10,7 +11,7 @@ import { AUTH_REQUIRED } from '../security';
 export class CarritoService {
   items: Array<any> = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private messageService: MessageService,) {}
 
   addToCarrito(product: any, cantidad = 1) {
     const ele = this.items.find((item) => item.product.id === product.id);
@@ -19,6 +20,7 @@ export class CarritoService {
     } else {
       this.items.push({ product, cantidad: 1 });
     }
+    this.messageService.add({severity:'success', summary:'Producto añadido al carrito'});
   }
   removeFromCarrito(index: number) {
     this.items.splice(index, 1)
