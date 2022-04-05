@@ -73,7 +73,7 @@ export class AppComponent {
             label: 'Manager',
             icon: 'pi pi-fw pi-info-circle',
 
-            visible: this.loginSrv.isInRoles('ROLE_EMPLOYED'),
+            visible: this.loginSrv.isInRoles('ROLE_ADMIN'),
             items: [
               {
                 label: 'Usuarios',
