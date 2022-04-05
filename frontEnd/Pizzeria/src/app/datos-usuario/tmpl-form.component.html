@@ -1,7 +1,7 @@
 <h1>Usuarios</h1>
 <form #miForm="ngForm">
   <div class="form-row">
-
+    <ng-container *ngIf="VM.Modo==='view'">
     <div class="form-group col-md-4">
       <label class="form-label" for="nombre">Nombre:</label>
       <input
@@ -66,8 +66,106 @@
       >
         Debe tener como máximo 50 letras.
       </div>
+
+      <div class="form-group">
+        <input
+          type="button"
+          class="btn btn-success"
+          value="Cambiar contraseña"
+        (click)="VM.add()"
+
+        />
+      </div>
+
+    </div>
+  </ng-container>
+
+
+  <ng-container *myUnless="VM.Modo==='view'">
+    <div class="form-group col-md-4">
+      <b><label class="form-label" for="nombre">Nombre:</label></b><br>
+      <span>{{VM.Elemento.nombre}}</span>
     </div>
 
+    <div class="form-group col-md-4">
+      <b><label class="form-label" for="apellido">Apellido:</label></b><br>
+      <span>{{VM.Elemento.apellido}}</span>
+    </div>
+
+    <div class="form-group col-md-4">
+      <b><label class="form-label" for="apellido">Dirección:</label></b><br>
+      <span>{{VM.Elemento.direccion}}</span>
+    </div>
+
+  </ng-container>
+
+
+  <ng-container *ngIf="VM.Modo==='edit'">
+    <div class="form-group">
+      <input
+        type="button"
+        class="btn btn-success"
+        value="Editar perfil"
+      (click)="VM.cambia()"
+      />
+    </div>
+  </ng-container>
+
+    <ng-container *ngIf="VM.Modo==='add'">
+      <div class="form-group col-md-4">
+        <label class="form-label" for="pass">Contraseña:</label>
+        <input
+          class="form-control"
+          [class.is-invalid]="pass.invalid"
+          type="text"
+          name="pass"
+          id="pass"
+          [(ngModel)]="VM.Elemento.pass"
+          #pass="ngModel"
+          required
+          maxlength="10"
+        />
+        <div class="invalid-feedback" [hidden]="!pass.hasError('required')">
+          Es obligatorio
+        </div>
+        <div
+          class="invalid-feedback"
+          [hidden]="
+            !pass.hasError('maxlength')
+          "
+        >
+          Debe tener como máximo 10 letras.
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label class="form-label" for="pass2">Repetir contraseña:</label>
+        <input
+          class="form-control"
+          [class.is-invalid]="pass2.invalid"
+          type="text"
+          name="pass2"
+          id="pass2"
+          [(ngModel)]="VM.Elemento.pass2"
+          #pass2="ngModel"
+          required
+          maxlength="10"
+        />
+        <div class="invalid-feedback" [hidden]="!pass2.hasError('required')">
+          Es obligatorio
+        </div>
+        <div
+          class="invalid-feedback"
+          [hidden]="
+            !pass2.hasError('maxlength')
+          "
+        >
+          Debe tener como máximo 10 letras.
+        </div>
+      </div>
+
+
+     </ng-container>
 
 
   </div>
