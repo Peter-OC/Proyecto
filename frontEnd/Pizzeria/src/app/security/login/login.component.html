@@ -23,8 +23,10 @@
 
   </ng-container>
 
-  <small *ngIf="loginSrv.isAutenticated">
-    Hola {{loginSrv.Name}}
-    <input class="btn btn-outline-success btn-sm" type="button" value="Desconectar" (click)="logInOut()">
+  <div class="main-container">
+    <div class="form-group" *ngIf="loginSrv.isAutenticated">
+      <p>Hola {{loginSrv.Name}}</p>
+      <input class="cancelBtn" type="button" value="Desconectar" (click)="logInOut()">
 
-  </small>
+    </div>
+  </div>
