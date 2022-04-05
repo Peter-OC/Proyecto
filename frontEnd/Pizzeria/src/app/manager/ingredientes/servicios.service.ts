@@ -170,9 +170,10 @@ export class IngredientesViewModelService {
     this.delete(this.idPasa)
   }
   public send(): void {
-    this.messageService.add({severity:'success', summary:'Ingrediente editado con éxito'});
+
     switch (this.modo) {
       case 'add':
+        this.messageService.add({severity:'success', summary:'Ingrediente añadido con éxito'});
         this.dao
           .add(this.elemento)
           .subscribe({
@@ -181,6 +182,7 @@ export class IngredientesViewModelService {
           });
         break;
       case 'edit':
+        this.messageService.add({severity:'success', summary:'Ingrediente editado con éxito'});
         this.dao
           .change(this.idOriginal, this.elemento)
           .subscribe({
