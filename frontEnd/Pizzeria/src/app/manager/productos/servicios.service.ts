@@ -51,6 +51,26 @@ export class ProductosViewModelService {
   public get Ingredientes(): Array<any> {
     return this.listadoIngredientes.filter(item => item.tipo === "other");
   }
+
+  showConfirm() {
+    this.messageService.clear();
+    this.messageService.add({key: 'c', sticky: true, severity:'error', summary:'¿Eliminar este producto?'});
+  }
+
+  seguro(id: number): void {
+
+    this.showConfirm()
+    this.idPasa = id;
+    console.log("en el seguro "+ this.idPasa);
+  }
+
+  si(){
+    console.log("en el si "+ this.idPasa);
+
+    this.delete(this.idPasa)
+  }
+
+
   public list(): void {
     this.dao.query().subscribe({
       next: (data) => {
@@ -84,9 +104,9 @@ export class ProductosViewModelService {
     });
   }
   public delete(key: any): void {
-    if (!window.confirm('¿Seguro?')) {
-      return;
-    }
+    // if (!window.confirm('¿Seguro?')) {
+    //   return;
+    // }
     this.dao.remove(key).subscribe({
       next: (data) => this.list(),
       error: (err) => this.notify.add(err.message),
@@ -100,19 +120,7 @@ export class ProductosViewModelService {
   public cancel(): void {
     this.router.navigateByUrl('/manager/productos');
   }
-  showConfirm() {
-    this.messageService.clear();
-    this.messageService.add({key: 'c', sticky: true, severity:'error', summary:'¿Eliminar este usuario?'});
-  }
 
-  seguro(id: number): void {
-    this.showConfirm()
-    this.idPasa = id;
-  }
-
-  si(){
-    this.delete(this.idPasa)
-  }
   public send(): void {
     switch (this.modo) {
       case 'add':

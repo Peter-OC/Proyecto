@@ -24,7 +24,7 @@ export class ProductosComponent implements OnInit {
   styleUrls: ['./componente.component.scss'],
 })
 export class ProductosListComponent implements OnInit {
-  constructor(protected vm: ProductosViewModelService,private messageService: MessageService, private primengConfig: PrimeNGConfig, private myService: UsuariosViewModelService,) {}
+  constructor(protected vm: ProductosViewModelService,private messageService: MessageService, private primengConfig: PrimeNGConfig, private myService: ProductosViewModelService,) {}
   public get VM(): ProductosViewModelService {
     return this.vm;
   }
@@ -32,6 +32,7 @@ export class ProductosListComponent implements OnInit {
     this.vm.list();
   }
   onConfirm() {
+    console.log("HOLA LIST");
     this.myService.si();
     this.messageService.clear('c');
 }
@@ -53,6 +54,7 @@ export class ProductosAddComponent implements OnInit {
   ngOnInit(): void {
     this.vm.add();
   }
+
 }
 @Component({
   selector: 'app-productos-edit',
@@ -64,7 +66,7 @@ export class ProductosEditComponent implements OnInit, OnDestroy {
   constructor(
     protected vm: ProductosViewModelService,
     protected route: ActivatedRoute,
-    protected router: Router
+    protected router: Router,private messageService: MessageService,
   ) {}
   public get VM(): ProductosViewModelService {
     return this.vm;
@@ -82,6 +84,7 @@ export class ProductosEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.obs$.unsubscribe();
   }
+
 }
 @Component({
   selector: 'app-productos-view',
