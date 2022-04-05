@@ -100,12 +100,16 @@ export class PedidosViewModelService {
   public cancel(): void {
     this.elemento = {};
     this.idOriginal = null;
+    if(this.modo === 'cocina')
+      this.listCocina();
+    else
+      this.listRepartidor();
     // this.list();
-    this.router.navigateByUrl(this.listURL);
+    // this.router.navigateByUrl(this.listURL);
   }
 
   public send(id: number): void {
-      this.dao.change(this.idOriginal).subscribe({
+      this.dao.change(id).subscribe({
         next: (data) => this.cancel(),
         error: (err) => this.notify.add(err.message),
        });

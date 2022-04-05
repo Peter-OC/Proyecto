@@ -33,7 +33,7 @@ public class Order extends EntityBase<Order> implements Serializable {
 	@Column(name="id_user")
 	private String user;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="order_date")
 	@PastOrPresent
 	@NotNull
@@ -43,7 +43,7 @@ public class Order extends EntityBase<Order> implements Serializable {
 	@Length(max = 100)
 	private String address;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="delivery_date")
 	@PastOrPresent
 	private Date deliveryDate;
