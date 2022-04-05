@@ -1,13 +1,14 @@
 <h1>Usuarios</h1>
 <div class="main-container">
-  <form #miForm="ngForm">
-      <div class="form-group">
-        <label class="form-label" for="nombre">Nombre:</label>
-        <input class="form-control" [class.is-invalid]="nombre.invalid" type="text" name="nombre" id="nombre" [(ngModel)]="VM.Elemento.nombre" #nombre="ngModel" maxlength="25"/>
-        <div class="invalid-feedback" [hidden]="!nombre.hasError('maxlength')">
-          Debe tener como máximo 25 letras.
-        </div>
+<form #miForm="ngForm">
+  <div class="form-group">
+    <ng-container *ngIf="VM.Modo==='view'">
+      <label class="form-label" for="nombre">Nombre:</label>
+      <input class="form-control" [class.is-invalid]="nombre.invalid" type="text" name="nombre" id="nombre" [(ngModel)]="VM.Elemento.nombre" #nombre="ngModel" maxlength="25" />
+      <div class="invalid-feedback" [hidden]="!nombre.hasError('maxlength')">
+        Debe tener como máximo 25 letras.
       </div>
+
 
       <div class="form-group">
         <label class="form-label" for="apellido">Apellido:</label>
@@ -24,11 +25,115 @@
           Debe tener como máximo 50 letras.
         </div>
       </div>
-    <div class="form-group">
-      <input type="button" class="sendBtn"  value="Enviar" (click)="VM.send()" [disabled]="miForm.invalid"/>
-      <input type="button"  class="cancelBtn" value="Volver" (click)="VM.cancel()"/>
-      <input type="button"  class="logOutBtn" value="Cerrar sesión" routerLink="/login"/>
+
+      <div class="form-group">
+        <input
+          type="button"
+          class="btn btn-success"
+          value="Cambiar contraseña"
+        (click)="VM.add()"
+
+        />
+      </div>
+  </ng-container>
+
+
+  <ng-container *myUnless="VM.Modo==='view'">
+    <div class="form-group col-md-4">
+      <b><label class="form-label" for="nombre">Nombre:</label></b><br>
+      <span>{{VM.Elemento.nombre}}</span>
     </div>
-  </form>
+
+    <div class="form-group col-md-4">
+      <b><label class="form-label" for="apellido">Apellido:</label></b><br>
+      <span>{{VM.Elemento.apellido}}</span>
+    </div>
+
+    <div class="form-group col-md-4">
+      <b><label class="form-label" for="apellido">Dirección:</label></b><br>
+      <span>{{VM.Elemento.direccion}}</span>
+    </div>
+
+  </ng-container>
+
+
+  <ng-container *ngIf="VM.Modo==='edit'">
+    <div class="form-group">
+      <input
+        type="button"
+        class="btn btn-success"
+        value="Editar perfil"
+      (click)="VM.cambia()"
+      />
+    </div>
+  </ng-container>
+
+    <ng-container *ngIf="VM.Modo==='add'">
+      <div class="form-group col-md-4">
+        <label class="form-label" for="pass">Contraseña:</label>
+        <input
+          class="form-control"
+          [class.is-invalid]="pass.invalid"
+          type="text"
+          name="pass"
+          id="pass"
+          [(ngModel)]="VM.Elemento.pass"
+          #pass="ngModel"
+          required
+          maxlength="10"
+        />
+        <div class="invalid-feedback" [hidden]="!pass.hasError('required')">
+          Es obligatorio
+        </div>
+        <div
+          class="invalid-feedback"
+          [hidden]="
+            !pass.hasError('maxlength')
+          "
+        >
+          Debe tener como máximo 10 letras.
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label class="form-label" for="pass2">Repetir contraseña:</label>
+        <input
+          class="form-control"
+          [class.is-invalid]="pass2.invalid"
+          type="text"
+          name="pass2"
+          id="pass2"
+          [(ngModel)]="VM.Elemento.pass2"
+          #pass2="ngModel"
+          required
+          maxlength="10"
+        />
+        <div class="invalid-feedback" [hidden]="!pass2.hasError('required')">
+          Es obligatorio
+        </div>
+        <div
+          class="invalid-feedback"
+          [hidden]="
+            !pass2.hasError('maxlength')
+          "
+        >
+          Debe tener como máximo 10 letras.
+        </div>
+      </div>
+
+
+     </ng-container>
+
+
+  </div>
+
+
+  <div class="form-group">
+    <input type="button" class="sendBtn"  value="Enviar" (click)="VM.send()" [disabled]="miForm.invalid"/>
+    <input type="button"  class="cancelBtn" value="Volver" (click)="VM.cancel()"/>
+    <input type="button"  class="logOutBtn" value="Cerrar sesión" routerLink="/login"/>
+  </div>
+</form>
 </div>
+
 

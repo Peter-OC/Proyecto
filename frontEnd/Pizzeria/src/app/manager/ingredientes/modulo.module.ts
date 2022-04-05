@@ -11,6 +11,8 @@ import { RatingModule } from 'primeng/rating';
 import {ToolbarModule} from 'primeng/toolbar';
 import {InputNumberModule} from 'primeng/inputnumber';
 
+import {PaginatorModule} from 'primeng/paginator';
+
 @NgModule({
   declarations: [INGREDIENTES_COMPONENTES],
   imports: [
@@ -24,7 +26,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
     RatingModule,
     FormsModule,
     ToolbarModule,
-    InputNumberModule
+    InputNumberModule,
+    PaginatorModule
   ],
   exports: [INGREDIENTES_COMPONENTES],
 })

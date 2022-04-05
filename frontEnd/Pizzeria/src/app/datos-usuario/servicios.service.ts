@@ -61,6 +61,13 @@ export class DatosUsuariosViewModelService {
     this.elemento = {};
     this.idOriginal = null;
   }
+  public cambia(): void {
+    this.modo = 'view';
+  }
+
+  public add(): void {
+    this.modo = 'add';
+  }
   public send(): void {
     switch (this.modo) {
       case 'edit':
