@@ -1,3 +1,22 @@
+<p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div class="flex flex-column" style="flex: 1">
+        <div class="text-center">
+            <i class="pi pi-chevron-right" style="font-size: 3rem"></i>
+            <h4>{{message.summary}}</h4>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-6">
+                <button type="button" pButton (click)="onConfirm()" label="Sí" class="p-button-success"></button>
+            </div>
+            <div class="col-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+</p-toast>
 <div class="main-container">
 <p-table [value]="VM.ListadoReadies" [paginator]="true" [rows] = "5" [showCurrentPageReport]="true" responsiveLayout="scroll">
   <ng-template pTemplate="caption">
@@ -30,7 +49,7 @@
           pRipple
           icon="pi pi-check"
           class="p-button-rounded p-button-success mr-2"
-          (click) = "VM.send(item.idPedido)"
+          (click) = "VM.seguro(item.idPedido)"
         ></button>
       </td>
     </tr>
@@ -73,7 +92,7 @@
           pRipple
           icon="pi pi-check"
           class="p-button-rounded p-button-success mr-2"
-          (click) = "VM.send(item.idPedido)"
+          (click) = "VM.seguro(item.idPedido)"
         > </button>
       </td>
     </tr>
