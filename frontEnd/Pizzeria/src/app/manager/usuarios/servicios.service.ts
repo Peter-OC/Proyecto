@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from '../../common-services/notification.service';
 import { LoggerService } from 'src/lib/my-core/services/logger.service';
+
+import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk/collections';
 export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
@@ -19,7 +22,9 @@ export class UsuariosViewModelService {
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
-    protected dao: UsuariosDAOService
+    protected router: Router,
+    protected dao: UsuariosDAOService,
+    private messageService: MessageService, private primengConfig: PrimeNGConfig
   ) {}
   public get Modo(): ModoCRUD {
     return this.modo;
@@ -78,11 +83,10 @@ export class UsuariosViewModelService {
     this.listado = [];
   }
   public cancel(): void {
-    this.elemento = {};
-    this.idOriginal = null;
-    this.list();
+    this.router.navigateByUrl('/manager/usuarios');
   }
   public send(): void {
+    this.messageService.add({severity:'success', summary:'Usuario editado con éxito'});
     switch (this.modo) {
       case 'add':
         this.dao
@@ -99,6 +103,7 @@ export class UsuariosViewModelService {
             next: (data) => this.cancel(),
             error: (err) => this.notify.add(err.message),
           });
+          this.router.navigateByUrl('/manager/usuarios');
         break;
       case 'view':
         this.cancel();
