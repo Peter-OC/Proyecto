@@ -70,15 +70,15 @@ export class DatosUsuariosViewModelService {
   }
   public send(): void {
     switch (this.modo) {
-      case 'edit':
+      case 'view':
         this.dao.change(this.elemento).subscribe({
           next: (data) => this.cancel(),
           error: (err) => this.notify.add(err.message),
         });
         break;
-      case 'view':
-        this.cancel();
-        break;
+      // case 'view':
+      //   this.cancel();
+      //   break;
       case 'add': //este va a ser el change password
         this.dao.changePass(this.elemento).subscribe({
           next: (data) => this.cancel(),

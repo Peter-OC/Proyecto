@@ -1,9 +1,8 @@
 <img alt="Foto home 1" src="../../assets/images/fotoHome01.png" style="width: 100%;">
 
-
+<ng-container *ngIf="!this.loginSrv.isAutenticated">
 <div class="btn-container">
-  <input class="sendBtn" type="button" value="Inicia sesión" routerLink="/login">
-  <input class="sendBtn" type="button" value="Registrarse" routerLink="/registro">
+  <button class="sendBtn" type="button" value="Inicia sesión" routerLink="/login">Inicia sesión</button>
+  <button class="sendBtn" type="button" value="Regístrate" routerLink="/registro">Regístrate</button>
 </div>
-
-
+</ng-container>
