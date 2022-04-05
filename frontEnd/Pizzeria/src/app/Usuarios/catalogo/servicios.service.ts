@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/common-services';
 import { LoggerService } from 'src/lib/my-core';
 import { Router } from '@angular/router';
+import { CarritoService } from 'src/app/carrito/carrito.service';
 
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 
@@ -62,7 +63,7 @@ export class CatalogoViewModelService {
   protected listURL = '/productos';
 
   constructor(protected notify: NotificationService, protected out: LoggerService,
-    protected dao: CatalogoDAOService, protected router: Router) { }
+    protected dao: CatalogoDAOService, protected router: Router, public carrito: CarritoService) { }
 
 
   public get Modo(): ModoCRUD {

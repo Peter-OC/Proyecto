@@ -1,1 +1,16 @@
-<p>carrito works!</p>
+<p>carrito</p>
+<form #miForm="ngForm">
+<input type="text" [(ngModel)]="VM.direccion" name="direccion" required>
+<ul>
+  <li *ngFor="let item of VM.Items; let indice = index;">
+    {{item.product.nombre}}
+    {{item.product.precio}}
+    {{item.cantidad}}
+    {{item.cantidad * item.product.precio}}
+  </li>
+</ul>
+<p>
+  Total: {{VM.Total}}
+</p>
+<input type="button" [disabled]="miForm.invalid || VM.Total == 0" value="Enviar" (click)="VM.send()">
+</form>

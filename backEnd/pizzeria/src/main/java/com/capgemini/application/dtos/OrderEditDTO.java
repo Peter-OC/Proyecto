@@ -95,7 +95,7 @@ public class OrderEditDTO {
 	}
 	
 
-	private void incorporarNuevosProductosPorPedido(Order target) {
+	public void incorporarNuevosProductosPorPedido(Order target) {
 		productos.stream().filter(
 				dto -> target.getProductsPerOrders().stream()
 							.noneMatch(entity -> entity.getId().getIdProduct() == dto.getProductId()))
