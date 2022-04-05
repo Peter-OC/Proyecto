@@ -82,6 +82,7 @@ export class LoginService {
             }
             observable.next(this.auth.isAutenticated);
           },
+
           error: err => observable.error(err)
        })
     );

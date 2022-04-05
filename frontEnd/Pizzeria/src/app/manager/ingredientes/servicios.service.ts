@@ -85,12 +85,13 @@ export class IngredientesViewModelService {
   protected listado: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
+  protected idPasa: any = null;
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
     protected dao: IngredientesDAOService,
+    private messageService: MessageService, private primengConfig: PrimeNGConfig,
     protected router: Router,
-    private messageService: MessageService, private primengConfig: PrimeNGConfig
   ) {}
   public get Modo(): ModoCRUD {
     return this.modo;
@@ -134,9 +135,9 @@ export class IngredientesViewModelService {
     });
   }
   public delete(key: any): void {
-    if (!window.confirm('¿Seguro?')) {
-      return;
-    }
+    // if (!window.confirm('¿Seguro?')) {
+    //   return;
+    // }
     this.dao.remove(key).subscribe({
       next: (data) => this.list(),
       error: (err) => this.notify.add(err.message),
@@ -149,6 +150,24 @@ export class IngredientesViewModelService {
   }
   public cancel(): void {
     this.router.navigateByUrl('/manager/ingredientes');
+  }
+
+  showConfirm() {
+    this.messageService.clear();
+    this.messageService.add({key: 'c', sticky: true, severity:'error', summary:'¿Eliminar este producto?'});
+  }
+
+  seguro(id: number): void {
+
+    this.showConfirm()
+    this.idPasa = id;
+    console.log("en el seguro "+ this.idPasa);
+  }
+
+  si(){
+    console.log("en el si "+ this.idPasa);
+
+    this.delete(this.idPasa)
   }
   public send(): void {
     this.messageService.add({severity:'success', summary:'Ingrediente editado con éxito'});

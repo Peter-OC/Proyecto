@@ -10,6 +10,7 @@ import { Table, TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
 import {ToolbarModule} from 'primeng/toolbar';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {ToastModule} from 'primeng/toast';
 
 import {PaginatorModule} from 'primeng/paginator';
 
@@ -27,7 +28,8 @@ import {PaginatorModule} from 'primeng/paginator';
     FormsModule,
     ToolbarModule,
     InputNumberModule,
-    PaginatorModule
+    PaginatorModule,
+    ToastModule
   ],
   exports: [INGREDIENTES_COMPONENTES],
 })

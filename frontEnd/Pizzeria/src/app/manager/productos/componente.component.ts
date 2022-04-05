@@ -3,7 +3,6 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProductosViewModelService } from './servicios.service';
 
 import { MessageService, PrimeNGConfig } from 'primeng/api';
-import { UsuariosViewModelService } from '../usuarios/servicios.service';
 @Component({
   selector: 'app-productos',
   templateUrl: './tmpl-anfitrion.component.html',
@@ -32,7 +31,6 @@ export class ProductosListComponent implements OnInit {
     this.vm.list();
   }
   onConfirm() {
-    console.log("HOLA LIST");
     this.myService.si();
     this.messageService.clear('c');
 }
