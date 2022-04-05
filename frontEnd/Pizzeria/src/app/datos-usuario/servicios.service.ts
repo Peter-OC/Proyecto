@@ -10,6 +10,10 @@ import { LoggerService } from 'src/lib/my-core/services/logger.service';
 import { NotificationService } from '../common-services';
 import { ModoCRUD } from '../base-code/tipos';
 import { AUTH_REQUIRED } from '../security';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { Router } from '@angular/router';
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -21,10 +25,14 @@ export class DatosUsuariosViewModelService {
   protected idOriginal: any = null;
   private id: any = localStorage.getItem('datos');
 
+
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
-    protected dao: DatosDAOService
+    protected router: Router,
+    protected dao: DatosDAOService,
+    private messageService: MessageService, private primengConfig: PrimeNGConfig
+
   ) {}
   public get Modo(): ModoCRUD {
     return this.modo;
@@ -68,13 +76,23 @@ export class DatosUsuariosViewModelService {
   public add(): void {
     this.modo = 'add';
   }
+  public volver(): void {
+    this.modo = 'edit';
+  }
+//   showViaService() {
+//     this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+// }
+
   public send(): void {
+    this.messageService.add({severity:'success', summary:'Perfil editado con éxito'});
     switch (this.modo) {
       case 'view':
+
         this.dao.change(this.elemento).subscribe({
           next: (data) => this.cancel(),
           error: (err) => this.notify.add(err.message),
         });
+        this.router.navigateByUrl('/');
         break;
       // case 'view':
       //   this.cancel();
@@ -87,6 +105,8 @@ export class DatosUsuariosViewModelService {
         break;
     }
   }
+
+
 }
 
 @Injectable({ providedIn: 'root' })

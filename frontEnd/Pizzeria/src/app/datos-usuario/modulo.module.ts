@@ -11,6 +11,12 @@ import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {InputTextModule} from 'primeng/inputtext';
+import {RippleModule} from 'primeng/ripple';
+
+
 @NgModule({
   declarations: [USUARIOS_COMPONENTES],
   imports: [
@@ -25,6 +31,10 @@ import { ToolbarModule } from 'primeng/toolbar';
     FormsModule,
     ToolbarModule,
     InputNumberModule,
+    MessageModule,
+    MessagesModule,
+    RippleModule,
+    InputTextModule,
   ],
   exports: [USUARIOS_COMPONENTES],
 })
