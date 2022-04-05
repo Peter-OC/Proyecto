@@ -18,6 +18,7 @@ export class UsuariosViewModelService {
   protected listado: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
+  protected idPasa: any = null;
 
   constructor(
     protected notify: NotificationService,
@@ -68,10 +69,25 @@ export class UsuariosViewModelService {
       error: (err) => this.notify.add(err.message),
     });
   }
+  showConfirm() {
+    this.messageService.clear();
+    this.messageService.add({key: 'c', sticky: true, severity:'error', summary:'¿Eliminar este usuario?'});
+  }
+
+  seguro(id: number): void {
+    this.showConfirm()
+    this.idPasa = id;
+  }
+
+  si(){
+    this.delete(this.idPasa)
+  }
+
+
   public delete(key: any): void {
-    if (!window.confirm('¿Seguro?')) {
-      return;
-    }
+    // if (!window.confirm('¿Seguro?')) {
+    //   return;
+    // }
     this.dao.remove(key).subscribe({
       next: (data) => this.list(),
       error: (err) => this.notify.add(err.message),
