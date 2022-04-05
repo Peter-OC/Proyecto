@@ -1,15 +1,17 @@
 <h1>Inicio sesión</h1>
   <ng-container *ngIf="!loginSrv.isAutenticated">
     <div class="main-container">
-      <form #logForm="ngForm">
+      <form #logForm="ngForm" [formGroup]="miForm">
 
         <div role="group" aria-label="Login Form">
           <div class="form-group">
             <label>Correo: </label>
-            <input class="form-control" type="text" [(ngModel)]="txtUsuario" required minlength="4" placeholder="Usuario" [ngModelOptions]="{standalone: true}">
+            <input class="form-control" [class.is-invalid]="miForm?.get('username')?.invalid" type="text" [(ngModel)]="txtUsuario" required minlength="4" placeholder="Usuario" [ngModelOptions]="{standalone: true}" formControlName="username">
+            <span class="invalid-feedback">{{getErrorMessage('username')}}</span>
           </div>
+
           <label>Contraseña: </label>
-          <input class="form-control" type="password" [(ngModel)]="txtPassword" required minlength="4" placeholder="Contraseña" [ngModelOptions]="{standalone: true}" (keydown.enter)="logInOut()" >
+          <input class="form-control" type="password" [(ngModel)]="txtPassword" required minlength="4" placeholder="Contraseña" [ngModelOptions]="{standalone: true}" (keydown.enter)="logInOut()">
 
           <div class="input-group-append">
             <input class="sendBtn" type="button" [disabled]="logForm.invalid" value="Enviar"  (click)="logInOut()">
