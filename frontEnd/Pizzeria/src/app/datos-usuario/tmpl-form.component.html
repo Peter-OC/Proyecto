@@ -130,7 +130,7 @@
   <ng-container *myUnless="VM.Modo==='edit'">
 
   <div class="form-group">
-    <input type="button" class="sendBtn"  value="Enviar" (click)="VM.send()" [disabled]="miForm.invalid" />
+    <input type="button" class="sendBtn"  value="Confirmar cambios" (click)="VM.send()" [disabled]="miForm.invalid" />
     <input type="button"  class="cancelBtn" value="Volver"  (click)="VM.volver()"/>
     <input type="button"  class="logOutBtn" value="Cerrar sesión" routerLink="/login"/>
   </div>
