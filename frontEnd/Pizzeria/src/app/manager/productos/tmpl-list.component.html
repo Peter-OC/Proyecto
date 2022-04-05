@@ -2,12 +2,7 @@
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
       Productos
-      <p-button
-        icon="pi pi-plus"
-        class="p-button-success p-mr-2"
-        routerLink="add"
-        (click)="VM.add()"
-      ></p-button>
+      <input class="addBtn" type="button" value="+" routerLink="add" (click)="VM.add()">
     </div>
   </ng-template>
 
