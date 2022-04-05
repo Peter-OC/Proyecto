@@ -38,7 +38,7 @@ import {ToastModule} from 'primeng/toast';
     HomeComponent,
     // ProductsComponent,
     // ProductDetailsComponent,
-    // CarritoComponent,
+    CarritoComponent,
     // // PizzasComponent,s
   ],
   imports: [
