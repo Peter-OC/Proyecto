@@ -1,70 +1,29 @@
 <h1>Usuarios</h1>
+<div class="main-container">
 <form #miForm="ngForm">
-  <div class="form-row">
+  <div class="form-group">
     <ng-container *ngIf="VM.Modo==='view'">
-    <div class="form-group col-md-4">
       <label class="form-label" for="nombre">Nombre:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="nombre.invalid"
-        type="text"
-        name="nombre"
-        id="nombre"
-        [(ngModel)]="VM.Elemento.nombre"
-        #nombre="ngModel"
-        maxlength="25"
-      />
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !nombre.hasError('maxlength')
-        "
-      >
+      <input class="form-control" [class.is-invalid]="nombre.invalid" type="text" name="nombre" id="nombre" [(ngModel)]="VM.Elemento.nombre" #nombre="ngModel" maxlength="25" />
+      <div class="invalid-feedback" [hidden]="!nombre.hasError('maxlength')">
         Debe tener como máximo 25 letras.
       </div>
-    </div>
 
-    <div class="form-group col-md-4">
-      <label class="form-label" for="apellido">Apellido:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="apellido.invalid"
-        type="text"
-        name="apellido"
-        id="apellido"
-        [(ngModel)]="VM.Elemento.apellido"
-        #apellido="ngModel"
-        maxlength="25"
-      />
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !apellido.hasError('maxlength')
-        "
-      >
-        Debe tener como máximo 25 letras.
+
+      <div class="form-group">
+        <label class="form-label" for="apellido">Apellido:</label>
+        <input class="form-control" [class.is-invalid]="apellido.invalid" type="text" name="apellido" id="apellido" [(ngModel)]="VM.Elemento.apellido" #apellido="ngModel" maxlength="25"/>
+        <div class="invalid-feedback" [hidden]="!apellido.hasError('maxlength')">
+          Debe tener como máximo 25 letras.
+        </div>
       </div>
-    </div>
 
-    <div class="form-group col-md-4">
-      <label class="form-label" for="apellido">Dirección:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="direccion.invalid"
-        type="text"
-        name="direccion"
-        id="direccion"
-        [(ngModel)]="VM.Elemento.direccion"
-        #direccion="ngModel"
-        maxlength="50"
-      />
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !direccion.hasError('maxlength')
-        "
-      >
-        Debe tener como máximo 50 letras.
+      <div class="form-group">
+        <label class="form-label" for="direccion">Dirección:</label>
+        <input class="form-control" [class.is-invalid]="direccion.invalid" type="text" name="direccion" id="direccion" [(ngModel)]="VM.Elemento.direccion" #direccion="ngModel" maxlength="50" />
+        <div class="invalid-feedback" [hidden]="!direccion.hasError('maxlength')">
+          Debe tener como máximo 50 letras.
+        </div>
       </div>
 
       <div class="form-group">
@@ -76,8 +35,6 @@
 
         />
       </div>
-
-    </div>
   </ng-container>
 
 
@@ -172,20 +129,11 @@
 
 
   <div class="form-group">
-    <input
-      type="button"
-      class="btn btn-success"
-      value="Enviar"
-      (click)="VM.send()"
-      [disabled]="miForm.invalid"
-    />
-    <input
-      type="button"
-      class="btn btn-info"
-      value="Volver"
-      (click)="VM.cancel()"
-    />
+    <input type="button" class="sendBtn"  value="Enviar" (click)="VM.send()" [disabled]="miForm.invalid"/>
+    <input type="button"  class="cancelBtn" value="Volver" (click)="VM.cancel()"/>
+    <input type="button"  class="logOutBtn" value="Cerrar sesión" routerLink="/login"/>
   </div>
 </form>
+</div>
 
 
