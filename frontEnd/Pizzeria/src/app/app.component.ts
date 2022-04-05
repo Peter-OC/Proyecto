@@ -58,12 +58,6 @@ export class AppComponent {
             visible: !this.loginSrv.isAutenticated,
           },
           {
-            label: 'Perfil',
-            icon: 'pi pi-fw pi-user-edit',
-            routerLink: '/perfil',
-            visible: this.loginSrv.isAutenticated,
-          },
-          {
             label: 'Carrito',
             icon: 'pi pi-fw pi-shopping-cart',
             routerLink: '/carrito',
@@ -80,6 +74,19 @@ export class AppComponent {
             icon: 'pi pi-fw pi-info-circle',
             routerLink: '/empleado/repartidor',
             visible: this.loginSrv.isInRoles('ROLE_EMPLOYED'),
+          },
+          {
+            label: 'Perfil',
+            icon: 'pi pi-fw pi-user-edit',
+            routerLink: '/perfil',
+            visible: this.loginSrv.isAutenticated,
+          },
+          {
+            label: 'Cerrar sesión',
+            icon: 'pi pi-fw pi-sign-out',
+            routerLink: '/login',
+            visible: this.loginSrv.isAutenticated,
+
           },
         ])
   }
