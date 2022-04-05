@@ -1,6 +1,7 @@
 package com.capgemini.application.resources;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -130,13 +131,16 @@ public class OrderResource {
 	@ApiResponses({ @ApiResponse(code = 201, message = "Pedido añadido"),
 			@ApiResponse(code = 400, message = "Error al validar los datos o clave duplicada"),
 			@ApiResponse(code = 404, message = "Pedido no encontrado") })
-	public ResponseEntity<Object> create(@Valid @RequestBody OrderEditDTO item)
+	public ResponseEntity<Object> create(@Valid @RequestBody OrderEditDTO item, Principal usr)
 			throws InvalidDataException, DuplicateKeyException, NotFoundException {
 		var entity = OrderEditDTO.from(item);
+		entity.setUser(usr.getName());
+		entity.setStatus("ordered");
+		entity.setOrderDate(new Date());
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
 		entity = srv.add(entity);
-		item.update(entity);
+		item.incorporarNuevosProductosPorPedido(entity);
 		srv.change(entity);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(entity.getIdOrder()).toUri();

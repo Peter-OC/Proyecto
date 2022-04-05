@@ -11,6 +11,8 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
 
+import {ToastModule} from 'primeng/toast';
+import { PedidosViewModelService } from './servicios.service';
 
 const routes: Routes = [
   {
@@ -35,10 +37,12 @@ const routes: Routes = [
     RatingModule,
     ToolbarModule,
     InputNumberModule,
-    FormsModule
+    FormsModule,
+    ToastModule,
 
   ],
 
-  exports: [COCINA_COMPONENTES, REPARTIDOR_COMPONENTES,]
+  exports: [COCINA_COMPONENTES, REPARTIDOR_COMPONENTES,],
+  providers: [PedidosViewModelService]
 })
 export class EmpleadosModule { }

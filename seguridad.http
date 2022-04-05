@@ -1,4 +1,4 @@
-GET http://localhost:8091/login?name=armandobronca%40correo.com&password=contrase%C3%B1a
+GET http://localhost:8091/login?name=armandobronca%40correo.com&password=Contrase%C3%B1a
 
 ###
 GET http://localhost:8091/profile
@@ -14,4 +14,14 @@ Content-Type: application/json
   "comentario": "armando",
   "producto": 1,
   "puntuacion": 10
+}
+###
+
+PUT http://localhost:8091/password
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJNaWNyb3NlcnZpY2lvc0pXVCIsInN1YiI6ImFybWFuZG9icm9uY2FAY29ycmVvLmNvbSIsImF1dGhvcml0aWVzIjpbIlJPTEVfRU1QTE9ZRUQiXSwiaWF0IjoxNjQ5MTY5NjU1LCJleHAiOjE2NDkxNzMyNTV9.hUBN6kzUNCoV9D-FBJTF_qpwX2lc7OLZ_VwUvLJpfxMev2H2FgF8ahH2JhIjiVmVujY96N0oUsxiiFMgcgmpXw
+Content-Type: application/json
+
+{
+  "oldPassword": "contraseña",
+  "newPassword": "contraseña"
 }

@@ -1,7 +1,6 @@
 <h1>Producto</h1>
 <form #miForm="ngForm">
-
-<!--
+  <!--
   <div class="p-grid p-fluid">
     <div class="p-field p-col-12 p-md-3">
         <label for="stacked">Stacked</label>
@@ -11,79 +10,117 @@
   </div> -->
 
   <div class="form-row">
-    <ng-container *ngIf="VM.Modo==='add'">
-    <div class="form-group col-md-2">
-      <label class="form-label" for="tipo">Tipo:</label>
-      <select
-        class="form-control form-select"
-        name="tipo"
-        id="tipo"
-        [(ngModel)]="VM.Elemento.tipo"
-        #tipo="ngModel"
-        required
-      >
-        <option value="1">Entrante</option>
-        <option value="2">Bebida</option>
-        <option value="3">Pizza</option>
-      </select>
-    </div>
-  </ng-container>
-
-   <ng-container *ngIf="VM.Elemento.tipo ==='3'" >
-    <div class="form-group col-md-4">
-      <label class="form-label" for="base">Base:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="base.invalid"
-        type="text"
-        name="base"
-        id="base"
-        [(ngModel)]="VM.Elemento.base"
-        #base="ngModel"
-        required
-        maxlength="10"
-      />
-      <div class="invalid-feedback" [hidden]="!base.hasError('required')">
-        Es obligatorio
+    <ng-container *ngIf="VM.Modo === 'add'">
+      <div class="form-group col-md-2">
+        <label class="form-label" for="tipo">Tipo:</label>
+        <select
+          class="form-control form-select"
+          name="tipo"
+          id="tipo"
+          [(ngModel)]="VM.Elemento.tipo"
+          #tipo="ngModel"
+          required
+        >
+          <option value="1">Entrante</option>
+          <option value="2">Bebida</option>
+          <option value="3">Pizza</option>
+        </select>
       </div>
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !base.hasError('maxlength')
-        "
-      >
-        Debe tener como máximo 10 letras.
-      </div>
-    </div>
+    </ng-container>
 
-    <div class="form-group col-md-4">
-      <label class="form-label" for="salsa">Salsa:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="salsa.invalid"
-        type="text"
-        name="salsa"
-        id="salsa"
-        [(ngModel)]="VM.Elemento.salsa"
-        #salsa="ngModel"
-        required
-        maxlength="10"
-      />
-      <div class="invalid-feedback" [hidden]="!salsa.hasError('required')">
-        Es obligatorio
+    <ng-container *ngIf="VM.Elemento.tipo == 3">
+      <div class="form-group col-md-4">
+        <label class="form-label" for="base">Base:</label>
+        <select [(ngModel)]="VM.Elemento.base" name="base">
+          <option *ngFor="let item of VM.Bases" [value]="item.id">
+            {{ item.ingrediente }}
+          </option>
+        </select>
+        <input
+          class="form-control"
+          [class.is-invalid]="base.invalid"
+          type="text"
+          name="base"
+          id="base"
+          [(ngModel)]="VM.Elemento.pizza.base"
+          #base="ngModel"
+          required
+          maxlength="10"
+        />
+        <div class="invalid-feedback" [hidden]="!base.hasError('required')">
+          Es obligatorio
+        </div>
+        <div class="invalid-feedback" [hidden]="!base.hasError('maxlength')">
+          Debe tener como máximo 10 letras.
+        </div>
       </div>
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !salsa.hasError('maxlength')
-        "
-      >
-        Debe tener como máximo 10 letras.
+
+      <div class="form-group col-md-4">
+        <label class="form-label" for="salsa">Salsa:</label>
+        <input
+          class="form-control"
+          [class.is-invalid]="salsa.invalid"
+          type="text"
+          name="salsa"
+          id="salsa"
+          [(ngModel)]="VM.Elemento.pizza.salsa"
+          #salsa="ngModel"
+          required
+          maxlength="10"
+        />
+        <div class="invalid-feedback" [hidden]="!salsa.hasError('required')">
+          Es obligatorio
+        </div>
+        <div class="invalid-feedback" [hidden]="!salsa.hasError('maxlength')">
+          Debe tener como máximo 10 letras.
+        </div>
+        <label class="form-label" for="rol">Ingredientes:</label>
+        <p-button
+          icon="pi pi-plus"
+          class="p-button-success p-mr-2"
+          (click)="
+            VM.addDetalle('ingredients', { id_ingrediente: 0, cantidad: 0 })
+          "
+        ></p-button>
+
+        <ul>
+          <li *ngFor="let item of VM.Elemento.pizza.ingredients; let indice = index">
+
+            <select
+              class="form-control form-select"
+              name="ingredients{{ indice }}"
+              [(ngModel)]="VM.Elemento.pizza.ingredients[indice].id_ingrediente"
+              required
+            >
+              <option *ngFor="let item of VM.Ingredientes" [value]="item.id">
+                {{ item.ingrediente }}
+              </option>
+            </select>
+            <input
+              class="form-control"
+              [class.is-invalid]="nombre.invalid"
+              type="text"
+              name="cantidad{{ indice }}"
+              [(ngModel)]="VM.Elemento.pizza.ingredients[indice].cantidad"
+              required
+              maxlength="50"
+            />
+
+            <div
+              class="invalid-feedback"
+              [hidden]="!nombre.hasError('maxlength')"
+            >
+              Debe tener como máximo 50 letras.
+            </div>
+            <input
+              type="button"
+              value="x"
+              (click)="VM.delDetalle('ingredients', indice)"
+            />
+          </li>
+        </ul>
       </div>
-    </div>
-
-
-   </ng-container>
+    </ng-container>
 
     <div class="form-group col-md-4">
       <label class="form-label" for="nombre">Nombre:</label>
@@ -101,12 +138,7 @@
       <div class="invalid-feedback" [hidden]="!nombre.hasError('required')">
         Es obligatorio
       </div>
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !nombre.hasError('maxlength')
-        "
-      >
+      <div class="invalid-feedback" [hidden]="!nombre.hasError('maxlength')">
         Debe tener como máximo 50 letras.
       </div>
     </div>
@@ -123,7 +155,6 @@
         #descripcion="ngModel"
       />
     </div>
-
   </div>
   <div class="form-group row">
     <div class="form-group col-md-12">
@@ -181,7 +212,6 @@
     />
   </div>
 </form>
-
 
 <!-- {
   "foto": "string",

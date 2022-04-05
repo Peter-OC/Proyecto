@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpContext,
-  HttpContextToken,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { NotificationService } from '../common-services';
 import { LoggerService } from 'src/lib/my-core';
 import { Router } from '@angular/router';
 import { AUTH_REQUIRED } from '../security';
 import { RESTDAOService } from '../base-code/RESTDAOService';
-import { ModoCRUD } from '../base-code/tipos';
 
 
 @Injectable({
@@ -26,12 +24,14 @@ export class PedidosViewModelService {
   protected listadoSents: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
+  protected idPasa: any = null;
 
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
     protected dao: PedidosEmpleadoDAOService,
-    protected router: Router
+    protected router: Router,
+    private messageService: MessageService, private primengConfig: PrimeNGConfig,
   ) {}
 
   public get Modo(): 'cocina' | 'repartidor' {
@@ -97,6 +97,15 @@ export class PedidosViewModelService {
     this.listadoSents = [];
   }
 
+
+//   onConfirm() {
+//     this.messageService.clear('c');
+// }
+
+// onReject() {
+//     this.messageService.clear('c');
+// }
+
   public cancel(): void {
     this.elemento = {};
     this.idOriginal = null;
@@ -108,7 +117,26 @@ export class PedidosViewModelService {
     // this.router.navigateByUrl(this.listURL);
   }
 
+showConfirm() {
+  this.messageService.clear();
+  this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
+}
+
+seguro(id: number): void {
+  this.showConfirm()
+  this.idPasa = id;
+}
+
+si(){
+  this.send(this.idPasa)
+}
+// onConfirm(id: number): void {
+//   this.send(id);
+// }
+
+
   public send(id: number): void {
+
       this.dao.change(id).subscribe({
         next: (data) => this.cancel(),
         error: (err) => this.notify.add(err.message),

@@ -29,11 +29,9 @@
       <div class="form-group">
         <input
           type="button"
-          class="btn btn-success"
+          class="btnCambiarPass btn-success"
           value="Cambiar contraseña"
-        (click)="VM.add()"
-
-        />
+        (click)="VM.add()"/>
       </div>
   </ng-container>
 
@@ -61,7 +59,7 @@
     <div class="form-group">
       <input
         type="button"
-        class="btn btn-success"
+        class="btnEditar btn-success"
         value="Editar perfil"
       (click)="VM.cambia()"
       />
@@ -77,7 +75,7 @@
           type="password"
           name="pass"
           id="pass"
-          [(ngModel)]="VM.Elemento.pass"
+          [(ngModel)]="VM.Elemento.oldPassword"
           #pass="ngModel"
           required
           maxlength="10"
@@ -103,7 +101,7 @@
           type="password"
           name="pass2"
           id="pass2"
-          [(ngModel)]="VM.Elemento.pass2"
+          [(ngModel)]="VM.Elemento.newPassword"
           #pass2="ngModel"
           required
           maxlength="10"
@@ -130,7 +128,7 @@
   <ng-container *myUnless="VM.Modo==='edit'">
 
   <div class="form-group">
-    <input type="button" class="sendBtn"  value="Enviar" (click)="VM.send()" [disabled]="miForm.invalid" />
+    <input type="button" class="sendBtn"  value="Confirmar cambios" (click)="VM.send()" [disabled]="miForm.invalid" />
     <input type="button"  class="cancelBtn" value="Volver"  (click)="VM.volver()"/>
     <input type="button"  class="logOutBtn" value="Cerrar sesión" routerLink="/login"/>
   </div>

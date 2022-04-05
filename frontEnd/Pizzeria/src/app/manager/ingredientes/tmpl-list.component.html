@@ -10,6 +10,22 @@
       ></p-button>
     </div>
   </ng-template>
+<!--
+BUSCADOR Open tsconfig.json and disable strictTemplates
+ <p-table #dt [value]="VM.Listado" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll"
+        [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Products</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+ -->
+
   <ng-template pTemplate="header" >
     <tr>
       <th>Nombre</th>
