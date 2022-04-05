@@ -1,0 +1,10 @@
+p-table {
+  margin: 0 1em;
+}
+
+@media all and (min-width: 700px) {
+  .main-container {
+    display: flex;
+    justify-content: space-around;
+  }
+}

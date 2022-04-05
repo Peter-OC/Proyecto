@@ -1,91 +1,88 @@
-<p-table [value]="VM.ListadoOrdered">
-  <ng-template pTemplate="caption">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      <ul>
-        <li>En espera</li>
-      </ul>
-    </div>
-  </ng-template>
+<div class="main-container">
+  <p-table [value]="VM.ListadoOrdered">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <ul>
+          <li>En espera</li>
+        </ul>
+      </div>
+    </ng-template>
 
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Identificador del pedido</th>
-      <th>Hora del pedido</th>
-      <th>Productos</th>
-      <th></th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-item>
-    <tr>
-      <td>{{ item.idPedido }}</td>
-      <td>{{ item.horaPedido }}</td>
-      <ul *ngFor="let product of item.productosDelPedido">
-        <li>Producto: {{product.nombreProducto}}</li>
-        <li>Cantidad: {{product.cantidadProducto}}</li>
-      </ul>
-      <td>
-        <button
-          pButton
-          pRipple
-          icon="pi pi-check"
-          class="p-button-rounded p-button-success mr-2"
-          (click) = "VM.send(item.idPedido)"
-        ></button>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="summary">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM.ListadoOrdered ? VM.ListadoOrdered.length : 0 }} pedidos esperando.
-    </div>
-  </ng-template>
-</p-table>
-
-
-<br><br><br>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Identificador del pedido</th>
+        <th>Hora del pedido</th>
+        <th>Productos</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.idPedido }}</td>
+        <td>{{ item.horaPedido }}</td>
+        <ul *ngFor="let product of item.productosDelPedido">
+          <li>Producto: {{product.nombreProducto}}</li>
+          <li>Cantidad: {{product.cantidadProducto}}</li>
+        </ul>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-check"
+            class="p-button-rounded p-button-success mr-2"
+            (click) = "VM.send(item.idPedido)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        En total hay {{ VM.ListadoOrdered ? VM.ListadoOrdered.length : 0 }} pedidos esperando.
+      </div>
+    </ng-template>
+  </p-table>
 
 
+  <p-table [value]="VM.ListadoInProcess">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <ul>
+          <li>En elaboración</li>
+        </ul>
+      </div>
+    </ng-template>
 
-
-<p-table [value]="VM.ListadoInProcess">
-  <ng-template pTemplate="caption">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      <ul>
-        <li>En elaboración</li>
-      </ul>
-    </div>
-  </ng-template>
-
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Identificador del pedido</th>
-      <th>Hora del pedido</th>
-      <th>Productos</th>
-      <th></th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-item>
-    <tr>
-      <td>{{ item.idPedido }}</td>
-      <td>{{ item.horaPedido }}</td>
-      <ul *ngFor="let product of item.productosDelPedido">
-        <li>Producto: {{product.nombreProducto}}</li>
-        <li>Cantidad: {{product.cantidadProducto}}</li>
-      </ul>
-      <td>
-        <button
-          pButton
-          pRipple
-          icon="pi pi-check"
-          class="p-button-rounded p-button-success mr-2"
-          (click) = "VM.send(item.idPedido)"
-        > </button>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="summary">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM.ListadoInProcess ? VM.ListadoInProcess.length : 0 }} pedidos elaborándose.
-    </div>
-  </ng-template>
-</p-table>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Identificador del pedido</th>
+        <th>Hora del pedido</th>
+        <th>Productos</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.idPedido }}</td>
+        <td>{{ item.horaPedido }}</td>
+        <ul *ngFor="let product of item.productosDelPedido">
+          <li>Producto: {{product.nombreProducto}}</li>
+          <li>Cantidad: {{product.cantidadProducto}}</li>
+        </ul>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-check"
+            class="p-button-rounded p-button-success mr-2"
+            (click) = "VM.send(item.idPedido)"
+          > </button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        En total hay {{ VM.ListadoInProcess ? VM.ListadoInProcess.length : 0 }} pedidos elaborándose.
+      </div>
+    </ng-template>
+  </p-table>
+</div>

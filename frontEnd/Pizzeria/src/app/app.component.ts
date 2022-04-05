@@ -23,11 +23,6 @@ export class AppComponent {
   init() {
     (this.items = [
           {
-            label: 'Home',
-            icon: 'pi pi-fw pi-home',
-            routerLink: '/',
-          },
-          {
             label: 'Productos',
             routerLink: '/productos',
             items: [
