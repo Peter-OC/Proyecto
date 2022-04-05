@@ -29,11 +29,9 @@
       <div class="form-group">
         <input
           type="button"
-          class="btn btn-success"
+          class="btnCambiarPass btn-success"
           value="Cambiar contraseña"
-        (click)="VM.add()"
-
-        />
+        (click)="VM.add()"/>
       </div>
   </ng-container>
 
@@ -61,7 +59,7 @@
     <div class="form-group">
       <input
         type="button"
-        class="btn btn-success"
+        class="btnEditar btn-success"
         value="Editar perfil"
       (click)="VM.cambia()"
       />
@@ -131,8 +129,8 @@
 
   <div class="form-group">
     <input type="button" class="sendBtn"  value="Enviar" (click)="VM.send()" [disabled]="miForm.invalid" />
-    <input type="button"  class="cancelBtn" value="Volver"  (click)="VM.volver()"/>
-    <input type="button"  class="logOutBtn" value="Cerrar sesión" routerLink="/login"/>
+    <input type="button" class="cancelBtn" value="Volver"  (click)="VM.volver()"/>
+    <input type="button" class="logOutBtn" value="Cerrar sesión" routerLink="/login"/>
   </div>
   </ng-container>
 </form>
