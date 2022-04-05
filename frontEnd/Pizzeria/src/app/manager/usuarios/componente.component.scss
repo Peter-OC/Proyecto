@@ -1,1 +1,33 @@
 
+h1 {
+  margin: 1em 5%;
+  border-bottom: 5px solid black;
+}
+
+.main-container{
+  margin: 1em 5%;
+}
+
+.sendBtn, .cancelBtn{
+  border: none;
+  color: white;
+  background-color: rgb(117, 172, 77);
+  padding: .7em 2.5em;
+  margin: 1em 1em 1em 0;
+}
+
+.cancelBtn {
+  background-color: rgb(172, 77, 77);
+}
+
+@media all and (min-width: 500px) {
+
+  h1 {
+    margin: 1em 15%;
+    border-bottom: 5px solid black;
+  }
+
+  .main-container{
+    margin: 1em 15%;
+  }
+}

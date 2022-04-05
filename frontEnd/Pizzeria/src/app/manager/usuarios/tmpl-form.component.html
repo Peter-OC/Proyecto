@@ -1,86 +1,62 @@
 <h1>Editar usuario</h1>
-<form #miForm="ngForm">
-  <div class="form-row">
-    <!-- <div class="form-group col-md-2">
-      <label class="form-label" for="tipo">Rol:</label>
-      <select
-        class="form-control form-select"
-        name="rol"
-        id="rol"
-        [(ngModel)]="VM.Elemento.rol"
-        #rol="ngModel"
-        required
-      >
-        <option value="ROLE_ADMIN">Administrador</option>
-        <option value="ROLE_USER">Usuario</option>
-        <option value="ROLE_EMPLOYED">Empleado</option>
-      </select>
-    </div> -->
+<div class="main-container">
+  <form #miForm="ngForm">
+    <div class="form-row">
+      <label class="form-label" for="rol">Roles:</label>
+      <p-button icon="pi pi-plus" class="p-button-success p-mr-2" (click)="VM.addRol('roles','')"></p-button>
 
-    <label class="form-label" for="rol">Roles:</label>
-    <p-button
-    icon="pi pi-plus"
-    class="p-button-success p-mr-2" (click)="VM.addRol('roles','')"></p-button>
+      <!-- <input type="button" value="+" (click)="VM.addRol('roles','')"> -->
+      <ul>
+        <li *ngFor="let item of VM.Elemento.rol; let indice=index">
+          <input class="form-control" name="rol" id="rol" #rol="ngModel" required maxlength="25" [(ngModel)]="VM.Elemento.rol[indice]" name="rol{{indice}}">
+          <input type="button" value="x" (click)="VM.delRol('roles', indice)">
+        </li>
+      </ul>
 
-    <!-- <input type="button" value="+" (click)="VM.addRol('roles','')"> -->
-    <ul>
-      <li *ngFor="let item of VM.Elemento.rol; let indice=index">
-        <input class="form-control"
-        name="rol"
-        id="rol"
-        #rol="ngModel"
-        required
-        maxlength="25" [(ngModel)]="VM.Elemento.rol[indice]" name="rol{{indice}}">
-        <input type="button" value="x" (click)="VM.delRol('roles', indice)">
-      </li>
-    </ul>
-
-
-
-    <div class="form-group col-md-4">
-      <label class="form-label" for="rol">Rol:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="rol.invalid"
-        name="rol"
-        id="rol"
-        [(ngModel)]="VM.Elemento.rol"
-        #rol="ngModel"
-        required
-        maxlength="25"
-      />
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !rol.hasError('maxlength')
-        "
-      >
-        Debe tener como máximo 100 letras.
+      <div class="form-group col-md-4">
+        <label class="form-label" for="rol">Rol:</label>
+        <input
+          class="form-control"
+          [class.is-invalid]="rol.invalid"
+          name="rol"
+          id="rol"
+          [(ngModel)]="VM.Elemento.rol"
+          #rol="ngModel"
+          required
+          maxlength="25"
+        />
+        <div
+          class="invalid-feedback"
+          [hidden]="
+            !rol.hasError('maxlength')
+          "
+        >
+          Debe tener como máximo 100 letras.
+        </div>
       </div>
+
+      <div class="form-group col-md-4">
+        <label class="form-label" for="nombre">Usuario:  {{VM.Elemento.nombre}} {{VM.Elemento.apellido}}</label>
+      </div>
+
     </div>
 
-    <div class="form-group col-md-4">
-      <label class="form-label" for="nombre">Usuario:  {{VM.Elemento.nombre}} {{VM.Elemento.apellido}}</label>
+
+    <div class="form-group">
+      <input
+        type="button"
+        class="btn btn-success"
+        value="Enviar"
+        (click)="VM.send()"
+        [disabled]="miForm.invalid"
+      />
+      <input
+        type="button"
+        class="btn btn-info"
+        value="Volver"
+        (click)="VM.cancel()"
+      />
     </div>
-
-  </div>
-
-
-  <div class="form-group">
-    <input
-      type="button"
-      class="btn btn-success"
-      value="Enviar"
-      (click)="VM.send()"
-      [disabled]="miForm.invalid"
-    />
-    <input
-      type="button"
-      class="btn btn-info"
-      value="Volver"
-      (click)="VM.cancel()"
-    />
-  </div>
-</form>
-
+  </form>
+</div>
 
