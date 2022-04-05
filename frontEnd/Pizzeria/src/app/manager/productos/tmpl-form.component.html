@@ -31,7 +31,7 @@
     <ng-container *ngIf="VM.Elemento.tipo == 3">
       <div class="form-group col-md-1">
         <label class="form-label" for="base">Base:</label>
-        <select [(ngModel)]="VM.Elemento.base" name="base" class="form-control form-select">
+        <select [(ngModel)]="VM.Elemento.pizza.base" name="base" class="form-control form-select">
           <option *ngFor="let item of VM.Bases" [value]="item.id">
             {{ item.ingrediente }}
           </option>
@@ -40,7 +40,7 @@
 
       <div class="form-group col-md-1">
         <label class="form-label" for="salsa">Salsa:</label>
-        <select [(ngModel)]="VM.Elemento.salsa" name="salsa" class="form-control form-select">
+        <select [(ngModel)]="VM.Elemento.pizza.salsa" name="salsa" class="form-control form-select">
           <option *ngFor="let item of VM.Salsa" [value]="item.id">
             {{ item.ingrediente }}
           </option>
