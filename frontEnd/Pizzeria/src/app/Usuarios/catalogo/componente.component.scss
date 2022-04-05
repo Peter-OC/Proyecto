@@ -13,12 +13,13 @@
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px;
-    background-image: url(/assets/images/paternBack.png) ;
+    background-image: url('/assets/images/paternBack.png') ;
     background-repeat: repeat;
     background-color: orange;
     justify-content: flex-start;
 
     width: 100%;
+    padding: 1.5em;
   }
 .cardProduct{
   display: grid;
