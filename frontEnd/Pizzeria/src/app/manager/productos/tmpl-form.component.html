@@ -59,16 +59,33 @@
     <ng-container *ngIf="VM.Elemento.tipo == 3">
       <div class="form-group">
         <label class="form-label" for="base">Base:</label>
-        <select [(ngModel)]="VM.Elemento.base" name="base" class="form-control form-select">
+        <select [(ngModel)]="VM.Elemento.pizza.base" name="base" class="form-control form-select">
           <option *ngFor="let item of VM.Bases" [value]="item.id">
             {{ item.ingrediente }}
           </option>
         </select>
+        <input
+          class="form-control"
+          [class.is-invalid]="base.invalid"
+          type="text"
+          name="base"
+          id="base"
+          [(ngModel)]="VM.Elemento.base"
+          #base="ngModel"
+          required
+          maxlength="10"
+        />
+        <div class="invalid-feedback" [hidden]="!base.hasError('required')">
+          Es obligatorio
+        </div>
+        <div class="invalid-feedback" [hidden]="!base.hasError('maxlength')">
+          Debe tener como máximo 10 letras.
+        </div>
       </div>
 
       <div class="form-group">
         <label class="form-label" for="salsa">Salsa:</label>
-        <select [(ngModel)]="VM.Elemento.salsa" name="salsa" class="form-control form-select">
+        <select [(ngModel)]="VM.Elemento.pizza.salsa" name="salsa" class="form-control form-select">
           <option *ngFor="let item of VM.Salsa" [value]="item.id">
             {{ item.ingrediente }}
           </option>

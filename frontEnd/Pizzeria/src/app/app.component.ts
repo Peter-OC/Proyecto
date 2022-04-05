@@ -24,6 +24,7 @@ export class AppComponent {
     (this.items = [
           {
             label: 'Carta',
+            icon: 'pi pi-fw pi-book',
             routerLink: '/pizzas',
           },
           {
