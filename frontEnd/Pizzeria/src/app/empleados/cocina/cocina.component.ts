@@ -28,10 +28,7 @@ export class CocinaComponent implements OnInit {
 onReject() {
     this.messageService.clear('c');
 }
-showConfirm() {
-  this.messageService.clear();
-  this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
-}
+
 
 }
 

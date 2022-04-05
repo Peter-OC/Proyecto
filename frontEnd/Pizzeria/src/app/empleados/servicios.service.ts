@@ -119,7 +119,7 @@ export class PedidosViewModelService {
 
 showConfirm() {
   this.messageService.clear();
-  this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
+  this.messageService.add({key: 'c', sticky: true, severity:'info', summary:'¿Cambiar estado de pedido?'});
 }
 
 seguro(id: number): void {
