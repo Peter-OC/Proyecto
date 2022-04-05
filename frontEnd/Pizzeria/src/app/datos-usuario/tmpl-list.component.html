@@ -17,7 +17,6 @@
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr>
-      <td>{{ loginSrv.Name }}</td>
       <td>{{ item.nombre }}</td>
       <td>{{ item.apellido }}</td>
       <td>{{ item.direccion }}</td>
@@ -31,7 +30,7 @@
           pRipple
           icon="pi pi-pencil"
           class="p-button-rounded p-button-success mr-2"
-          [routerLink]="[loginSrv.Name, 'edit']"
+          [routerLink]="[item.id, 'edit']"
         ></button>
         <button
           pButton
@@ -49,13 +48,5 @@
     </div>
   </ng-template>
 </p-table>
-<ng-container *ngIf="!loginSrv.isAutenticated">
-  <form #logForm="ngForm" class="form-inline my-2 my-lg-0">
-    <div class="input-group" role="group" aria-label="Login Form">
-      <div class="input-group-append">
-        <input class="btn btn-outline-success btn-sm" type="button" value="Registrar">
-      </div>
-    </div>
-  </form>
-</ng-container>
+
 

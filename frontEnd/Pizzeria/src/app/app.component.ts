@@ -49,11 +49,13 @@ export class AppComponent {
         label: 'Registro',
         icon: 'pi pi-fw pi-sign-in',
         routerLink: '/registro',
+        visible: !this.loginSrv.isAutenticated
       },
       {
         label: 'Perfil',
         icon: 'pi pi-fw pi-user',
         routerLink: '/perfil',
+        visible: this.loginSrv.isAutenticated
       },
       {
         label: 'Carrito',
