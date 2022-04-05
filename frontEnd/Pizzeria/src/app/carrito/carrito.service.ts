@@ -28,7 +28,7 @@ export class CarritoService {
   }
 
   get Total() : number {
-    return this.items.reduce((acumulado, item) => acumulado + (item.product.precio * item.cantidad), 0)
+    return this.items.reduce((acumulado, item) => acumulado + (item.product.precio * item.cantidad), 0).toFixed(2);
   }
 
   clearCarrito() {

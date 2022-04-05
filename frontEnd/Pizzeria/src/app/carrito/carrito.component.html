@@ -1,16 +1,24 @@
-<p>carrito</p>
-<form #miForm="ngForm">
-<input type="text" [(ngModel)]="VM.direccion" name="direccion" required>
-<ul>
-  <li *ngFor="let item of VM.Items; let indice = index;">
-    {{item.product.nombre}}
-    {{item.product.precio}}
-    {{item.cantidad}}
-    {{item.cantidad * item.product.precio}}
-  </li>
-</ul>
-<p>
-  Total: {{VM.Total}}
-</p>
-<input type="button" [disabled]="miForm.invalid || VM.Total == 0" value="Enviar" (click)="VM.send()">
-</form>
+<h1>Carrito</h1>
+<div class="main-container">
+  <form #miForm="ngForm">
+
+  <ul>
+    <li *ngFor="let item of VM.Items; let indice = index;">
+      <span><b>Producto: </b>{{item.product.nombre}}</span>
+      <span><b>Precio: </b>{{item.product.precio}}€</span>
+      <span><b>Cantidad: </b>{{item.cantidad}}</span>
+      <span><b>Subtotal: </b>{{item.cantidad * item.product.precio}}€</span>
+      <span><button class="cancelBtn" (click)="VM.removeFromCarrito()">Eliminar</button></span>
+    </li>
+  </ul>
+
+  <p> <b>Total: </b>{{VM.Total}}€ </p>
+
+  <div class="form-group">
+    <label for="direccion">¿A dónde te llevamos tu pedido? :)</label>
+    <input class="form-control" placeholder="Introduce la dirección de envío" type="text" [(ngModel)]="VM.direccion" name="direccion" required>
+  </div>
+
+  <input class="sendBtn" type="button" [disabled]="miForm.invalid || VM.Total == 0" value="Enviar" (click)="VM.send()">
+  </form>
+</div>
