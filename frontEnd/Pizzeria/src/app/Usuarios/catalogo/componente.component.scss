@@ -41,19 +41,19 @@
   }
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 800px) {
   .cardList {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1100px) {
   .cardList {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1400px) {
   .cardList {
     grid-template-columns: repeat(5, 1fr);
   }
