@@ -24,7 +24,6 @@ export class AppComponent {
     (this.items = [
           {
             label: 'Productos',
-            routerLink: '/productos',
             items: [
               {
                 label: 'Pizzas',
@@ -69,6 +68,26 @@ export class AppComponent {
             icon: 'pi pi-fw pi-info-circle',
             routerLink: '/empleado/repartidor',
             visible: this.loginSrv.isInRoles('ROLE_EMPLOYED'),
+          },
+          {
+            label: 'Manager',
+            icon: 'pi pi-fw pi-info-circle',
+
+            visible: this.loginSrv.isInRoles('ROLE_EMPLOYED'),
+            items: [
+              {
+                label: 'Usuarios',
+                routerLink: '/manager/usuarios',
+              },
+              {
+                label: 'Ingredientes',
+                routerLink: '/manager/ingredientes',
+              },
+              {
+                label: 'Productos',
+                routerLink: '/manager/productos',
+              },
+            ],
           },
           {
             label: 'Perfil',
