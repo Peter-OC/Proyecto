@@ -9,10 +9,10 @@
             <input class="form-control" type="text" [(ngModel)]="txtUsuario" required minlength="4" placeholder="Usuario" [ngModelOptions]="{standalone: true}">
           </div>
           <label>Contraseña: </label>
-          <input class="form-control" type="password" [(ngModel)]="txtPassword" required minlength="4" placeholder="Contraseña" [ngModelOptions]="{standalone: true}">
+          <input class="form-control" type="password" [(ngModel)]="txtPassword" required minlength="4" placeholder="Contraseña" [ngModelOptions]="{standalone: true}" (keydown.enter)="logInOut()" >
 
           <div class="input-group-append">
-            <input class="sendBtn" type="button" [disabled]="logForm.invalid" value="Enviar" (click)="logInOut()">
+            <input class="sendBtn" type="button" [disabled]="logForm.invalid" value="Enviar"  (click)="logInOut()">
             <input class="sendBtn" type="button" value="Registrar" (click)="registrar()">
           </div>
 

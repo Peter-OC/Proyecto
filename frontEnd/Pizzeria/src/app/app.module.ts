@@ -27,6 +27,10 @@ import { CatalogoModule } from './Usuarios/catalogo';
 import { DatosModule } from './datos-usuario';
 import { AuthInterceptor } from './security';
 import { HomeComponent } from './home/home.component';
+import { MessageService } from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
+
+
 
 @NgModule({
   declarations: [
@@ -53,8 +57,9 @@ import { HomeComponent } from './home/home.component';
     InputTextModule,
     CatalogoModule,
     DatosModule,
+    ToastModule
   ],
-  providers: [LoggerService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },],
+  providers: [LoggerService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, }, MessageService],
   bootstrap: [AppComponent],  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
