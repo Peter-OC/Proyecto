@@ -1,5 +1,5 @@
 <div class="main-container">
-<p-table [value]="VM.ListadoReadies">
+<p-table [value]="VM.ListadoReadies" [paginator]="true" [rows] = "5" [showCurrentPageReport]="true" responsiveLayout="scroll">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
       <ul>
@@ -42,7 +42,7 @@
   </ng-template>
 </p-table>
 
-<p-table [value]="VM.ListadoSents">
+<p-table [value]="VM.ListadoSents" [paginator]="true" [rows] = "5" [showCurrentPageReport]="true" responsiveLayout="scroll">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
       <ul>
