@@ -33,6 +33,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.capgemini.application.dtos.AuthToken;
 import com.capgemini.application.dtos.BasicCredential;
 import com.capgemini.application.dtos.FunctionEditDTO;
+import com.capgemini.application.dtos.PasswordDTO;
 import com.capgemini.application.dtos.ProfileDTO;
 import com.capgemini.application.dtos.UserCreateDTO;
 import com.capgemini.application.dtos.UserEditDTO;
@@ -120,16 +121,16 @@ public class AuthResource {
 
 	@PutMapping(path = "/password")
 	@Transactional
-	public ResponseEntity<Object> password(@RequestParam String oldPassword, @RequestParam String newPassword, Principal identity) throws NotFoundException, InvalidDataException {		
+	public ResponseEntity<Object> password(@RequestBody PasswordDTO item, Principal identity) throws NotFoundException, InvalidDataException {		
 		User usr;
 		try {
 			usr = srv.getOne(identity.getName());
-			if(!passwordEncoder.matches(oldPassword, usr.getPassword()))
+			if(!passwordEncoder.matches(item.getOldPassword(), usr.getPassword()))
 				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		} catch (NotFoundException e) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();	
 		}
-		usr.setPassword(passwordEncoder.encode(newPassword));
+		usr.setPassword(passwordEncoder.encode(item.getNewPassword()));
 		srv.change(usr);
 		return ResponseEntity.accepted().build();		
 	}

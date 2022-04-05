@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from '../../common-services/notification.service';
 import { LoggerService } from 'src/lib/my-core/services/logger.service';
+import { IngredientesDAOService } from '../ingredientes/servicios.service';
 export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 @Injectable({
@@ -14,11 +15,17 @@ export class ProductosViewModelService {
   protected listado: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
+  protected listadoIngredientes: Array<any> = [];
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
-    protected dao: ProductosDAOService
-  ) {}
+    protected dao: ProductosDAOService,
+    protected daoIngredientes: IngredientesDAOService
+  ) {
+    daoIngredientes.query().subscribe({
+      next: data => this.listadoIngredientes = data
+    })
+  }
   public get Modo(): ModoCRUD {
     return this.modo;
   }
@@ -27,6 +34,15 @@ export class ProductosViewModelService {
   }
   public get Elemento(): any {
     return this.elemento;
+  }
+  public get Salsa(): Array<any> {
+    return this.listadoIngredientes.filter(item => item.tipo === "sauce");
+  }
+  public get Bases(): Array<any> {
+    return this.listadoIngredientes.filter(item => item.tipo === "base");
+  }
+  public get Ingredientes(): Array<any> {
+    return this.listadoIngredientes.filter(item => item.tipo === "other");
   }
   public list(): void {
     this.dao.query().subscribe({
@@ -38,11 +54,11 @@ export class ProductosViewModelService {
     });
   }
   public add(): void {
-    this.elemento = {};
+    this.elemento = {pizza: { ingredients: [] }};
     this.modo = 'add';
   }
   public edit(key: any): void {
-    this.dao.get(key).subscribe({
+    this.dao.getEdit(key).subscribe({
       next: (data) => {
         this.elemento = data;
         this.idOriginal = key;
@@ -102,6 +118,14 @@ export class ProductosViewModelService {
         break;
     }
   }
+  addDetalle(prop: any, item: any) {
+    if(!this.elemento.pizza) this.elemento.pizza = {}
+    if(!this.elemento.pizza[prop]) this.elemento.pizza[prop] = []
+    this.elemento.pizza[prop].push(item)
+  }
+  delDetalle(prop: any, index: any) {
+    this.elemento.pizza[prop].splice(index, 1)
+  }
 }
 export abstract class RESTDAOService<T, K> {
   protected baseUrl = environment.apiURL;
@@ -134,5 +158,8 @@ export class ProductosDAOService extends RESTDAOService<any, any> {
     super(http, 'productos', {
       context: new HttpContext().set(AUTH_REQUIRED, true),
     });
+  }
+  getEdit(id: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + '/' + id + '?mode=edit', this.option);
   }
 }

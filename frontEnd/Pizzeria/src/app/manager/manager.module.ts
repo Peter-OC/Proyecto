@@ -5,13 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { IngredientesAddComponent, IngredientesComponent, IngredientesEditComponent, IngredientesViewComponent } from './ingredientes/componente.component';
 import { UsuariosModule } from './usuarios';
 import { ProductosModule } from './productos';
-import { ProductosAddComponent, ProductosComponent, ProductosEditComponent, ProductosViewComponent } from './productos/componente.component';
-import { UsuariosComponent, UsuariosEditComponent, UsuariosViewComponent } from './usuarios/componente.component';
+import { ProductosAddComponent, ProductosComponent, ProductosEditComponent, ProductosListComponent, ProductosViewComponent } from './productos/componente.component';
+import { UsuariosComponent, UsuariosEditComponent, UsuariosListComponent, UsuariosViewComponent } from './usuarios/componente.component';
 
 const routes: Routes = [
   {
     path: 'productos', children: [
-      { path: '', component: ProductosComponent },
+      { path: '', component: ProductosListComponent},
       { path: 'add', component: ProductosAddComponent },
       { path: ':id/edit', component: ProductosEditComponent },
       { path: ':id', component: ProductosViewComponent },
@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'usuarios', children: [
-      { path: '', component: UsuariosComponent },
+      { path: '', component: UsuariosListComponent },
       { path: ':id/edit', component: UsuariosEditComponent },
       { path: ':id', component: UsuariosViewComponent },
     ]
