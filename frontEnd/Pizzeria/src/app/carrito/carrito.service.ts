@@ -14,6 +14,12 @@ export class CarritoService {
   constructor(private http: HttpClient, private messageService: MessageService,) {}
 
   addToCarrito(product: any, cantidad = 1) {
+     if(localStorage.getItem('AuthService')==null){
+      console.log("holaaa");
+      this.messageService.add({severity:'error', summary:'Error', detail:'Tienes que estar registrado para añadir productos al carrito'});
+      return;
+     }
+
     const ele = this.items.find((item) => item.product.id === product.id);
     if (ele) {
       ele.cantidad++;

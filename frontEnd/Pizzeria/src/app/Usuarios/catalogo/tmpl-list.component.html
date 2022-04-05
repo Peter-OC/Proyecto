@@ -1,3 +1,7 @@
+<p-toast position="bottom-center" key="c"  [baseZIndex]="5000">
+
+</p-toast>
+
 <div class="cardList">
   <div *ngFor="let item of VM.Listado" styleClass="p-card-shadow"
   gdAreas="header header | side side | footer carrito"
@@ -24,6 +28,7 @@
       {{ item.precio + "€" }}
       </div>
     </div>
+    <ng-container >
     <div [style.grid-area]="'carrito'">
       <p-button class ="carritoProducto"
             icon="pi pi-shopping-cart"
@@ -32,6 +37,7 @@
             (onClick)="VM.carrito.addToCarrito(item)"
       ></p-button>
     </div>
+  </ng-container>
   </div>
 </div>
 </div>
