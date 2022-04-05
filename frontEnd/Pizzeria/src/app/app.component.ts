@@ -53,7 +53,7 @@ export class AppComponent {
       },
       {
         label: 'Perfil',
-        icon: 'pi pi-fw pi-user',
+        icon: 'pi pi-fw pi-user-edit',
         routerLink: '/perfil',
         visible: this.loginSrv.isAutenticated
       },
@@ -62,6 +62,18 @@ export class AppComponent {
         icon: 'pi pi-fw pi-shopping-cart',
         routerLink: '/carrito',
         visible: this.loginSrv.isAutenticated
+      },
+      {
+        label: 'Cocina',
+        icon: 'pi pi-fw pi-info-circle',
+        routerLink: '/empleado/cocina',
+        visible: this.loginSrv.isInRoles("ROLE_EMPLOYED")
+      },
+      {
+        label: 'Repartidor',
+        icon: 'pi pi-fw pi-info-circle',
+        routerLink: '/empleado/repartidor',
+        visible: this.loginSrv.isInRoles("ROLE_EMPLOYED")
       },
     ];
   }
