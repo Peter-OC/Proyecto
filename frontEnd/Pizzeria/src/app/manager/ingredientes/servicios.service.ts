@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { NotificationService } from '../../common-services/notification.service';
 import { LoggerService } from 'src/lib/my-core/services/logger.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { Router } from '@angular/router';
 export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 
@@ -88,6 +89,7 @@ export class IngredientesViewModelService {
     protected notify: NotificationService,
     protected out: LoggerService,
     protected dao: IngredientesDAOService,
+    protected router: Router,
     private messageService: MessageService, private primengConfig: PrimeNGConfig
   ) {}
   public get Modo(): ModoCRUD {
@@ -146,9 +148,7 @@ export class IngredientesViewModelService {
     this.listado = [];
   }
   public cancel(): void {
-    this.elemento = {};
-    this.idOriginal = null;
-    this.list();
+    this.router.navigateByUrl('/manager/ingredientes');
   }
   public send(): void {
     this.messageService.add({severity:'success', summary:'Ingrediente editado con éxito'});
