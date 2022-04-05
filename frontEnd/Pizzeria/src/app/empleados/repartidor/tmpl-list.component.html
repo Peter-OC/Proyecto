@@ -1,4 +1,5 @@
-<p-table [value]="VM.ListadoReadies">
+<div class="main-container">
+<p-table [value]="VM.ListadoReadies" [paginator]="true" [rows] = "5" [showCurrentPageReport]="true" responsiveLayout="scroll">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
       <ul>
@@ -41,13 +42,7 @@
   </ng-template>
 </p-table>
 
-
-<br><br><br>
-
-
-
-
-<p-table [value]="VM.ListadoSents">
+<p-table [value]="VM.ListadoSents" [paginator]="true" [rows] = "5" [showCurrentPageReport]="true" responsiveLayout="scroll">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
       <ul>
@@ -89,3 +84,4 @@
     </div>
   </ng-template>
 </p-table>
+</div>

@@ -2,18 +2,14 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpContext,
-  HttpContextToken,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { NotificationService } from '../common-services';
 import { LoggerService } from 'src/lib/my-core';
 import { Router } from '@angular/router';
 import { AUTH_REQUIRED } from '../security';
 import { RESTDAOService } from '../base-code/RESTDAOService';
-import { ModoCRUD } from '../base-code/tipos';
-
-import { MessageService, PrimeNGConfig } from 'primeng/api';
 
 
 @Injectable({
@@ -35,7 +31,7 @@ export class PedidosViewModelService {
     protected out: LoggerService,
     protected dao: PedidosEmpleadoDAOService,
     protected router: Router,
-     private messageService: MessageService, private primengConfig: PrimeNGConfig,
+    private messageService: MessageService, private primengConfig: PrimeNGConfig,
   ) {}
 
   public get Modo(): 'cocina' | 'repartidor' {

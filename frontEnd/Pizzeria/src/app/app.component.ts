@@ -23,13 +23,7 @@ export class AppComponent {
   init() {
     (this.items = [
           {
-            label: 'Home',
-            icon: 'pi pi-fw pi-home',
-            routerLink: '/',
-          },
-          {
             label: 'Productos',
-            routerLink: '/productos',
             items: [
               {
                 label: 'Pizzas',
@@ -58,12 +52,6 @@ export class AppComponent {
             visible: !this.loginSrv.isAutenticated,
           },
           {
-            label: 'Perfil',
-            icon: 'pi pi-fw pi-user-edit',
-            routerLink: '/perfil',
-            visible: this.loginSrv.isAutenticated,
-          },
-          {
             label: 'Carrito',
             icon: 'pi pi-fw pi-shopping-cart',
             routerLink: '/carrito',
@@ -80,6 +68,39 @@ export class AppComponent {
             icon: 'pi pi-fw pi-info-circle',
             routerLink: '/empleado/repartidor',
             visible: this.loginSrv.isInRoles('ROLE_EMPLOYED'),
+          },
+          {
+            label: 'Manager',
+            icon: 'pi pi-fw pi-info-circle',
+
+            visible: this.loginSrv.isInRoles('ROLE_EMPLOYED'),
+            items: [
+              {
+                label: 'Usuarios',
+                routerLink: '/manager/usuarios',
+              },
+              {
+                label: 'Ingredientes',
+                routerLink: '/manager/ingredientes',
+              },
+              {
+                label: 'Productos',
+                routerLink: '/manager/productos',
+              },
+            ],
+          },
+          {
+            label: 'Perfil',
+            icon: 'pi pi-fw pi-user-edit',
+            routerLink: '/perfil',
+            visible: this.loginSrv.isAutenticated,
+          },
+          {
+            label: 'Cerrar sesión',
+            icon: 'pi pi-fw pi-sign-out',
+            routerLink: '/login',
+            visible: this.loginSrv.isAutenticated,
+
           },
         ])
   }

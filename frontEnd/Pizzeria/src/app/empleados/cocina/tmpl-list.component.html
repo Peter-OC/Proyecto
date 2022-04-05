@@ -66,7 +66,14 @@
 </p-table>
 
 
-<br><br><br>
+  <p-table [value]="VM.ListadoInProcess" [paginator]="true" [rows] = "5" [showCurrentPageReport]="true" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <ul>
+          <li>En elaboración</li>
+        </ul>
+      </div>
+    </ng-template>
 
 
 

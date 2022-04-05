@@ -57,6 +57,7 @@
   <div class="form-group row">
     <div class="form-group col-md-12">
       <label class="form-label" for="precio">Precio:</label>
+      <span class="p-inputgroup-addon">€</span>
       <input
         class="form-control"
         [class.is-invalid]="precio.invalid"
@@ -68,6 +69,7 @@
         pattern="^([1-9]+\d*([.]\d+)?)$|^(0[.]\d*[1-9]+)$|^0$|^0.0$"
         required
       />
+
       <output class="error" [hidden]="!precio.hasError('pattern')">
         Formato inválido
       </output>
@@ -97,14 +99,14 @@
   <div class="form-group">
     <input
       type="button"
-      class="btn btn-success"
+      class="btnEnviar btn-success"
       value="Enviar"
       (click)="VM.send()"
       [disabled]="miForm.invalid"
     />
     <input
       type="button"
-      class="btn btn-info"
+      class="btnVolver btn-info"
       value="Volver"
       (click)="VM.cancel()"
     />

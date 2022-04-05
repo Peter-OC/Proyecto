@@ -20,16 +20,17 @@
         {{ item.nombre }}
       </div>
     </div>
-    <div [style.grid-area]="'footer'" class = "butoncarrito">
+    <div [style.grid-area]="'footer'" class = "precio">
       <div class = "precioProducto" [style]="{ 'margin-top': '.5em'}">
       {{ item.precio + "€" }}
       </div>
     </div>
-    <div [style.grid-area]="'carrito'">
+    <div [style.grid-area]="'carrito'" class ="carrito">
       <p-button class ="carritoProducto"
             icon="pi pi-shopping-cart"
             [style]="{ 'margin-left': '.5em'}"
-            [style]="{'background-color': 'orange'}"
+            [style]="{'background-color': 'rgb(117, 172, 77)'}"
+            (onClick)="VM.carrito.addToCarrito(item)"
       ></p-button>
     </div>
   </div>
