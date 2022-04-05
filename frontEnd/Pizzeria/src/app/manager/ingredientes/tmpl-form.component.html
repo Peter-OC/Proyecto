@@ -55,64 +55,7 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <input
-        type="button"
-        class="sendBtn"
-        value="Enviar"
-        (click)="VM.send()"
-        [disabled]="miForm.invalid"
-      />
-      <div class="invalid-feedback" [hidden]="!nombre.hasError('required')">
-        Es obligatorio
-      </div>
-      <div
-        class="invalid-feedback"
-        [hidden]="
-          !nombre.hasError('maxlength')
-        "
-      >
-        Debe tener como máximo 25 letras.
-      </div>
-    </div>
 
-  <div class="form-group row">
-    <div class="form-group col-md-12">
-      <label class="form-label" for="precio">Precio:</label>
-      <span class="p-inputgroup-addon">€</span>
-      <input
-        type="button"
-        class="cancelBtn"
-        value="Volver"
-        (click)="VM.cancel()"
-      />
-
-      <output class="error" [hidden]="!precio.hasError('pattern')">
-        Formato inválido
-      </output>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="form-group col-md-12">
-      <label class="form-label" for="foto">Foto:</label>
-      <input
-        class="form-control"
-        [class.is-invalid]="foto.invalid"
-        type="text"
-        name="foto"
-        id="foto"
-        [(ngModel)]="VM.Elemento.foto"
-        #foto="ngModel"
-        maxlength="200"
-      />
-      <div class="invalid-feedback" [hidden]="!foto.hasError('maxlength')">
-        Debe tener menos 200 caracteres.
-      </div>
-      <div class="invalid-feedback" [hidden]="!foto.hasError('type')">
-        {{ foto.hasError("type") }}
-      </div>
-    </div>
-  </div>
   <div class="form-group">
     <input
       type="button"
