@@ -4,7 +4,6 @@ h1 {
 }
 
 .main-container{
-  display: flex;
   margin: 1em 5%;
 }
 .btnEnviar, .btnVolver{
@@ -19,7 +18,7 @@ h1 {
   background-color: rgb(214, 159, 107);
 }
 
-.sendBtn, .cancelBtn{
+.sendBtn, .cancelBtn, .addBtn, .deletetBtn{
   border: none;
   color: white;
   background-color: rgb(117, 172, 77);
@@ -28,7 +27,19 @@ h1 {
 }
 
 .cancelBtn {
+  background-color: rgb(172, 129, 77);
+}
+
+.deletetBtn {
   background-color: rgb(172, 77, 77);
+  padding: .3em 1em;
+  margin: .3em .3em .3em 1em;
+}
+
+.addBtn {
+  background-color: rgb(77, 142, 172);
+  padding: .3em 1em;
+  margin: .3em .3em .3em .6em;
 }
 
 @media all and (min-width: 500px) {

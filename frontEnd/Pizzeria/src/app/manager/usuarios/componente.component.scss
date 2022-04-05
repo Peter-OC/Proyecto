@@ -15,7 +15,11 @@ h1 {
   margin: 1em 5%;
 }
 
-.sendBtn, .cancelBtn{
+li {
+  display: flex;
+}
+
+.sendBtn, .cancelBtn, .addBtn, .deletetBtn{
   border: none;
   color: white;
   background-color: rgb(117, 172, 77);
@@ -24,7 +28,19 @@ h1 {
 }
 
 .cancelBtn {
+  background-color: rgb(172, 129, 77);
+}
+
+.deletetBtn {
   background-color: rgb(172, 77, 77);
+  padding: .3em 1em;
+  margin: .3em .3em .3em 1em;
+}
+
+.addBtn {
+  background-color: rgb(77, 142, 172);
+  padding: .3em 1em;
+  margin: .3em .3em .3em 0;
 }
 
 @media all and (min-width: 500px) {
