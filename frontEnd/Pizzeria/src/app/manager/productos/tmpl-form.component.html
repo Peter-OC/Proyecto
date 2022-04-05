@@ -29,51 +29,26 @@
     </ng-container>
 
     <ng-container *ngIf="VM.Elemento.tipo == 3">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-1">
         <label class="form-label" for="base">Base:</label>
-        <select [(ngModel)]="VM.Elemento.base" name="base">
+        <select [(ngModel)]="VM.Elemento.base" name="base" class="form-control form-select">
           <option *ngFor="let item of VM.Bases" [value]="item.id">
             {{ item.ingrediente }}
           </option>
         </select>
-        <input
-          class="form-control"
-          [class.is-invalid]="base.invalid"
-          type="text"
-          name="base"
-          id="base"
-          [(ngModel)]="VM.Elemento.pizza.base"
-          #base="ngModel"
-          required
-          maxlength="10"
-        />
-        <div class="invalid-feedback" [hidden]="!base.hasError('required')">
-          Es obligatorio
-        </div>
-        <div class="invalid-feedback" [hidden]="!base.hasError('maxlength')">
-          Debe tener como máximo 10 letras.
-        </div>
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-1">
         <label class="form-label" for="salsa">Salsa:</label>
-        <input
-          class="form-control"
-          [class.is-invalid]="salsa.invalid"
-          type="text"
-          name="salsa"
-          id="salsa"
-          [(ngModel)]="VM.Elemento.pizza.salsa"
-          #salsa="ngModel"
-          required
-          maxlength="10"
-        />
-        <div class="invalid-feedback" [hidden]="!salsa.hasError('required')">
-          Es obligatorio
-        </div>
-        <div class="invalid-feedback" [hidden]="!salsa.hasError('maxlength')">
-          Debe tener como máximo 10 letras.
-        </div>
+        <select [(ngModel)]="VM.Elemento.salsa" name="salsa" class="form-control form-select">
+          <option *ngFor="let item of VM.Salsa" [value]="item.id">
+            {{ item.ingrediente }}
+          </option>
+        </select>
+      </div>
+
+
+      <div class="form-group col-md-4">
         <label class="form-label" for="rol">Ingredientes:</label>
         <p-button
           icon="pi pi-plus"
