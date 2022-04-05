@@ -1,3 +1,4 @@
+<div class="usuarios">
 <p-table [value]="VM.Listado">
   <ng-template pTemplate="caption">
     <div class="p-d-flex p-ai-center p-jc-between">
@@ -27,14 +28,14 @@
           pButton
           pRipple
           icon="pi pi-pencil"
-          class="p-button-rounded p-button-success mr-2"
+          class="p-button-raised p-button-success mr-2"
           [routerLink]="[item.username, 'edit']"
         ></button>
         <button
           pButton
           pRipple
           icon="pi pi-trash"
-          class="p-button-rounded p-button-warning"
+          class="p-button-danger p-button-warning"
           (click)="VM.delete(item.username)"
         ></button>
       </td>
@@ -46,3 +47,4 @@
     </div>
   </ng-template>
 </p-table>
+</div>

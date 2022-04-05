@@ -4,14 +4,13 @@
       Ingredientes
       <p-button
         icon="pi pi-plus"
-        class="p-button-success p-mr-2"
+        class="p-button-rounded p-button-plain p-mr-2"
         routerLink="add"
         (click)="VM.add()"
       ></p-button>
     </div>
   </ng-template>
-
-  <ng-template pTemplate="header">
+  <ng-template pTemplate="header" >
     <tr>
       <th>Nombre</th>
       <th>Tipo</th>
@@ -20,6 +19,7 @@
       <th></th>
     </tr>
   </ng-template>
+
   <ng-template pTemplate="body" let-item>
     <tr>
       <td>{{ item.ingrediente }}</td>
@@ -38,14 +38,14 @@
           pButton
           pRipple
           icon="pi pi-pencil"
-          class="p-button-rounded p-button-success mr-2"
+          class="p-button-raised p-button-success mr-2"
           [routerLink]="[item.id, 'edit']"
         ></button>
         <button
           pButton
           pRipple
           icon="pi pi-trash"
-          class="p-button-rounded p-button-warning"
+          class="p-button-danger p-button-warning"
           (click)="VM.delete(item.id)"
         ></button>
       </td>
