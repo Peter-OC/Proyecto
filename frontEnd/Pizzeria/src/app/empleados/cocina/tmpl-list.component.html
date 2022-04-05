@@ -1,71 +1,64 @@
 <p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
   <ng-template let-message pTemplate="message">
-      <div class="flex flex-column" style="flex: 1">
-          <div class="text-center">
-              <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
-              <h4>{{message.summary}}</h4>
-              <p>{{message.detail}}</p>
-          </div>
-          <div class="grid p-fluid">
-              <div class="col-6">
-                  <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
-              </div>
-              <div class="col-6">
-                  <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
-              </div>
-          </div>
-      </div>
-  </ng-template>
+    <div class="flex flex-column" style="flex: 1">
+        <div class="text-center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+            <h4>{{message.summary}}</h4>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-6">
+                <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+            </div>
+            <div class="col-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+            </div>
+        </div>
+    </div>
+</ng-template>
 </p-toast>
-<h5>Template</h5>
-<button type="button" pButton pRipple (click)="showConfirm()" label="Confirm" class="ui-button-warning"></button>
-
-
-
-<p-table [value]="VM.ListadoOrdered">
-  <ng-template pTemplate="caption">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      <ul>
-        <li>En espera</li>
-      </ul>
-    </div>
-  </ng-template>
-
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Identificador del pedido</th>
-      <th>Hora del pedido</th>
-      <th>Productos</th>
-      <th></th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-item>
-    <tr>
-      <td>{{ item.idPedido }}</td>
-      <td>{{ item.horaPedido }}</td>
-      <ul *ngFor="let product of item.productosDelPedido">
-        <li>Producto: {{product.nombreProducto}}</li>
-        <li>Cantidad: {{product.cantidadProducto}}</li>
-      </ul>
-      <td>
-        <button
-          pButton
-          pRipple
-          icon="pi pi-check"
-          class="p-button-rounded p-button-success mr-2"
-          (click) = "VM.seguro(item.idPedido)"
-        ></button>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="summary">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM.ListadoOrdered ? VM.ListadoOrdered.length : 0 }} pedidos esperando.
-    </div>
-  </ng-template>
-</p-table>
-
-
+<div class="main-container">
+  <p-table [value]="VM.ListadoOrdered" [paginator]="true" [rows] = "5" [showCurrentPageReport]="true" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <ul>
+          <li>En espera</li>
+        </ul>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Identificador del pedido</th>
+        <th>Hora del pedido</th>
+        <th>Productos</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.idPedido }}</td>
+        <td>{{ item.horaPedido }}</td>
+        <ul *ngFor="let product of item.productosDelPedido">
+          <li>Producto: {{product.nombreProducto}}</li>
+          <li>Cantidad: {{product.cantidadProducto}}</li>
+        </ul>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-check"
+            class="p-button-rounded p-button-success mr-2"
+            (click) = "VM.seguro(item.idPedido)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        En total hay {{ VM.ListadoOrdered ? VM.ListadoOrdered.length : 0 }} pedidos esperando.
+      </div>
+    </ng-template>
+  </p-table>
   <p-table [value]="VM.ListadoInProcess" [paginator]="true" [rows] = "5" [showCurrentPageReport]="true" responsiveLayout="scroll">
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
@@ -74,52 +67,37 @@
         </ul>
       </div>
     </ng-template>
-
-
-
-
-<p-table [value]="VM.ListadoInProcess">
-  <ng-template pTemplate="caption">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      <ul>
-        <li>En elaboración</li>
-      </ul>
-    </div>
-  </ng-template>
-
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Identificador del pedido</th>
-      <th>Hora del pedido</th>
-      <th>Productos</th>
-      <th></th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-item>
-    <tr>
-      <td>{{ item.idPedido }}</td>
-      <td>{{ item.horaPedido }}</td>
-      <ul *ngFor="let product of item.productosDelPedido">
-        <li>Producto: {{product.nombreProducto}}</li>
-        <li>Cantidad: {{product.cantidadProducto}}</li>
-      </ul>
-      <td>
-        <button
-          pButton
-          pRipple
-          icon="pi pi-check"
-          class="p-button-rounded p-button-success mr-2"
-          (click) = "VM.seguro(item.idPedido)"
-        > </button>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="summary">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      En total hay {{ VM.ListadoInProcess ? VM.ListadoInProcess.length : 0 }} pedidos elaborándose.
-    </div>
-  </ng-template>
-
-</p-table>
-
-
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Identificador del pedido</th>
+        <th>Hora del pedido</th>
+        <th>Productos</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.idPedido }}</td>
+        <td>{{ item.horaPedido }}</td>
+        <ul *ngFor="let product of item.productosDelPedido">
+          <li>Producto: {{product.nombreProducto}}</li>
+          <li>Cantidad: {{product.cantidadProducto}}</li>
+        </ul>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-check"
+            class="p-button-rounded p-button-success mr-2"
+            (click) = "VM.seguro(item.idPedido)"
+          > </button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        En total hay {{ VM.ListadoInProcess ? VM.ListadoInProcess.length : 0 }} pedidos elaborándose.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
