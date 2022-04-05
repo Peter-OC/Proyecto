@@ -12,7 +12,6 @@
       <th>Identificador del pedido</th>
       <th>Hora del pedido</th>
       <th>Productos</th>
-      <th>Estado</th>
       <th></th>
     </tr>
   </ng-template>
@@ -24,7 +23,6 @@
         <li>Producto: {{product.nombreProducto}}</li>
         <li>Cantidad: {{product.cantidadProducto}}</li>
       </ul>
-      <td>{{ item.estado}}</td>
       <td>
         <button
           pButton
@@ -32,7 +30,7 @@
           icon="pi pi-check"
           class="p-button-rounded p-button-success mr-2"
           (click) = "VM.send(item.idPedido)"
-        >En elaboración</button>
+        ></button>
       </td>
     </tr>
   </ng-template>
@@ -63,7 +61,6 @@
       <th>Identificador del pedido</th>
       <th>Hora del pedido</th>
       <th>Productos</th>
-      <th>Estado</th>
       <th></th>
     </tr>
   </ng-template>
@@ -75,7 +72,6 @@
         <li>Producto: {{product.nombreProducto}}</li>
         <li>Cantidad: {{product.cantidadProducto}}</li>
       </ul>
-      <td>{{ item.estado}}</td>
       <td>
         <button
           pButton
@@ -83,7 +79,7 @@
           icon="pi pi-check"
           class="p-button-rounded p-button-success mr-2"
           (click) = "VM.send(item.idPedido)"
-        > Terminada la preparación</button>
+        > </button>
       </td>
     </tr>
   </ng-template>
