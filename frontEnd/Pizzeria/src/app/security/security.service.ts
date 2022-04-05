@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, UrlTree, CanLoad, Route, UrlSegment, Data } from '@angular/router';
 import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpContextToken } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
@@ -12,6 +12,9 @@ export class AuthService {
   private authToken: string = '';
   private name = '';
   private roles: Array<string> = []
+  private notificacion$ = new Subject<boolean>();
+
+  public get Notificacion() { return this.notificacion$; }
 
   constructor() {
     if (localStorage && localStorage['AuthService']) {
@@ -36,6 +39,7 @@ export class AuthService {
     if (localStorage) {
       localStorage['AuthService'] = JSON.stringify({ isAuth: this.isAuth, authToken, name, roles });
     }
+    this.notificacion$.next(true)
   }
   isInRoles(...rolesArgs: Array<string>) {
     if(this.isAutenticated && this.roles.length > 0 && rolesArgs.length > 0)
@@ -51,6 +55,7 @@ export class AuthService {
     if (localStorage) {
       localStorage.removeItem('AuthService');
     }
+    this.notificacion$.next(false)
   }
 }
 
