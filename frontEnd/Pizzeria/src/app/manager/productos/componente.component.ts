@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProductosViewModelService } from './servicios.service';
 
+import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { UsuariosViewModelService } from '../usuarios/servicios.service';
 @Component({
   selector: 'app-productos',
   templateUrl: './tmpl-anfitrion.component.html',
@@ -22,12 +24,20 @@ export class ProductosComponent implements OnInit {
   styleUrls: ['./componente.component.scss'],
 })
 export class ProductosListComponent implements OnInit {
-  constructor(protected vm: ProductosViewModelService) {}
+  constructor(protected vm: ProductosViewModelService,private messageService: MessageService, private primengConfig: PrimeNGConfig, private myService: UsuariosViewModelService,) {}
   public get VM(): ProductosViewModelService {
     return this.vm;
   }
   ngOnInit(): void {
     this.vm.list();
+  }
+  onConfirm() {
+    this.myService.si();
+    this.messageService.clear('c');
+}
+
+  onReject() {
+      this.messageService.clear('c');
   }
 }
 @Component({

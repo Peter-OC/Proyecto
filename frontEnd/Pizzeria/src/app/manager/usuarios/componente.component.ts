@@ -36,9 +36,9 @@ export class UsuariosListComponent implements OnInit {
     this.messageService.clear('c');
 }
 
-onReject() {
-    this.messageService.clear('c');
-}
+  onReject() {
+      this.messageService.clear('c');
+  }
 
 }
 @Component({

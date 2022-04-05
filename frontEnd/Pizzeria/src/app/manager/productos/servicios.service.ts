@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { NotificationService } from '../../common-services/notification.service';
 import { LoggerService } from 'src/lib/my-core/services/logger.service';
 import { IngredientesDAOService } from '../ingredientes/servicios.service';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { Router } from '@angular/router';
 export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 @Injectable({
@@ -16,11 +18,16 @@ export class ProductosViewModelService {
   protected elemento: any = {};
   protected idOriginal: any = null;
   protected listadoIngredientes: Array<any> = [];
+  protected idPasa: any = null;
+
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
     protected dao: ProductosDAOService,
-    protected daoIngredientes: IngredientesDAOService
+    protected daoIngredientes: IngredientesDAOService,
+    protected router: Router,
+
+    private messageService: MessageService, private primengConfig: PrimeNGConfig
   ) {
     daoIngredientes.query().subscribe({
       next: data => this.listadoIngredientes = data
@@ -91,13 +98,25 @@ export class ProductosViewModelService {
     this.listado = [];
   }
   public cancel(): void {
-    this.elemento = {};
-    this.idOriginal = null;
-    this.list();
+    this.router.navigateByUrl('/manager/productos');
+  }
+  showConfirm() {
+    this.messageService.clear();
+    this.messageService.add({key: 'c', sticky: true, severity:'error', summary:'¿Eliminar este usuario?'});
+  }
+
+  seguro(id: number): void {
+    this.showConfirm()
+    this.idPasa = id;
+  }
+
+  si(){
+    this.delete(this.idPasa)
   }
   public send(): void {
     switch (this.modo) {
       case 'add':
+    this.messageService.add({severity:'success', summary:'Producto añadido con éxito'});
         this.dao
           .add(this.elemento)
           .subscribe({
@@ -106,6 +125,7 @@ export class ProductosViewModelService {
           });
         break;
       case 'edit':
+    this.messageService.add({severity:'success', summary:'Producto editado con éxito'});
         this.dao
           .change(this.idOriginal, this.elemento)
           .subscribe({
