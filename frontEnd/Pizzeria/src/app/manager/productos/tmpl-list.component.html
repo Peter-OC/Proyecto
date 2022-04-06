@@ -53,14 +53,14 @@
           pButton
           pRipple
           icon="pi pi-pencil"
-          class="p-button-rounded p-button-success mr-2"
+          class="p-button-raised p-button-success mr-2"
           [routerLink]="[item.id, 'edit']"
         ></button>
         <button
           pButton
           pRipple
           icon="pi pi-trash"
-          class="p-button-rounded p-button-warning"
+          class="p-button-danger"
           (click)="VM.seguro(item.id)"
         ></button>
       </td>
