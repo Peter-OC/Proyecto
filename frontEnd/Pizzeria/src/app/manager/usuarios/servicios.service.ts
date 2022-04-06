@@ -99,6 +99,8 @@ export class UsuariosViewModelService {
     this.listado = [];
   }
   public cancel(): void {
+    this.elemento = {};
+    this.idOriginal = null;
     this.router.navigateByUrl('/manager/usuarios');
   }
   public send(): void {
