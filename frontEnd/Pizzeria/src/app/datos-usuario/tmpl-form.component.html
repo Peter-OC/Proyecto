@@ -1,4 +1,4 @@
-<h1>Usuarios</h1>
+<h1>Perfil</h1>
 <div class="main-container">
 <form #miForm="ngForm">
   <div class="form-group">
@@ -29,7 +29,7 @@
       <div class="form-group">
         <input
           type="button"
-          class="btnCambiarPass btn-success"
+          class="btnCambiarPass"
           value="Cambiar contraseña"
         (click)="VM.add()"/>
       </div>
@@ -59,7 +59,7 @@
     <div class="form-group">
       <input
         type="button"
-        class="btnEditar btn-success"
+        class="btnCambiarPass"
         value="Editar perfil"
       (click)="VM.cambia()"
       />
@@ -136,41 +136,4 @@
 </form>
 </div>
 
-<!--
-<h5>Severities</h5>
-<p-messages [(value)]="msgs1" [enableService]="false"></p-messages>
 
-<h5>Dynamic</h5>
-<button type="button" pButton pRipple (click)="addMessages()" label="Show" class="p-mr-2"></button>
-<button type="button" pButton pRipple (click)="clearMessages()" icon="pi pi-times" label="Clear" class="p-button-secondary"></button>
-
-<p-messages [(value)]="msgs2" [enableService]="false"></p-messages>
-
-<h5>Message Service</h5>
-<button type="button" pButton (click)="showViaService()" label="Via Service"></button>
-<p-messages></p-messages>
-
-<h5>Inline Message</h5>
-<p>p-message component is used to display inline messages mostly within forms.</p>
-<p-message severity="info" text="Message Content" styleClass="p-mr-2"></p-message>
-<p-message severity="success" text="Message Content" styleClass="p-mr-2"></p-message>
-<p-message severity="warn" text="Message Content" styleClass="p-mr-2"></p-message>
-<p-message severity="error" text="Message Content"></p-message>
-
-<div class="p-mt-4">
-    <input type="text" pInputText placeholder="Username" class="ng-dirty ng-invalid p-mr-2">
-    <p-message severity="error" text="Field is required"></p-message>
-</div>
-
-<div class="p-mt-4">
-    <input type="text" pInputText placeholder="Email" class="ng-dirty ng-invalid p-mr-2">
-    <p-message severity="error"></p-message>
-</div>
-
-<h5>Form Layout</h5>
-<div class="p-field p-fluid">
-    <label for="username">Username</label>
-    <input id="username" type="username" aria-describedby="username-help" class="p-invalid" pInputText />
-    <small id="username-help" class="p-invalid">Username is not available.</small>
-</div>
- -->

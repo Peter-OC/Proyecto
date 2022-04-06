@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { IngredientesViewModelService } from './servicios.service';
 
 @Component({
@@ -22,12 +23,20 @@ export class IngredientesComponent implements OnInit {
   styleUrls: ['./componente.component.scss'],
 })
 export class IngredientesListComponent implements OnInit {
-  constructor(protected vm: IngredientesViewModelService) {}
+  constructor(protected vm: IngredientesViewModelService, private messageService: MessageService, private primengConfig: PrimeNGConfig, private myService: IngredientesViewModelService,) {}
   public get VM(): IngredientesViewModelService {
     return this.vm;
   }
   ngOnInit(): void {
     this.vm.list();
+  }
+  onConfirm() {
+    this.myService.si();
+    this.messageService.clear('c');
+}
+
+  onReject() {
+      this.messageService.clear('c');
   }
 }
 @Component({
@@ -83,7 +92,8 @@ export class IngredientesViewComponent implements OnInit, OnDestroy {
   constructor(
     protected vm: IngredientesViewModelService,
     protected route: ActivatedRoute,
-    protected router: Router
+    protected router: Router,
+    private messageService: MessageService, private primengConfig: PrimeNGConfig, private myService: IngredientesViewModelService,
   ) {}
   public get VM(): IngredientesViewModelService {
     return this.vm;
@@ -100,6 +110,14 @@ export class IngredientesViewComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.obs$.unsubscribe();
+  }
+  onConfirm() {
+    this.myService.si();
+    this.messageService.clear('c');
+}
+
+  onReject() {
+      this.messageService.clear('c');
   }
 }
 

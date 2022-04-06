@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProductosViewModelService } from './servicios.service';
 
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-productos',
   templateUrl: './tmpl-anfitrion.component.html',
@@ -22,12 +23,20 @@ export class ProductosComponent implements OnInit {
   styleUrls: ['./componente.component.scss'],
 })
 export class ProductosListComponent implements OnInit {
-  constructor(protected vm: ProductosViewModelService) {}
+  constructor(protected vm: ProductosViewModelService,private messageService: MessageService, private primengConfig: PrimeNGConfig, private myService: ProductosViewModelService,) {}
   public get VM(): ProductosViewModelService {
     return this.vm;
   }
   ngOnInit(): void {
     this.vm.list();
+  }
+  onConfirm() {
+    this.myService.si();
+    this.messageService.clear('c');
+}
+
+  onReject() {
+      this.messageService.clear('c');
   }
 }
 @Component({
@@ -43,6 +52,7 @@ export class ProductosAddComponent implements OnInit {
   ngOnInit(): void {
     this.vm.add();
   }
+
 }
 @Component({
   selector: 'app-productos-edit',
@@ -54,7 +64,7 @@ export class ProductosEditComponent implements OnInit, OnDestroy {
   constructor(
     protected vm: ProductosViewModelService,
     protected route: ActivatedRoute,
-    protected router: Router
+    protected router: Router,private messageService: MessageService,
   ) {}
   public get VM(): ProductosViewModelService {
     return this.vm;
@@ -72,6 +82,7 @@ export class ProductosEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.obs$.unsubscribe();
   }
+
 }
 @Component({
   selector: 'app-productos-view',

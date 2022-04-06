@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { PedidosViewModelService } from '../servicios.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { PedidosViewModelService } from '../servicios.service';
   styleUrls: ['./repartidor.component.scss'],
 })
 export class RepartidorComponent implements OnInit {
-  constructor(protected vm: PedidosViewModelService) {}
+     constructor(protected vm: PedidosViewModelService,private messageService: MessageService,private primengConfig: PrimeNGConfig, private myService: PedidosViewModelService,) {}
   public get VM(): PedidosViewModelService {
     return this.vm;
   }
@@ -16,6 +17,15 @@ export class RepartidorComponent implements OnInit {
   ngOnInit(): void {
     this.vm.listRepartidor();
   }
+
+  onConfirm() {
+    this.myService.si();
+    this.messageService.clear('c');
+}
+
+onReject() {
+    this.messageService.clear('c');
+}
 }
 
 

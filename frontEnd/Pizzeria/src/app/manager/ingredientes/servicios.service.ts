@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { NotificationService } from '../../common-services/notification.service';
 import { LoggerService } from 'src/lib/my-core/services/logger.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { Router } from '@angular/router';
 export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 
@@ -84,11 +85,13 @@ export class IngredientesViewModelService {
   protected listado: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
+  protected idPasa: any = null;
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
     protected dao: IngredientesDAOService,
-    private messageService: MessageService, private primengConfig: PrimeNGConfig
+    private messageService: MessageService, private primengConfig: PrimeNGConfig,
+    protected router: Router,
   ) {}
   public get Modo(): ModoCRUD {
     return this.modo;
@@ -132,9 +135,9 @@ export class IngredientesViewModelService {
     });
   }
   public delete(key: any): void {
-    if (!window.confirm('¿Seguro?')) {
-      return;
-    }
+    // if (!window.confirm('¿Seguro?')) {
+    //   return;
+    // }
     this.dao.remove(key).subscribe({
       next: (data) => this.list(),
       error: (err) => this.notify.add(err.message),
@@ -146,14 +149,31 @@ export class IngredientesViewModelService {
     this.listado = [];
   }
   public cancel(): void {
-    this.elemento = {};
-    this.idOriginal = null;
-    this.list();
+    this.router.navigateByUrl('/manager/ingredientes');
+  }
+
+  showConfirm() {
+    this.messageService.clear();
+    this.messageService.add({key: 'c', sticky: true, severity:'error', summary:'¿Eliminar este producto?'});
+  }
+
+  seguro(id: number): void {
+
+    this.showConfirm()
+    this.idPasa = id;
+    console.log("en el seguro "+ this.idPasa);
+  }
+
+  si(){
+    console.log("en el si "+ this.idPasa);
+
+    this.delete(this.idPasa)
   }
   public send(): void {
-    this.messageService.add({severity:'success', summary:'Ingrediente editado con éxito'});
+
     switch (this.modo) {
       case 'add':
+        this.messageService.add({severity:'success', summary:'Ingrediente añadido con éxito'});
         this.dao
           .add(this.elemento)
           .subscribe({
@@ -162,6 +182,7 @@ export class IngredientesViewModelService {
           });
         break;
       case 'edit':
+        this.messageService.add({severity:'success', summary:'Ingrediente editado con éxito'});
         this.dao
           .change(this.idOriginal, this.elemento)
           .subscribe({

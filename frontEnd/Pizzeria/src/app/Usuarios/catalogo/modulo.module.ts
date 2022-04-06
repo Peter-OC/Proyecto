@@ -7,6 +7,7 @@ import { MyCoreModule } from 'src/lib/my-core';
 import { CATALOGO_COMPONENTES } from './componente.component';
 import {CardModule} from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
 
 
 
@@ -16,7 +17,7 @@ import { ButtonModule } from 'primeng/button';
   ],
   imports: [
     CommonModule, FormsModule, RouterModule.forChild([]),
-    MyCoreModule, CommonServicesModule, CardModule, ButtonModule,
+    MyCoreModule, CommonServicesModule, CardModule, ButtonModule,ToastModule
 
   ],
   exports: [
