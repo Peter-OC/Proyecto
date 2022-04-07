@@ -1,4 +1,4 @@
-package com.capgemini.domains.entities;
+package com.bootcamp.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;

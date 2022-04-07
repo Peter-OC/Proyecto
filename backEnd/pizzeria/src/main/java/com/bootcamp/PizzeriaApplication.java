@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-@EnableFeignClients("com.capgemini.application.proxies")
+@EnableFeignClients("com.bootcamp.application.proxies")
 public class PizzeriaApplication {
 
 	public static void main(String[] args) {

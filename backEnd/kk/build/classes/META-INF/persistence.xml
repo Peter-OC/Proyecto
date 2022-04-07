@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="kk">
-		<class>com.capgemini.domains.entities.Category</class>
-		<class>com.capgemini.domains.entities.Comment</class>
-		<class>com.capgemini.domains.entities.Ingredient</class>
-		<class>com.capgemini.domains.entities.IngredientsPerPizza</class>
-		<class>com.capgemini.domains.entities.IngredientsPerPizzaPK</class>
-		<class>com.capgemini.domains.entities.Order</class>
-		<class>com.capgemini.domains.entities.Pizza</class>
-		<class>com.capgemini.domains.entities.Product</class>
-		<class>com.capgemini.domains.entities.ProductsPerOrder</class>
-		<class>com.capgemini.domains.entities.ProductsPerOrderPK</class>
-		<class>com.capgemini.domains.entities.User</class>
+		<class>com.bootcamp.domains.entities.Category</class>
+		<class>com.bootcamp.domains.entities.Comment</class>
+		<class>com.bootcamp.domains.entities.Ingredient</class>
+		<class>com.bootcamp.domains.entities.IngredientsPerPizza</class>
+		<class>com.bootcamp.domains.entities.IngredientsPerPizzaPK</class>
+		<class>com.bootcamp.domains.entities.Order</class>
+		<class>com.bootcamp.domains.entities.Pizza</class>
+		<class>com.bootcamp.domains.entities.Product</class>
+		<class>com.bootcamp.domains.entities.ProductsPerOrder</class>
+		<class>com.bootcamp.domains.entities.ProductsPerOrderPK</class>
+		<class>com.bootcamp.domains.entities.User</class>
 	</persistence-unit> 
 </persistence>
